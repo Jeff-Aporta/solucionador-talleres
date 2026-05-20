@@ -1,0 +1,47 @@
+---
+import "../styles/global.css";
+import { COURSES } from "../data/works";
+
+interface Props {
+   title: string;
+   activeCourse?: string;
+   activeWork?: string;
+}
+
+const { title, activeCourse, activeWork } = Astro.props;
+const rawBase = import.meta.env.BASE_URL || "/";
+const base = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
+const link = (p: string): string => base + p || "/";
+---
+
+<html lang="es" class="dark">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{title}</title>
+   </head>
+   <body>
+      <div class="app-shell">
+         <header class="app-header">
+            <div class="app-header-top">
+               <a href={link("/")} class="app-logo">REMINGTON</a>
+               <span class="app-sep">|</span>
+               <span class="app-title">Trabajos universitarios — Jeffrey Agudelo</span>
+            </div>
+            <nav class="app-nav">
+               <a href={link("/")} class:list={["app-nav-link", { active: !activeCourse }]}>Inicio</a>
+               {
+                  COURSES.map((c) => (
+                     <a href={link(`/curso/${c.key.toLowerCase()}`)} class:list={["app-nav-link", { active: activeCourse === c.key }]}>
+                        {c.label}
+                     </a>
+                  ))
+               }
+            </nav>
+         </header>
+         <main class="app-main">
+            <slot />
+         </main>
+      </div>
+   </body>
+</html>

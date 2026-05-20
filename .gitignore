@@ -1,0 +1,25 @@
+node_modules/
+dist/
+.astro/
+
+# Logs y env
+*.log
+npm-debug.log*
+.env
+.env.*
+!.env.example
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python (scripts de generación)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# NOTA: public/works/ SÍ se commitea — son los HTML/PDF estáticos que sirve GH Pages.
+

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Foro Nº2</title>
+    <style>
+      @page {
+        size: letter;
+        margin: 1in;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 2; color: #000">
+    <!-- PORTADA -->
+    <div style="page-break-after: always; display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 100vh; text-align: center">
+      <div style="margin-top: 80px">
+        <h1 style="font-size: 14pt; font-weight: normal; margin: 0; line-height: 1.5">
+          INGENIERÍA DE SISTEMAS
+        </h1>
+        <p style="font-size: 12pt; margin: 5px 0; line-height: 1.5">
+          ELECTRÓNICA - 2510B04G1
+        </p>
+      </div>
+      
+      <div style="margin-top: 100px">
+        <p style="font-size: 12pt; font-weight: bold; margin: 0; line-height: 1.5">
+          JEFFREY ALEXANDER AGUDELO ESPITIA
+        </p>
+        <p style="font-size: 11pt; margin: 5px 0; line-height: 1.5">
+          CC 1094955981
+        </p>
+      </div>
+      
+      <div style="margin-bottom: 80px">
+        <p style="font-size: 12pt; margin: 0 0 20px 0; line-height: 1.5">
+          TULUÁ - VALLE DEL CAUCA
+        </p>
+        <img src="imgs/logo-universdad.png" alt="Logo Universidad" style="width: 200px; height: auto;">
+      </div>
+    </div>
+
+    <!-- CONTENIDO DEL FORO -->
+    <br />
+    <div style="page-break-before: always"></div>
+    <!-- FORO Nº2 -->
+    <h2 style="text-align: center">FORO Nº2</h2>
+
+    <p style="text-align: justify; margin-bottom: 24pt">
+      A continuacion se presenta la solucion del Foro N°2, el cual aborda la aplicacion de la Ley de Ohm 
+      y el calculo de parametros electricos en circuitos resistivos. Se desarrollaran tres ejercicios practicos: 
+      analisis de una licuadora, calculo de parametros en un calentador de agua, y determinacion de valores 
+      totales y parciales en un circuito resistivo en serie. Cada ejercicio incluye el planteamiento, 
+      desarrollo matematico y resultados finales.
+    </p>
+
+    <!-- Ejercicio 1 -->
+    <br />
+    <div style="page-break-before: always"></div>
+    <h3>1) Licuadora</h3>
+    <p>
+      Una licuadora tiene las siguientes características. Se debe hallar la
+      tensión y la resistencia.
+    </p>
+    <p>Datos: I = 41,7 dA, P = 500000 mW</p>
+
+    <table
+      style="width: 100%; border: 1px solid black; border-collapse: collapse"
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid black;
+            background-color: #eee;
+            padding: 5px;
+          "
+        >
+          Usamos las fórmulas de potencia eléctrica y ley de Ohm:
+          <br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small P=V\cdot I"
+            style="vertical-align: top; margin-top: 10px"
+          />
+          <br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small R=\frac{V}{I}"
+            style="vertical-align: top; margin-top: 10px"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <p>Conversión de unidades:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small 41.7\,dA=41.7\times10\,A=417\,A"
+        style="vertical-align: top; margin-top: 10px"
+      /><br />
+      <img
+        src="https://latex.codecogs.com/svg.image?\small 500000\,mW=500000\times10^{-3}\,W=500\,W"
+        style="vertical-align: top; margin-top: 10px"
+      />
+    </p>
+
+    <p>Despejamos tensión:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small V=\frac{P}{I}=\frac{500}{417}=1.2\,V"
+        style="vertical-align: top"
+      />
+    </p>
+
+    <table
+      style="width: 100%; border: 1px solid black; border-collapse: collapse"
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid black;
+            padding: 5px;
+          "
+        >
+          <strong>Respuesta a)</strong><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small V=1.2\,V"
+            style="vertical-align: top; margin-top: 10px"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <p>Ahora hallamos la resistencia:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small R=\frac{V}{I}=\frac{1.2}{417}=0.0029\,\Omega"
+        style="vertical-align: top"
+      />
+    </p>
+
+    <table
+      style="width: 100%; border: 1px solid black; border-collapse: collapse"
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid black;
+            padding: 5px;
+          "
+        >
+          <strong>Respuesta b)</strong><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small R=0.0029\,\Omega"
+            style="vertical-align: top; margin-top: 10px"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <br />
+    <!-- Ejercicio 2 -->
+    <br />
+    <div style="page-break-before: always"></div>
+    <h3>2) Calentador de agua</h3>
+    <p>
+      Un calentador de agua posee una resistencia y trabaja a un voltaje
+      determinado. Se debe hallar la potencia y la intensidad.
+    </p>
+    <p>Datos: R = 0,00303 kΩ, V = 0,00011 MV</p>
+
+    <table
+      style="width: 100%; border: 1px solid black; border-collapse: collapse"
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid black;
+            background-color: #eee;
+            padding: 5px;
+          "
+        >
+          Usamos las fórmulas generales:
+          <br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small P=\frac{V^2}{R}"
+            style="vertical-align: top; margin-top: 10px"
+          />
+          <br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small I=\frac{V}{R}"
+            style="vertical-align: top; margin-top: 10px"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <p>Conversión de unidades:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small 0.00303\,k\Omega=0.00303\times1000=3.03\,\Omega"
+        style="vertical-align: top; margin-top: 10px"
+      /><br />
+      <img
+        src="https://latex.codecogs.com/svg.image?\small 0.00011\,MV=0.00011\times10^6=110\,V"
+        style="vertical-align: top; margin-top: 10px"
+      />
+    </p>
+
+    <p>Potencia:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small P=\frac{110^2}{3.03}=3993.4\,W"
+        style="vertical-align: top"
+      />
+    </p>
+
+    <table
+      style="width: 100%; border: 1px solid black; border-collapse: collapse"
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid black;
+            padding: 5px;
+          "
+        >
+          <strong>Respuesta a)</strong><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small P=3993.4\,W"
+            style="vertical-align: top; margin-top: 10px"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <p>Intensidad:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small I=\frac{V}{R}=\frac{110}{3.03}=36.3\,A"
+        style="vertical-align: top"
+      />
+    </p>
+
+    <table
+      style="width: 100%; border: 1px solid black; border-collapse: collapse"
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid black;
+            padding: 5px;
+          "
+        >
+          <strong>Respuesta b)</strong><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small I=36.3\,A"
+            style="vertical-align: top; margin-top: 10px"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <br />
+    <!-- Ejercicio 3 -->
+    <br />
+    <div style="page-break-before: always"></div>
+    <h3>3) Circuito resistivo</h3>
+    <p>
+      Un circuito con tres resistencias en serie. Se debe determinar los valores
+      de tensión, intensidad, resistencia y potencia totales y parciales.
+    </p>
+    <p>Datos: V = 10V, R₁ = 220Ω, R₂ = 980Ω, R₃ = 47Ω</p>
+
+    <table
+      style="width: 100%; border: 1px solid black; border-collapse: collapse"
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid black;
+            background-color: #eee;
+            padding: 5px;
+          "
+        >
+          Usamos las fórmulas de resistencias en serie y ley de Ohm:
+          <br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small R_T=R_1+R_2+R_3"
+            style="vertical-align: top; margin-top: 10px"
+          />
+          <br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small I_T=\frac{V}{R_T}"
+            style="vertical-align: top; margin-top: 10px"
+          />
+          <br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small V_{R_i}=I_T\cdot R_i"
+            style="vertical-align: top; margin-top: 10px"
+          />
+          <br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small P_T=V\cdot I_T"
+            style="vertical-align: top; margin-top: 10px"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <p>Cálculo de resistencia total:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small R_T=220+980+47=1247\,\Omega"
+        style="vertical-align: top"
+      />
+    </p>
+
+    <p>Corriente total:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small I_T=\frac{10}{1247}=0.0080\,A"
+        style="vertical-align: top"
+      />
+    </p>
+
+    <p>Tensiones parciales:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small V_{R1}=0.0080\times220=1.76\,V"
+        style="vertical-align: top"
+      /><br />
+      <img
+        src="https://latex.codecogs.com/svg.image?\small V_{R2}=0.0080\times980=7.84\,V"
+        style="vertical-align: top; margin-top: 10px"
+      /><br />
+      <img
+        src="https://latex.codecogs.com/svg.image?\small V_{R3}=0.0080\times47=0.38\,V"
+        style="vertical-align: top; margin-top: 10px"
+      />
+    </p>
+
+    <p>Potencia total:</p>
+    <p>
+      <img
+        src="https://latex.codecogs.com/svg.image?\small P_T=V\cdot I_T=10\times0.0080=0.08\,W"
+        style="vertical-align: top"
+      />
+    </p>
+
+    <table
+      style="width: 100%; border: 1px solid black; border-collapse: collapse"
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid black;
+            padding: 5px;
+          "
+        >
+          <strong>Respuestas)</strong><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small R_T=1247\,\Omega"
+            style="vertical-align: top; margin-top: 10px"
+          /><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small I_T=0.0080\,A"
+            style="vertical-align: top; margin-top: 10px"
+          /><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small V_{R1}=1.76\,V"
+            style="vertical-align: top; margin-top: 10px"
+          /><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small V_{R2}=7.84\,V"
+            style="vertical-align: top; margin-top: 10px"
+          /><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small V_{R3}=0.38\,V"
+            style="vertical-align: top; margin-top: 10px"
+          /><br />
+          <img
+            src="https://latex.codecogs.com/svg.image?\small P_T=0.08\,W"
+            style="vertical-align: top; margin-top: 10px"
+          />
+        </td>
+      </tr>
+    </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { COURSES, worksByCourse, TYPE_LABELS, type Course } from "../../data/works";
+
+export function getStaticPaths() {
+   return COURSES.map((c) => ({ params: { course: c.key.toLowerCase() }, props: { courseKey: c.key } }));
+}
+
+const { courseKey } = Astro.props as { courseKey: Course };
+const info = COURSES.find((c) => c.key === courseKey)!;
+const items = worksByCourse(courseKey);
+
+const rawBase = import.meta.env.BASE_URL || "/";
+const base = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
+const link = (p: string): string => base + p || "/";
+---
+
+<Layout title={`${info.label} — REMINGTON`} activeCourse={info.key}>
+   <div class="container">
+      <header class="course-page-header" style={`--accent: ${info.accent}`}>
+         <span class="course-dot"></span>
+         <h1>{info.label}</h1>
+         <span class="count">{items.length} {items.length === 1 ? "entrega" : "entregas"}</span>
+      </header>
+
+      <div class="grid">
+         {
+            items.map((w) => (
+               <a class="work-card" href={link(`/trabajo/${w.slug}`)} style={`--accent: ${info.accent}`}>
+                  <div>
+                     <span class="tag">{TYPE_LABELS[w.type]}</span>
+                  </div>
+                  <h3>{w.title}</h3>
+                  <div class="work-meta">
+                     <span>HTML</span>
+                     {w.hasPdf !== false && (
+                        <>
+                           <span class="dot">·</span>
+                           <span>PDF</span>
+                        </>
+                     )}
+                  </div>
+               </a>
+            ))
+         }
+      </div>
+   </div>
+</Layout>
+
+<style>
+   .course-page-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1.25rem 0 0.6rem;
+      border-bottom: 1px solid var(--is-b-color);
+      margin-bottom: 1.25rem;
+   }
+   .course-page-header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+   }
+   .course-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+   }
+   .count {
+      margin-left: auto;
+      color: var(--is-color-muted);
+      font-size: 0.8rem;
+   }
+
+   .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.85rem;
+   }
+   .work-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.9rem 1rem;
+      background: var(--is-bg-secondary);
+      border: 1px solid var(--is-b-color);
+      border-radius: var(--is-radius);
+      color: var(--is-color);
+      transition:
+         border-color 0.12s,
+         background 0.12s,
+         transform 0.12s;
+   }
+   .work-card:hover {
+      text-decoration: none;
+      background: var(--is-bg-elevated);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+   }
+   .work-card h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+   }
+   .work-meta {
+      display: flex;
+      gap: 0.4rem;
+      color: var(--is-color-muted);
+      font-size: 0.78rem;
+   }
+   .work-meta .dot {
+      opacity: 0.5;
+   }
+</style>

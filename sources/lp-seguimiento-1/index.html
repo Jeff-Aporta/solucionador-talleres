@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seguimiento 1 - Lenguaje de Programacion - Jeffrey Agudelo</title>
+  </head>
+  <body>
+    <div
+      style="
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      "
+    >
+      <!-- PORTADA -->
+      <div
+        style="
+          page-break-after: always;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          height: 100vh;
+          text-align: center;
+        "
+      >
+        <div style="margin-top: 80px">
+          <h1
+            style="
+              font-size: 14pt;
+              font-weight: normal;
+              margin: 0;
+              line-height: 1.5;
+            "
+          >
+            INGENIERÍA DE SISTEMAS
+          </h1>
+          <p style="font-size: 12pt; margin: 5px 0; line-height: 1.5; padding-left: 0; padding-right: 0">
+            LENGUAJE DE PROGRAMACIÓN - 2510B04G2
+          </p>
+        </div>
+
+        <div>
+          <h2
+            style="
+              font-size: 14pt;
+              font-weight: bold;
+              margin: 20px 0;
+              line-height: 1.5;
+            "
+          >
+            Seguimiento 1 (5%)
+          </h2>
+          <p style="font-size: 12pt; margin: 10px 0; line-height: 1.5; padding-left: 20px; padding-right: 20px">
+            JEFFREY ALEXANDER AGUDELO ESPITIA
+          </p>
+          <p style="font-size: 12pt; margin: 5px 0; line-height: 1.5; padding-left: 0; padding-right: 0">
+            CC: 1094955981
+          </p>
+        </div>
+
+        <div style="margin-bottom: 80px">
+          <p style="font-size: 12pt; margin: 0 0 20px 0; line-height: 1.5; padding-left: 0; padding-right: 0">
+            TULUÁ - VALLE DEL CAUCA
+          </p>
+          <img
+            src="imgs/logo-universdad.png"
+            alt="Logo Remington"
+            style="width: 200px; height: auto"
+          />
+          <p style="font-size: 12pt; margin: 20px 0 0 0; line-height: 1.5; padding-left: 0; padding-right: 0">
+            2025
+          </p>
+        </div>
+      </div>
+
+      <!-- CONTENIDO -->
+      <div style="page-break-before: always"></div>
+
+      <h2 style="padding-left: 20px; padding-right: 20px">Foro de Discusión: Dependencias en Programación</h2>
+
+      <h3 style="padding-left: 20px; padding-right: 20px">Pregunta de Discusión</h3>
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        ¿Qué es una dependencia en el contexto de programación? ¿Por qué son importantes para las aplicaciones? Explique y justifique sus respuestas.
+      </p>
+
+      <h3 style="padding-left: 20px; padding-right: 20px">Aporte Principal</h3>
+
+      <h4 style="padding-left: 20px; padding-right: 20px">Dependencias: Los Cimientos de la Construcción de Software Moderno</h4>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        En el desarrollo de software contemporáneo, las <strong>dependencias</strong> representan componentes, bibliotecas o módulos externos que una aplicación requiere para funcionar correctamente. Estas pueden ser paquetes de código reutilizable, frameworks, librerías de terceros o incluso otros servicios que proporcionan funcionalidades específicas sin necesidad de implementarlas desde cero (Fowler, 2019).
+      </p>
+
+      <h4 style="padding-left: 20px; padding-right: 20px">¿Qué es una Dependencia?</h4>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Una dependencia es cualquier recurso externo del que depende nuestro código para ejecutarse. Por ejemplo, si desarrollamos una aplicación web con React, esta biblioteca es una dependencia de nuestro proyecto. Del mismo modo, si utilizamos Axios para realizar peticiones HTTP, Axios se convierte en otra dependencia (Mozilla Developer Network, 2024).
+      </p>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Las dependencias se clasifican principalmente en dos tipos:
+      </p>
+
+      <ul style="padding-left: 20px; padding-right: 20px">
+        <li>
+          <strong>Dependencias de producción:</strong> Necesarias para que la aplicación funcione en el entorno final (ej: Express, React, Lodash)
+        </li>
+        <li>
+          <strong>Dependencias de desarrollo:</strong> Utilizadas solo durante el proceso de desarrollo (ej: Jest para pruebas, ESLint para análisis de código, Webpack para empaquetado)
+        </li>
+      </ul>
+
+      <h4 style="padding-left: 20px; padding-right: 20px">Importancia de las Dependencias</h4>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Las dependencias son fundamentales en el desarrollo moderno por varias razones críticas:
+      </p>
+
+      <h5 style="padding-left: 20px; padding-right: 20px">1. Reutilización de Código y Eficiencia</h5>
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        En lugar de reinventar la rueda, los desarrolladores pueden aprovechar soluciones probadas y optimizadas. Por ejemplo, implementar un sistema de autenticación seguro desde cero requeriría semanas de desarrollo y pruebas exhaustivas. Utilizar una biblioteca como Passport.js permite integrar autenticación robusta en horas, con la confianza de que ha sido probada por miles de desarrolladores (npm, Inc., 2024).
+      </p>
+
+      <h5 style="padding-left: 20px; padding-right: 20px">2. Mantenimiento y Actualizaciones</h5>
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Las dependencias bien mantenidas reciben actualizaciones constantes que incluyen correcciones de seguridad, mejoras de rendimiento y nuevas características. Esto significa que nuestra aplicación se beneficia automáticamente de estos avances sin necesidad de implementarlos internamente (GitHub, Inc., 2024).
+      </p>
+
+      <h5 style="padding-left: 20px; padding-right: 20px">3. Especialización y Calidad</h5>
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Las bibliotecas populares son desarrolladas y mantenidas por expertos en áreas específicas. Por ejemplo, Moment.js (ahora Day.js) para manejo de fechas, Chart.js para visualización de datos, o Socket.io para comunicación en tiempo real. Estas herramientas han sido refinadas a través de años de uso en producción y feedback de la comunidad (Stack Overflow, 2024).
+      </p>
+
+      <h5 style="padding-left: 20px; padding-right: 20px">4. Aceleración del Desarrollo</h5>
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        El tiempo de desarrollo se reduce significativamente al no tener que implementar funcionalidades comunes. Un equipo puede enfocarse en la lógica de negocio específica de su aplicación mientras delega tareas genéricas a dependencias confiables (Martin, 2018).
+      </p>
+
+      <h4 style="padding-left: 20px; padding-right: 20px">Gestión de Dependencias: Un Aspecto Crítico</h4>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Sin embargo, el uso de dependencias también introduce desafíos que deben gestionarse adecuadamente:
+      </p>
+
+      <ul style="padding-left: 20px; padding-right: 20px">
+        <li>
+          <strong>Versionado:</strong> Es crucial especificar versiones compatibles para evitar conflictos. Herramientas como npm, yarn o pip utilizan archivos de configuración (package.json, requirements.txt) para mantener un registro preciso de las dependencias y sus versiones (Node.js Foundation, 2024).
+        </li>
+        <li>
+          <strong>Seguridad:</strong> Las dependencias pueden contener vulnerabilidades. Es fundamental realizar auditorías periódicas usando herramientas como npm audit, Snyk o Dependabot para identificar y corregir problemas de seguridad (Synk Ltd., 2024).
+        </li>
+        <li>
+          <strong>Tamaño del proyecto:</strong> Cada dependencia añade peso a la aplicación. Es importante evaluar si realmente necesitamos una biblioteca completa o si podemos implementar una solución más ligera (Webpack Contributors, 2024).
+        </li>
+        <li>
+          <strong>Mantenimiento:</strong> Dependencias abandonadas o sin mantenimiento pueden convertirse en un riesgo. Es recomendable verificar la actividad del proyecto antes de adoptarlo (Open Source Initiative, 2024).
+        </li>
+      </ul>
+
+      <h4 style="padding-left: 20px; padding-right: 20px">Ejemplo Práctico</h4>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Consideremos un proyecto Node.js típico. El archivo <code>package.json</code> podría incluir:
+      </p>
+
+      <pre style="background-color: #f5f5f5; padding: 15px; border-left: 4px solid #2196F3; margin: 20px; font-family: monospace; padding-left: 20px; padding-right: 20px">
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22"
+  }
+}</pre>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Aquí, Express proporciona el framework web, Mongoose facilita la interacción con MongoDB, y JWT maneja la autenticación. En desarrollo, Jest permite escribir pruebas y Nodemon reinicia automáticamente el servidor al detectar cambios.
+      </p>
+
+      <h4 style="padding-left: 20px; padding-right: 20px">Reflexión Final</h4>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        Las dependencias son un pilar fundamental del desarrollo de software moderno. Permiten construir aplicaciones complejas de manera eficiente, aprovechando el conocimiento colectivo de la comunidad de desarrolladores. Sin embargo, su uso debe ser consciente y estratégico, evaluando siempre el balance entre los beneficios que aportan y los riesgos que introducen.
+      </p>
+
+      <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+        La clave está en mantener un equilibrio: utilizar dependencias cuando aporten valor real, pero sin caer en la "dependencia de dependencias" que puede hacer nuestro proyecto frágil y difícil de mantener. Como desarrolladores, debemos ser curadores cuidadosos de las herramientas que incorporamos en nuestros proyectos.
+      </p>
+
+      <h4 style="padding-left: 20px; padding-right: 20px">Preguntas para Profundizar la Discusión</h4>
+
+      <ul style="padding-left: 20px; padding-right: 20px">
+        <li>¿Cuál es su criterio para decidir si implementar una funcionalidad desde cero o usar una dependencia externa?</li>
+        <li>¿Han experimentado problemas con dependencias obsoletas o vulnerables? ¿Cómo los resolvieron?</li>
+        <li>¿Qué herramientas utilizan para gestionar y auditar las dependencias en sus proyectos?</li>
+        <li>¿Consideran que existe un número "ideal" de dependencias para un proyecto, o depende completamente del contexto?</li>
+      </ul>
+
+      <!-- COMENTARIO A COMPAÑERO -->
+      <div style="page-break-before: always"></div>
+      <h3 style="padding-left: 20px; padding-right: 20px">Comentario al Aporte de un Compañero</h3>
+
+      <div style="border: 2px solid #2196F3; padding: 15px; margin: 20px 0; border-radius: 8px;">
+        <h4 style="color: #2196F3">Respuesta al aporte de Julián Zapata Rojas</h4>
+        
+        <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+          Julián, tu aporte proporciona una clasificación muy completa de las dependencias en programación. Comparto plenamente tu perspectiva sobre la importancia de las dependencias como facilitadores del desarrollo, y me parece especialmente valiosa tu distinción entre <strong>dependencias directas y transitivas</strong>, ya que este concepto es fundamental pero a menudo subestimado por desarrolladores principiantes.
+        </p>
+
+        <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+          Tu mención de las <strong>dependencias no utilizadas</strong> conecta directamente con lo que planteé sobre la gestión del tamaño del proyecto. Este es un problema real que he enfrentado en proyectos de producción: dependencias que fueron instaladas para una funcionalidad específica pero que quedaron olvidadas cuando esa funcionalidad cambió o se eliminó. Herramientas como <code>npm prune</code> o <code>depcheck</code> son esenciales para identificar y eliminar estas dependencias huérfanas que inflan innecesariamente el bundle final.
+        </p>
+
+        <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+          Sin embargo, me gustaría profundizar en un aspecto que mencionas: los <strong>riesgos de las dependencias</strong>. Planteas cinco categorías de riesgos (compatibilidad, licencia, rendimiento, mantenibilidad y seguridad), pero ¿cuál consideras que es el más crítico en el contexto actual del desarrollo de software? En mi experiencia, las vulnerabilidades de seguridad han tomado protagonismo, especialmente después de incidentes como el de <em>log4j</em> en 2021 o el más reciente problema con <em>node-ipc</em> en 2022, donde dependencias ampliamente utilizadas introdujeron código malicioso.
+        </p>
+
+        <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+          Esto me lleva a plantear una pregunta para enriquecer la discusión: <strong>¿Cómo equilibramos la necesidad de mantener dependencias actualizadas (para corregir vulnerabilidades) con el riesgo de introducir breaking changes que puedan romper nuestra aplicación?</strong> Este dilema es particularmente relevante en proyectos legacy donde las actualizaciones pueden ser costosas y arriesgadas.
+        </p>
+
+        <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+          Además, mencionas los problemas de licencia como un riesgo. Este es un punto crucial que muchos desarrolladores pasan por alto. ¿Has tenido experiencia con conflictos de licencias en tus proyectos? Por ejemplo, usar una dependencia con licencia GPL en un proyecto comercial puede tener implicaciones legales significativas. Herramientas como <code>license-checker</code> o <code>FOSSA</code> pueden ayudar a auditar las licencias de todas nuestras dependencias, pero la pregunta es: <strong>¿cuántos equipos realmente realizan esta auditoría de forma sistemática?</strong>
+        </p>
+
+        <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+          Finalmente, tu clasificación de tipos de dependencias podría expandirse para incluir las <strong>dependencias peer</strong> (peer dependencies), que son especialmente importantes en el ecosistema de plugins y extensiones. Por ejemplo, un plugin de React debe especificar React como peer dependency para evitar tener múltiples versiones de React en el mismo proyecto, lo cual causaría errores graves.
+        </p>
+
+        <p style="text-align: justify; padding-left: 20px; padding-right: 20px">
+          Tu aporte establece bases sólidas para la discusión. ¿Qué estrategias específicas recomiendas para mitigar los riesgos que mencionas, especialmente en proyectos de gran escala?
+        </p>
+      </div>
+
+      <!-- Referencias -->
+      <div style="page-break-before: always"></div>
+      <h2 style="padding-left: 20px; padding-right: 20px">Referencias Bibliográficas</h2>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Fowler, M. (2019).
+        <em>Refactoring: Improving the Design of Existing Code</em> (2nd ed.).
+        Addison-Wesley Professional.
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        GitHub, Inc. (2024).
+        <em>Dependency Management Best Practices</em>.<br>
+        <a href="https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain" target="_blank" style="color: #0066cc; text-decoration: none;">https://docs.github.com/en/code-security/supply-chain-security</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Martin, R. C. (2018).
+        <em>Clean Architecture: A Craftsman's Guide to Software Structure and Design</em>.
+        Prentice Hall.
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Mozilla Developer Network. (2024).
+        <em>Understanding Dependencies in JavaScript</em>.<br>
+        <a href="https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Package_management" target="_blank" style="color: #0066cc; text-decoration: none;">https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Node.js Foundation. (2024).
+        <em>npm Documentation: Managing Dependencies</em>.<br>
+        <a href="https://docs.npmjs.com/cli/v9/configuring-npm/package-json" target="_blank" style="color: #0066cc; text-decoration: none;">https://docs.npmjs.com/cli/v9/configuring-npm/package-json</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        npm, Inc. (2024).
+        <em>npm Registry Documentation</em>.<br>
+        <a href="https://www.npmjs.com/" target="_blank" style="color: #0066cc; text-decoration: none;">https://www.npmjs.com/</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Open Source Initiative. (2024).
+        <em>The Open Source Definition</em>.<br>
+        <a href="https://opensource.org/osd" target="_blank" style="color: #0066cc; text-decoration: none;">https://opensource.org/osd</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Stack Overflow. (2024).
+        <em>Developer Survey 2024: Most Popular Technologies</em>.<br>
+        <a href="https://survey.stackoverflow.co/2024/" target="_blank" style="color: #0066cc; text-decoration: none;">https://survey.stackoverflow.co/2024/</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Synk Ltd. (2024).
+        <em>Open Source Security: Best Practices for Dependency Management</em>.<br>
+        <a href="https://snyk.io/learn/open-source-security/" target="_blank" style="color: #0066cc; text-decoration: none;">https://snyk.io/learn/open-source-security/</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Webpack Contributors. (2024).
+        <em>Webpack Documentation: Code Splitting and Bundle Analysis</em>.<br>
+        <a href="https://webpack.js.org/guides/code-splitting/" target="_blank" style="color: #0066cc; text-decoration: none;">https://webpack.js.org/guides/code-splitting/</a>
+      </p>
+
+    </div>
+  </body>
+</html>

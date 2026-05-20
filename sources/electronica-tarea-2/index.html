@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Circuitos Eléctricos - Tarea N°2</title>
+    <style>
+        @page {
+            size: letter;
+            margin: 1in;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.3;
+            color: #333;
+            padding: 1in;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: #34495e;
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #bdc3c7;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e3f2fd;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        img {
+            max-width: 90vw;
+            max-height: 400px;
+            object-fit: contain;
+            margin: 0px auto;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #bdc3c7;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            display: block;
+            margin: 20px 0 5px 0 !important;
+            font-size: small;
+        }
+
+        .code-block strong {
+            display: block;
+            margin: 5px 0 !important;
+        }
+
+        .formula-box {
+            background-color: #f8f9fb;
+            border: 1px solid #dfe6e9;
+            border-radius: 4px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .section-title {
+            background-color: #ecf0f1;
+            padding: 10px 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0 10px 0;
+            font-weight: bold;
+        }
+
+        .respuesta {
+            background-color: hsl(122, 38%, 95%);
+            padding: 10px;
+        }
+
+        .conversion {
+            background-color: #e3f2fd;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="
+          page-break-after: always;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          height: 100vh;
+          width: 100%;
+          text-align: center;
+        ">
+        <div style="margin-top: 80px; width: 100%;">
+            <h1 style="
+              font-size: 14pt;
+              font-weight: normal;
+              margin: 0;
+              line-height: 1.5;
+            ">
+                INGENIERIA DE SISTEMAS
+            </h1>
+
+            <p style="font-size: 12pt; text-align: center; margin: 5px 0; line-height: 1.5">
+                ELECTRONICA - 2510B04G1
+            </p>
+        </div>
+
+        <div style="width: 100%;">
+            <h2 style="
+              font-size: 14pt;
+              font-weight: bold;
+              margin: 20px 0;
+              line-height: 1.5;
+              text-align: center;
+              border: none;
+              padding: 0;
+            ">
+                TAREA N°2
+            </h2>
+
+            <p style="font-size: 12pt; text-align: center; margin: 10px 0; line-height: 1.5">
+                JEFFREY ALEXANDER AGUDELO ESPITIA
+            </p>
+
+            <p style="font-size: 12pt; text-align: center; margin: 5px 0; line-height: 1.5">
+                <b>CC: 1094955981</b>
+            </p>
+        </div>
+
+        <div style="margin-bottom: 80px; width: 100%;">
+            <p style="font-size: 12pt; text-align: center; margin: 0 0 20px 0; line-height: 1.5">
+                TULUA - VALLE DEL CAUCA
+            </p>
+
+            <img src="imgs/logo-universdad.png" alt="Logo Universidad" style="width: 200px; height: auto" />
+        </div>
+    </div>
+
+    <header>
+        <h1>Análisis de Circuitos Eléctricos</h1>
+        <p><strong>Objetivo</strong></p>
+        <p style="text-align: justify; margin: 20px 0;">
+            Realizar el análisis teórico completo de circuitos eléctricos en <span class="highlight">configuración serie y paralelo</span>,
+            aplicando la <strong>Ley de Ohm</strong> y principios fundamentales de electrónica para calcular
+            voltaje, corriente, resistencia y potencia en cada componente del circuito.
+        </p>
+    </header>
+
+    <section style="page-break-before: always;">
+        <h2>Nota Importante sobre el Software de Simulación</h2>
+        <div class="note">
+      <p>
+        Respecto a la parte de simulacion solicitada en los ejercicios 2 y 3 utilizando el software <strong>Crocodile Clips v3.5</strong>, debo informar lo siguiente:
+      </p>
+      <p>
+        El computador que utilizo es proporcionado por la empresa en la que trabajo, y por <strong>politicas de seguridad informatica</strong>, cualquier instalacion de software debe pasar por un proceso de revision tecnica y aprobacion del departamento de TI. Dado que Crocodile Clips v3.5 no es una herramienta relacionada con mis funciones laborales, <strong>no se me permite su instalacion en el equipo corporativo</strong>.
+      </p>
+      <p>
+        No obstante, he desarrollado la <strong>parte teorica completa</strong> de todos los ejercicios, demostrando dominio de los conceptos de analisis de circuitos, ley de Ohm, calculo de potencia, y analisis de circuitos mixtos (serie-paralelo). Los calculos teoricos son precisos y pueden ser verificados mediante cualquier simulador de circuitos.
+      </p>
+        </div>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>Contenido de la Tarea</h2>
+        <p style="text-align: justify; margin-bottom: 24pt">
+            A continuación se presenta la solución de la Tarea N°2, la cual aborda el análisis de circuitos
+            eléctricos en serie y paralelo, cálculo de potencia, tensión, corriente y resistencia. Se desarrollarán
+            tres ejercicios que incluyen conversiones de unidades, aplicación de fórmulas de ley de Ohm y análisis
+            de circuitos. Cada ejercicio muestra el procedimiento completo con conversiones de unidades y
+            resultados en unidades fundamentales.
+        </p>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>Ejercicio 1: Olimpiadas Académicas Institucionales</h2>
+        <p style="text-align: justify;">
+            Como parte del proceso de fortalecimiento académico en el curso de Electrónica, se invita a participar activamente en las Olimpiadas Académicas Institucionales, las cuales han sido diseñadas como espacio de preparación y práctica para las pruebas Saber Pro.
+        </p>
+        
+        <p style="text-align: center; margin-top: 20px;"><strong>Evidencia de Participación</strong></p>
+        
+        <p style="text-align: center; margin: 15px 0;">
+            <img src="imgs/olimpiadas/00-intro.png" alt="Introducción Olimpiadas" style="max-width: 100%; height: auto; margin: 10px 0;" />
+        </p>
+        
+        <p style="text-align: center; margin: 15px 0;">
+            <img src="imgs/olimpiadas/01-nbc.png" alt="Pregunta 1 NBC" style="max-width: 100%; height: auto; margin: 10px 0;" />
+        </p>
+        
+        <p style="text-align: center; margin: 15px 0;">
+            <img src="imgs/olimpiadas/02-nbc.png" alt="Pregunta 2 NBC" style="max-width: 100%; height: auto; margin: 10px 0;" />
+        </p>
+        
+        <p style="text-align: center; margin: 15px 0;">
+            <img src="imgs/olimpiadas/03-nbc.png" alt="Pregunta 3 NBC" style="max-width: 100%; height: auto; margin: 10px 0;" />
+        </p>
+        
+        <p style="text-align: center; margin: 15px 0;">
+            <img src="imgs/olimpiadas/04-nbc.png" alt="Pregunta 4 NBC" style="max-width: 100%; height: auto; margin: 10px 0;" />
+        </p>
+        
+        <p style="text-align: center; margin: 15px 0;">
+            <img src="imgs/olimpiadas/05-nbc.png" alt="Pregunta 5 NBC" style="max-width: 100%; height: auto; margin: 10px 0;" />
+        </p>
+        
+        <p style="text-align: center; margin: 15px 0;">
+            <img src="imgs/olimpiadas/06-resumen.png" alt="Resumen de Resultados" style="max-width: 100%; height: auto; margin: 10px 0;" />
+        </p>
+        
+        <p style="text-align: center; margin: 15px 0;">
+            <img src="imgs/olimpiadas/07-certificado.png" alt="Certificado de Participación" style="max-width: 100%; height: auto; margin: 10px 0;" />
+        </p>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>Ejercicio 2: Circuito Serie</h2>
+        <p><strong>Datos:</strong> V = 5 V, R₁ = 47 Ω, R₂ = 560 Ω, R₃ = 330 Ω</p>
+        <p><strong>Hallar:</strong> V<sub>T</sub>, I<sub>T</sub>, R<sub>T</sub>, P<sub>T</sub>, V<sub>R1</sub>, V<sub>R2</sub>, V<sub>R3</sub>, I<sub>R1</sub>, I<sub>R2</sub>, I<sub>R3</sub>, P<sub>R1</sub>, P<sub>R2</sub>, P<sub>R3</sub></p>
+
+        <h3>a) Parte Teórica (Fórmulas)</h3>
+
+        <p><strong>1. Voltaje Total (V<sub>T</sub>)</strong></p>
+        <p>El voltaje total es el voltaje de la fuente.</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small V_T=V=5\,\text{V}" style="vertical-align: top" />
+        </p>
+
+        <p><strong>2. Resistencia Total (R<sub>T</sub>)</strong></p>
+        <p>En un circuito serie, la resistencia total es la suma de las resistencias individuales.</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small R_T=R_1+R_2+R_3" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small R_T=47+560+330" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small R_T=937\,\Omega" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>3. Corriente Total (I<sub>T</sub>)</strong></p>
+        <p>Usando la Ley de Ohm (V = IR, por lo tanto I = V/R).</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small I_T=\frac{V_T}{R_T}" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small I_T=\frac{5}{937}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small I_T\approx0.005336\,\text{A}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>4. Corrientes Individuales (I<sub>R1</sub>, I<sub>R2</sub>, I<sub>R3</sub>)</strong></p>
+        <p>En un circuito serie, la corriente es la misma en todos los componentes.</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small I_{R1}=I_T\approx0.005336\,\text{A}" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small I_{R2}=I_T\approx0.005336\,\text{A}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small I_{R3}=I_T\approx0.005336\,\text{A}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>5. Voltajes Individuales (Caídas de Tensión) (V<sub>R1</sub>, V<sub>R2</sub>, V<sub>R3</sub>)</strong></p>
+        <p>Usando la Ley de Ohm (V = IR) para cada resistor.</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small V_{R1}=I_{R1}\times R_1=0.005336\,\text{A}\times47\,\Omega\approx0.2508\,\text{V}" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small V_{R2}=I_{R2}\times R_2=0.005336\,\text{A}\times560\,\Omega\approx2.9882\,\text{V}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small V_{R3}=I_{R3}\times R_3=0.005336\,\text{A}\times330\,\Omega\approx1.7609\,\text{V}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+        <p style="font-size: 11pt; margin-top: 10px">
+            <em>(Comprobación: 0.2508 + 2.9882 + 1.7609 ≈ 5.00 V, lo cual es igual al voltaje total)</em>
+        </p>
+
+        <p><strong>6. Potencia Total (P<sub>T</sub>)</strong></p>
+        <p>Usando la fórmula de potencia (P = VI).</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small P_T=V_T\times I_T" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small P_T=5\,\text{V}\times0.005336\,\text{A}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small P_T\approx0.02668\,\text{W}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>7. Potencias Individuales (P<sub>R1</sub>, P<sub>R2</sub>, P<sub>R3</sub>)</strong></p>
+        <p>Usando la fórmula de potencia (P = VI o P = I²R).</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small P_{R1}=V_{R1}\times I_{R1}=0.2508\,\text{V}\times0.005336\,\text{A}\approx0.001338\,\text{W}" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small P_{R2}=V_{R2}\times I_{R2}=2.9882\,\text{V}\times0.005336\,\text{A}\approx0.01594\,\text{W}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small P_{R3}=V_{R3}\times I_{R3}=1.7609\,\text{V}\times0.005336\,\text{A}\approx0.00939\,\text{W}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+        <p style="font-size: 11pt; margin-top: 10px">
+            <em>(Comprobación: 0.001338 + 0.01594 + 0.00939 ≈ 0.02667 W, lo cual es igual a la potencia total)</em>
+        </p>
+
+        <table style="width: 100%; border: 1px solid black; border-collapse: collapse; page-break-inside: avoid">
+            <tr>
+                <td style="border: 1px solid black;" class="respuesta">
+                    <strong>Respuestas parte teórica:</strong><br />
+                    V<sub>T</sub> = 5 V | I<sub>T</sub> ≈ 0.005336 A | R<sub>T</sub> = 937 Ω | P<sub>T</sub> ≈ 0.02668 W<br />
+                    V<sub>R1</sub> ≈ 0.2508 V | V<sub>R2</sub> ≈ 2.9882 V | V<sub>R3</sub> ≈ 1.7609 V<br />
+                    I<sub>R1</sub> ≈ 0.005336 A | I<sub>R2</sub> ≈ 0.005336 A | I<sub>R3</sub> ≈ 0.005336 A<br />
+                    P<sub>R1</sub> ≈ 0.001338 W | P<sub>R2</sub> ≈ 0.01594 W | P<sub>R3</sub> ≈ 0.00939 W
+                </td>
+            </tr>
+        </table>
+
+        <h3>b) Parte Simulación</h3>
+        <p>
+            Como se explicó en la nota inicial, no fue posible realizar la simulación con Crocodile Clips v3.5
+            debido a restricciones de seguridad en el equipo corporativo.
+        </p>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>Ejercicio 3: Circuito Paralelo</h2>
+        <p><strong>Datos:</strong> V = 5 V, R₁ = 4700 Ω, R₂ = 9.9 kΩ, R₃ = 8900 Ω</p>
+        <p><strong>Hallar:</strong> V<sub>T</sub>, I<sub>T</sub>, R<sub>T</sub>, P<sub>T</sub>, V<sub>R1</sub>, V<sub>R2</sub>, V<sub>R3</sub>, I<sub>R1</sub>, I<sub>R2</sub>, I<sub>R3</sub>, P<sub>R1</sub>, P<sub>R2</sub>, P<sub>R3</sub></p>
+
+        <h3>a) Parte Teórica (Fórmulas)</h3>
+
+        <p><strong>1. Conversión de Unidades</strong></p>
+        <p>Primero, convertimos todas las resistencias a la unidad fundamental (Ohmios).</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small R_1=4700\,\Omega" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small R_2=9.9\,k\Omega=9.9\times1000=9900\,\Omega" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small R_3=8900\,\Omega" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>2. Voltaje Total (V<sub>T</sub>)</strong></p>
+        <p>El voltaje total es el voltaje de la fuente.</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small V_T=V=5\,\text{V}" style="vertical-align: top" />
+        </p>
+
+        <p><strong>3. Voltajes Individuales (V<sub>R1</sub>, V<sub>R2</sub>, V<sub>R3</sub>)</strong></p>
+        <p>En un circuito paralelo, el voltaje es el mismo en todas las ramas.</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small V_{R1}=V_T=5\,\text{V}" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small V_{R2}=V_T=5\,\text{V}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small V_{R3}=V_T=5\,\text{V}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>4. Corrientes Individuales (I<sub>R1</sub>, I<sub>R2</sub>, I<sub>R3</sub>)</strong></p>
+        <p>Usando la Ley de Ohm (I = V/R) para cada rama.</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small I_{R1}=\frac{V_{R1}}{R_1}=\frac{5\,\text{V}}{4700\,\Omega}\approx0.001064\,\text{A}" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small I_{R2}=\frac{V_{R2}}{R_2}=\frac{5\,\text{V}}{9900\,\Omega}\approx0.000505\,\text{A}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small I_{R3}=\frac{V_{R3}}{R_3}=\frac{5\,\text{V}}{8900\,\Omega}\approx0.000562\,\text{A}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>5. Corriente Total (I<sub>T</sub>)</strong></p>
+        <p>En un circuito paralelo, la corriente total es la suma de las corrientes de las ramas.</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small I_T=I_{R1}+I_{R2}+I_{R3}" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small I_T\approx0.001064+0.000505+0.000562" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small I_T\approx0.002131\,\text{A}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>6. Resistencia Total (R<sub>T</sub>)</strong></p>
+        <p>Se puede calcular con la Ley de Ohm total (R<sub>T</sub> = V<sub>T</sub> / I<sub>T</sub>).</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small R_T=\frac{V_T}{I_T}=\frac{5\,\text{V}}{0.002131\,\text{A}}\approx2346.3\,\Omega" style="vertical-align: top" />
+        </p>
+        <p style="font-size: 11pt; margin-top: 10px">
+            <em>(Método alternativo: 1/R<sub>T</sub> = 1/R₁ + 1/R₂ + 1/R₃)</em>
+        </p>
+        <p style="font-size: 11pt">
+            <img src="https://latex.codecogs.com/svg.image?\small \frac{1}{R_T}=\frac{1}{4700}+\frac{1}{9900}+\frac{1}{8900}\approx0.0002127+0.0001010+0.0001123\approx0.000426" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small R_T=\frac{1}{0.000426}\approx2347.4\,\Omega" style="vertical-align: top; margin-top: 5px" />
+        </p>
+
+        <p><strong>7. Potencia Total (P<sub>T</sub>)</strong></p>
+        <p>Usando la fórmula de potencia (P = VI).</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small P_T=V_T\times I_T" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small P_T=5\,\text{V}\times0.002131\,\text{A}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small P_T\approx0.010655\,\text{W}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+
+        <p><strong>8. Potencias Individuales (P<sub>R1</sub>, P<sub>R2</sub>, P<sub>R3</sub>)</strong></p>
+        <p>Usando la fórmula de potencia (P = VI o P = V²/R).</p>
+        <p>
+            <img src="https://latex.codecogs.com/svg.image?\small P_{R1}=V_{R1}\times I_{R1}=5\,\text{V}\times0.001064\,\text{A}\approx0.00532\,\text{W}" style="vertical-align: top" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small P_{R2}=V_{R2}\times I_{R2}=5\,\text{V}\times0.000505\,\text{A}\approx0.002525\,\text{W}" style="vertical-align: top; margin-top: 10px" />
+            <br />
+            <img src="https://latex.codecogs.com/svg.image?\small P_{R3}=V_{R3}\times I_{R3}=5\,\text{V}\times0.000562\,\text{A}\approx0.00281\,\text{W}" style="vertical-align: top; margin-top: 10px" />
+        </p>
+        <p style="font-size: 11pt; margin-top: 10px">
+            <em>(Comprobación: 0.00532 + 0.002525 + 0.00281 ≈ 0.010655 W, lo cual es igual a la potencia total)</em>
+        </p>
+
+        <table style="width: 100%; border: 1px solid black; border-collapse: collapse; page-break-inside: avoid">
+            <tr>
+                <td style="border: 1px solid black;" class="respuesta">
+                    <strong>Respuestas parte teórica:</strong><br />
+                    V<sub>T</sub> = 5 V | I<sub>T</sub> ≈ 0.002131 A | R<sub>T</sub> ≈ 2346.3 Ω | P<sub>T</sub> ≈ 0.010655 W<br />
+                    V<sub>R1</sub> = 5 V | V<sub>R2</sub> = 5 V | V<sub>R3</sub> = 5 V<br />
+                    I<sub>R1</sub> ≈ 0.001064 A | I<sub>R2</sub> ≈ 0.000505 A | I<sub>R3</sub> ≈ 0.000562 A<br />
+                    P<sub>R1</sub> ≈ 0.00532 W | P<sub>R2</sub> ≈ 0.002525 W | P<sub>R3</sub> ≈ 0.00281 W
+                </td>
+            </tr>
+        </table>
+
+        <h3>b) Parte Simulación</h3>
+        <p>
+            Como se explicó en la nota inicial, no fue posible realizar la simulación con Crocodile Clips v3.5
+            debido a restricciones de seguridad en el equipo corporativo.
+        </p>
+    </section>
+
+</body>
+
+</html>

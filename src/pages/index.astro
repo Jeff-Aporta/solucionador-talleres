@@ -1,0 +1,141 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { COURSES, worksByCourse, TYPE_LABELS } from "../data/works";
+
+const rawBase = import.meta.env.BASE_URL || "/";
+const base = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
+const link = (p: string): string => base + p || "/";
+---
+
+<Layout title="REMINGTON — Trabajos universitarios">
+   <div class="container">
+      <section class="hero">
+         <h1>Trabajos universitarios</h1>
+         <p>
+            Catálogo de entregas (foros, tareas, evaluaciones y proyectos) con visor integrado de HTML y PDF.
+            <br />
+            Jeffrey Agudelo — Universidad Remington.
+         </p>
+      </section>
+
+      {
+         COURSES.map((c) => {
+            const items = worksByCourse(c.key);
+            return (
+               <section class="course-section" style={`--accent: ${c.accent}`}>
+                  <header class="course-header">
+                     <span class="course-dot" />
+                     <h2>{c.label}</h2>
+                     <span class="course-count">
+                        {items.length} {items.length === 1 ? "entrega" : "entregas"}
+                     </span>
+                  </header>
+                  <div class="grid">
+                     {items.map((w) => (
+                        <a class="work-card" href={link(`/trabajo/${w.slug}`)}>
+                           <div class="work-type">
+                              <span class="tag">{TYPE_LABELS[w.type]}</span>
+                           </div>
+                           <h3>{w.title}</h3>
+                           <div class="work-meta">
+                              <span>HTML</span>
+                              {w.hasPdf !== false && (
+                                 <>
+                                    <span class="dot">·</span>
+                                    <span>PDF</span>
+                                 </>
+                              )}
+                           </div>
+                        </a>
+                     ))}
+                  </div>
+               </section>
+            );
+         })
+      }
+   </div>
+</Layout>
+
+<style>
+   .hero {
+      padding: 1.5rem 0 2rem;
+   }
+   .hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.6rem;
+   }
+   .hero p {
+      margin: 0;
+      color: var(--is-color-muted);
+      line-height: 1.55;
+   }
+
+   .course-section {
+      margin: 1.75rem 0 2.5rem;
+   }
+   .course-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--is-b-color);
+      margin-bottom: 1rem;
+   }
+   .course-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+   }
+   .course-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent, var(--is-primary));
+   }
+   .course-count {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--is-color-muted);
+   }
+
+   .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.85rem;
+   }
+
+   .work-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.9rem 1rem;
+      background: var(--is-bg-secondary);
+      border: 1px solid var(--is-b-color);
+      border-radius: var(--is-radius);
+      color: var(--is-color);
+      transition:
+         border-color 0.12s,
+         background 0.12s,
+         transform 0.12s;
+   }
+   .work-card:hover {
+      text-decoration: none;
+      background: var(--is-bg-elevated);
+      border-color: var(--accent, var(--is-primary));
+      transform: translateY(-1px);
+   }
+   .work-card h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+   }
+   .work-meta {
+      display: flex;
+      gap: 0.4rem;
+      color: var(--is-color-muted);
+      font-size: 0.78rem;
+   }
+   .work-meta .dot {
+      opacity: 0.5;
+   }
+</style>

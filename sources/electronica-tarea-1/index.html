@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tarea N°1</title>
+    <style>
+      @page {
+        size: letter;
+        margin: 1in;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      style="
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+        line-height: 2;
+        color: #000;
+      "
+    >
+      <!-- PORTADA -->
+      <div
+        style="
+          page-break-after: always;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          height: 100vh;
+          text-align: center;
+        "
+      >
+        <div style="margin-top: 80px">
+          <h1
+            style="
+              font-size: 14pt;
+              font-weight: normal;
+              margin: 0;
+              line-height: 1.5;
+            "
+          >
+            INGENIERÍA DE SISTEMAS
+          </h1>
+          <p style="font-size: 12pt; margin: 5px 0; line-height: 1.5">
+            ELECTRÓNICA - 2510B04G1
+          </p>
+        </div>
+
+        <div style="margin-top: 100px">
+          <p
+            style="
+              font-size: 12pt;
+              font-weight: bold;
+              margin: 0;
+              line-height: 1.5;
+            "
+          >
+            JEFFREY ALEXANDER AGUDELO ESPITIA
+          </p>
+          <p style="font-size: 11pt; margin: 5px 0; line-height: 1.5">
+            CC 1094955981
+          </p>
+        </div>
+
+        <div style="margin-bottom: 80px">
+          <p style="font-size: 12pt; margin: 0 0 20px 0; line-height: 1.5">
+            TULUÁ - VALLE DEL CAUCA
+          </p>
+          <img
+            src="imgs/logo-universdad.png"
+            alt="Logo Universidad"
+            style="width: 200px; height: auto"
+          />
+        </div>
+      </div>
+
+      <!-- CONTENIDO DE LA TAREA -->
+      <div style="page-break-before: always"></div>
+      <h2 style="text-align: center">TAREA N°1</h2>
+
+      <p style="text-align: justify; margin-bottom: 24pt">
+        A continuacion se presenta la solucion de la Tarea N°1, la cual aborda
+        el analisis de resistividad de materiales, calculo de dimensiones en
+        conductores y analisis de circuitos resistivos mixtos. Se desarrollaran
+        cuatro ejercicios que incluyen conversiones de unidades, aplicacion de
+        formulas de resistividad y analisis de circuitos en serie y paralelo.
+        Cada ejercicio muestra el procedimiento completo con conversiones de
+        unidades y resultados en unidades fundamentales.
+      </p>
+
+      <!-- Ejercicio 1 -->
+      <div style="page-break-before: always"></div>
+      <h3>1) Elemento necesario para resistencia específica</h3>
+      <p>
+        ¿Qué elemento es necesario utilizar para conseguir que 20 × 10⁵ µm de
+        material de 0,1 × 10⁻¹⁴ km² posea una resistencia de 1 × 10⁵ cΩ?
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+        "
+      >
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              background-color: #eee;
+              padding: 5px;
+            "
+          >
+            Usamos la formula de resistencia en funcion de resistividad:
+            <br />
+            <img
+              src="https://latex.codecogs.com/svg.image?\small R=\rho\frac{L}{A}"
+              style="vertical-align: top; margin-top: 10px"
+            />
+            <br />
+            Despejando la resistividad:
+            <br />
+            <img
+              src="https://latex.codecogs.com/svg.image?\small \rho=\frac{R\cdot A}{L}"
+              style="vertical-align: top; margin-top: 10px"
+            />
+          </td>
+        </tr>
+      </table>
+
+      <p>Conversion de unidades:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small L=20\times10^5\,\mu m=20\times10^5\times10^{-6}\,m=2\,m"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small A=0.1\times10^{-14}\,km^2=0.1\times10^{-14}\times10^6\,m^2=1\times10^{-9}\,m^2"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R=1\times10^5\,c\Omega=1\times10^5\times10^{-2}\,\Omega=1000\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        />
+      </p>
+
+      <p>Calculo de resistividad:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small \rho=\frac{1000\times1\times10^{-9}}{2}=5\times10^{-7}\,\Omega\cdot m"
+          style="vertical-align: top"
+        />
+      </p>
+
+      <p>Comparando con la tabla de resistividades de materiales:</p>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin-top: 10px;
+          page-break-inside: avoid;
+        "
+      >
+        <tr style="background-color: #eee">
+          <th style="border: 1px solid black; padding: 8px; text-align: left">
+            Material
+          </th>
+          <th style="border: 1px solid black; padding: 8px; text-align: left">
+            Resistividad (Ω·m)
+          </th>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Plata</td>
+          <td style="border: 1px solid black; padding: 8px">1.59 × 10⁻⁸</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Cobre</td>
+          <td style="border: 1px solid black; padding: 8px">1.68 × 10⁻⁸</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Oro</td>
+          <td style="border: 1px solid black; padding: 8px">2.44 × 10⁻⁸</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Aluminio</td>
+          <td style="border: 1px solid black; padding: 8px">2.82 × 10⁻⁸</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Niquel</td>
+          <td style="border: 1px solid black; padding: 8px">6.99 × 10⁻⁸</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Hierro</td>
+          <td style="border: 1px solid black; padding: 8px">1.0 × 10⁻⁷</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Platino</td>
+          <td style="border: 1px solid black; padding: 8px">1.06 × 10⁻⁷</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Estano</td>
+          <td style="border: 1px solid black; padding: 8px">1.09 × 10⁻⁷</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Acero</td>
+          <td style="border: 1px solid black; padding: 8px">1.38 × 10⁻⁷</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Plomo</td>
+          <td style="border: 1px solid black; padding: 8px">2.2 × 10⁻⁷</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">Constantan</td>
+          <td style="border: 1px solid black; padding: 8px">4.9 × 10⁻⁷</td>
+        </tr>
+      </table>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+        "
+      >
+        <tr>
+          <td style="border: 1px solid black; padding: 5px">
+            <strong>Respuesta:</strong><br />
+            El material mas cercano es <strong>CONSTANTAN</strong> con ρ = 4.9 ×
+            10⁻⁷ Ω·m
+          </td>
+        </tr>
+      </table>
+
+      <!-- Ejercicio 2 -->
+      <div style="page-break-before: always"></div>
+      <h3>2) Diámetro del alambre de hierro</h3>
+      <p>
+        Si dos alambres, uno de hierro y otro de laton, tienen la misma longitud
+        y resistencia, y el alambre de laton tiene un radio de 0,04 dm, ¿cual es
+        el diametro del alambre de hierro?
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+        "
+      >
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              background-color: #eee;
+              padding: 5px;
+            "
+          >
+            Como ambos alambres tienen la misma resistencia y longitud:
+            <br />
+            <img
+              src="https://latex.codecogs.com/svg.image?\small R_{hierro}=R_{laton}"
+              style="vertical-align: top; margin-top: 10px"
+            />
+            <br />
+            <img
+              src="https://latex.codecogs.com/svg.image?\small \rho_{hierro}\frac{L}{A_{hierro}}=\rho_{laton}\frac{L}{A_{laton}}"
+              style="vertical-align: top; margin-top: 10px"
+            />
+            <br />
+            Simplificando (L se cancela):
+            <br />
+            <img
+              src="https://latex.codecogs.com/svg.image?\small \frac{\rho_{hierro}}{A_{hierro}}=\frac{\rho_{laton}}{A_{laton}}"
+              style="vertical-align: top; margin-top: 10px"
+            />
+          </td>
+        </tr>
+      </table>
+
+      <p>Datos de resistividad:</p>
+      <ul>
+        <li>Hierro: ρ = 1.0 × 10⁻⁷ Ω·m</li>
+        <li>Laton: ρ = 7.0 × 10⁻⁸ Ω·m</li>
+      </ul>
+
+      <p>Conversion de unidades:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small r_{laton}=0.04\,dm=0.04\times0.1\,m=0.004\,m"
+          style="vertical-align: top; margin-top: 10px"
+        />
+      </p>
+
+      <p>Area del alambre de laton:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small A_{laton}=\pi r^2=\pi(0.004)^2=5.027\times10^{-5}\,m^2"
+          style="vertical-align: top"
+        />
+      </p>
+
+      <p>Despejando area del hierro:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small A_{hierro}=\frac{\rho_{hierro}\cdot A_{laton}}{\rho_{laton}}=\frac{1.0\times10^{-7}\times5.027\times10^{-5}}{7.0\times10^{-8}}"
+          style="vertical-align: top"
+        />
+        <br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small A_{hierro}=7.181\times10^{-5}\,m^2"
+          style="vertical-align: top; margin-top: 10px"
+        />
+      </p>
+
+      <p>Calculando radio del hierro:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small r_{hierro}=\sqrt{\frac{A_{hierro}}{\pi}}=\sqrt{\frac{7.181\times10^{-5}}{\pi}}=0.00478\,m"
+          style="vertical-align: top"
+        />
+      </p>
+
+      <p>Diametro del hierro:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small d_{hierro}=2\times r_{hierro}=2\times0.00478=0.00956\,m"
+          style="vertical-align: top"
+        />
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+        "
+      >
+        <tr>
+          <td style="border: 1px solid black; padding: 5px">
+            <strong>Respuesta:</strong><br />
+            <img
+              src="https://latex.codecogs.com/svg.image?\small d_{hierro}=0.00956\,m=9.56\,mm"
+              style="vertical-align: top; margin-top: 10px"
+            />
+          </td>
+        </tr>
+      </table>
+
+      <!-- Ejercicio 3 -->
+      <div style="page-break-before: always"></div>
+      <h3>3) Hallar RT en el esquema</h3>
+      <p>Datos:</p>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin-top: 10px;
+          page-break-inside: avoid;
+        "
+      >
+        <tr style="background-color: #eee">
+          <th style="border: 1px solid black; padding: 8px; text-align: left">
+            Resistencia
+          </th>
+          <th style="border: 1px solid black; padding: 8px; text-align: left">
+            Valor
+          </th>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₁</td>
+          <td style="border: 1px solid black; padding: 8px">12 mΩ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₂</td>
+          <td style="border: 1px solid black; padding: 8px">2 kΩ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₃</td>
+          <td style="border: 1px solid black; padding: 8px">980 daΩ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₄</td>
+          <td style="border: 1px solid black; padding: 8px">3,5 kΩ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₅</td>
+          <td style="border: 1px solid black; padding: 8px">6800 Ω</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₆</td>
+          <td style="border: 1px solid black; padding: 8px">0,054 MΩ</td>
+        </tr>
+      </table>
+
+      <p style="text-align: center">
+        <svg width="600" height="250" xmlns="http://www.w3.org/2000/svg">
+          <!-- Linea superior -->
+          <line
+            x1="100"
+            y1="60"
+            x2="200"
+            y2="60"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="200"
+            y1="60"
+            x2="250"
+            y2="60"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="250"
+            y1="60"
+            x2="350"
+            y2="60"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="350"
+            y1="60"
+            x2="550"
+            y2="60"
+            stroke="black"
+            stroke-width="2"
+          />
+
+          <!-- Linea inferior -->
+          <line
+            x1="100"
+            y1="190"
+            x2="250"
+            y2="190"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="250"
+            y1="190"
+            x2="550"
+            y2="190"
+            stroke="black"
+            stroke-width="2"
+          />
+
+          <!-- Conexiones verticales -->
+          <line
+            x1="200"
+            y1="60"
+            x2="200"
+            y2="190"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="250"
+            y1="60"
+            x2="250"
+            y2="190"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="550"
+            y1="60"
+            x2="550"
+            y2="190"
+            stroke="black"
+            stroke-width="2"
+          />
+
+          <!-- R1 (vertical izquierda) -->
+          <rect
+            x="193"
+            y="80"
+            width="14"
+            height="50"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 200 80 L 205 85 L 195 90 L 205 95 L 195 100 L 205 105 L 195 110 L 205 115 L 195 120 L 205 125 L 200 130"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="180" y="110" font-size="16" text-anchor="middle">R1</text>
+
+          <!-- R2 (vertical centro) -->
+          <rect
+            x="243"
+            y="80"
+            width="14"
+            height="50"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 250 80 L 255 85 L 245 90 L 255 95 L 245 100 L 255 105 L 245 110 L 255 115 L 245 120 L 255 125 L 250 130"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="230" y="110" font-size="16" text-anchor="middle">R2</text>
+
+          <!-- R3 (vertical centro-derecha) -->
+          <line
+            x1="250"
+            y1="130"
+            x2="250"
+            y2="150"
+            stroke="black"
+            stroke-width="2"
+          />
+          <rect
+            x="243"
+            y="150"
+            width="14"
+            height="30"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 250 150 L 255 155 L 245 160 L 255 165 L 245 170 L 255 175 L 250 180"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="250"
+            y1="180"
+            x2="250"
+            y2="190"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="230" y="170" font-size="16" text-anchor="middle">R3</text>
+
+          <!-- R4 (horizontal superior derecha) -->
+          <line
+            x1="350"
+            y1="60"
+            x2="350"
+            y2="40"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="350"
+            y1="40"
+            x2="490"
+            y2="40"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="490"
+            y1="40"
+            x2="490"
+            y2="60"
+            stroke="black"
+            stroke-width="2"
+          />
+          <rect
+            x="370"
+            y="33"
+            width="60"
+            height="14"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 370 40 L 375 35 L 380 45 L 385 35 L 390 45 L 395 35 L 400 45 L 405 35 L 410 45 L 415 35 L 420 45 L 425 35 L 430 40"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="400" y="30" font-size="16" text-anchor="middle">R4</text>
+
+          <!-- R5 (horizontal medio derecha) -->
+          <line
+            x1="490"
+            y1="60"
+            x2="490"
+            y2="100"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="490"
+            y1="100"
+            x2="350"
+            y2="100"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="350"
+            y1="100"
+            x2="350"
+            y2="60"
+            stroke="black"
+            stroke-width="2"
+          />
+          <rect
+            x="430"
+            y="93"
+            width="60"
+            height="14"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 430 100 L 435 95 L 440 105 L 445 95 L 450 105 L 455 95 L 460 105 L 465 95 L 470 105 L 475 95 L 480 105 L 485 95 L 490 100"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="460" y="120" font-size="16" text-anchor="middle">R5</text>
+
+          <!-- R6 (vertical derecha) -->
+          <rect
+            x="543"
+            y="80"
+            width="14"
+            height="50"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 550 80 L 555 85 L 545 90 L 555 95 L 545 100 L 555 105 L 545 110 L 555 115 L 545 120 L 555 125 L 550 130"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="570" y="110" font-size="16" text-anchor="middle">R6</text>
+
+          <!-- Rectangulo blanco para ocultar linea entre R4 y R5 -->
+          <rect
+            x="352"
+            y="55"
+            width="136"
+            height="15"
+            fill="white"
+            stroke="none"
+          />
+        </svg>
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+        "
+      >
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              background-color: #eee;
+              padding: 5px;
+            "
+          >
+            Analisis del circuito:
+            <br />
+            - R₁, R₂, R₃ estan en paralelo
+            <br />
+            - R₄ y R₅ estan en serie
+            <br />
+            - El conjunto (R₄+R₅) esta en paralelo con R₆
+            <br />
+            - Todo el conjunto esta en serie con el paralelo de R₁, R₂, R₃
+          </td>
+        </tr>
+      </table>
+
+      <p>Conversion de unidades:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_1=12\,m\Omega=12\times10^{-3}=0.012\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_2=2\,k\Omega=2\times10^3=2000\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_3=980\,da\Omega=980\times10=9800\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_4=3.5\,k\Omega=3.5\times10^3=3500\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_5=6800\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_6=0.054\,M\Omega=0.054\times10^6=54000\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        />
+      </p>
+
+      <p>Paso 1: Paralelo de R₁, R₂, R₃:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small \frac{1}{R_{123}}=\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}=\frac{1}{0.012}+\frac{1}{2000}+\frac{1}{9800}"
+          style="vertical-align: top"
+        />
+        <br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small \frac{1}{R_{123}}=83.333+0.0005+0.000102=83.334"
+          style="vertical-align: top; margin-top: 10px"
+        />
+        <br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_{123}=0.012\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        />
+      </p>
+
+      <p>Paso 2: Serie de R₄ y R₅:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_{45}=R_4+R_5=3500+6800=10300\,\Omega"
+          style="vertical-align: top"
+        />
+      </p>
+
+      <p>Paso 3: Paralelo de R₄₅ y R₆:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small \frac{1}{R_{456}}=\frac{1}{R_{45}}+\frac{1}{R_6}=\frac{1}{10300}+\frac{1}{54000}"
+          style="vertical-align: top"
+        />
+        <br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small \frac{1}{R_{456}}=0.0000971+0.0000185=0.0001156"
+          style="vertical-align: top; margin-top: 10px"
+        />
+        <br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_{456}=8650.52\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        />
+      </p>
+
+      <p>Paso 4: Resistencia total (serie de R₁₂₃ y R₄₅₆):</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_T=R_{123}+R_{456}=0.012+8650.52=8650.532\,\Omega"
+          style="vertical-align: top"
+        />
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+        "
+      >
+        <tr>
+          <td style="border: 1px solid black; padding: 5px">
+            <strong>Respuesta:</strong><br />
+            <img
+              src="https://latex.codecogs.com/svg.image?\small R_T=8650.532\,\Omega"
+              style="vertical-align: top; margin-top: 10px"
+            />
+          </td>
+        </tr>
+      </table>
+
+      <!-- Ejercicio 4 -->
+      <div style="page-break-before: always"></div>
+      <h3>4) Hallar R₂ en el esquema</h3>
+      <p>Datos:</p>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin-top: 10px;
+          page-break-inside: avoid;
+        "
+      >
+        <tr style="background-color: #eee">
+          <th style="border: 1px solid black; padding: 8px; text-align: left">
+            Resistencia
+          </th>
+          <th style="border: 1px solid black; padding: 8px; text-align: left">
+            Valor
+          </th>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₁</td>
+          <td style="border: 1px solid black; padding: 8px">15 Ω</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">RT</td>
+          <td style="border: 1px solid black; padding: 8px">5,7 kΩ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₃</td>
+          <td style="border: 1px solid black; padding: 8px">0,033 MΩ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₄</td>
+          <td style="border: 1px solid black; padding: 8px">0,18 kΩ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₅</td>
+          <td style="border: 1px solid black; padding: 8px">2700000 mΩ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 8px">R₆</td>
+          <td style="border: 1px solid black; padding: 8px">82 Ω</td>
+        </tr>
+      </table>
+
+      <p style="text-align: center">
+        <svg width="650" height="250" xmlns="http://www.w3.org/2000/svg">
+          <!-- Linea superior -->
+          <line
+            x1="100"
+            y1="80"
+            x2="180"
+            y2="80"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="180"
+            y1="80"
+            x2="260"
+            y2="80"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="260"
+            y1="80"
+            x2="340"
+            y2="80"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="340"
+            y1="80"
+            x2="420"
+            y2="80"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="420"
+            y1="80"
+            x2="500"
+            y2="80"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="500"
+            y1="80"
+            x2="580"
+            y2="80"
+            stroke="black"
+            stroke-width="2"
+          />
+
+          <!-- Linea inferior -->
+          <line
+            x1="100"
+            y1="180"
+            x2="340"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="340"
+            y1="180"
+            x2="420"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="420"
+            y1="180"
+            x2="500"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="500"
+            y1="180"
+            x2="580"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+
+          <!-- Conexiones verticales -->
+          <line
+            x1="340"
+            y1="80"
+            x2="340"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="420"
+            y1="80"
+            x2="420"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="500"
+            y1="80"
+            x2="500"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+          <line
+            x1="580"
+            y1="80"
+            x2="580"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+
+          <!-- Cierre derecho -->
+          <line
+            x1="580"
+            y1="80"
+            x2="580"
+            y2="180"
+            stroke="black"
+            stroke-width="2"
+          />
+
+          <!-- R1 (horizontal) -->
+          <rect
+            x="120"
+            y="73"
+            width="60"
+            height="14"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 120 80 L 125 75 L 130 85 L 135 75 L 140 85 L 145 75 L 150 85 L 155 75 L 160 85 L 165 75 L 170 85 L 175 75 L 180 80"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="150" y="65" font-size="16" text-anchor="middle">R1</text>
+
+          <!-- R2 (horizontal) -->
+          <rect
+            x="200"
+            y="73"
+            width="60"
+            height="14"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 200 80 L 205 75 L 210 85 L 215 75 L 220 85 L 225 75 L 230 85 L 235 75 L 240 85 L 245 75 L 250 85 L 255 75 L 260 80"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="230" y="65" font-size="16" text-anchor="middle">R2</text>
+
+          <!-- R5 (horizontal derecha) -->
+          <rect
+            x="440"
+            y="73"
+            width="60"
+            height="14"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 440 80 L 445 75 L 450 85 L 455 75 L 460 85 L 465 75 L 470 85 L 475 75 L 480 85 L 485 75 L 490 85 L 495 75 L 500 80"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="470" y="65" font-size="16" text-anchor="middle">R5</text>
+
+          <!-- R3 (vertical) -->
+          <rect
+            x="333"
+            y="100"
+            width="14"
+            height="50"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 340 100 L 345 105 L 335 110 L 345 115 L 335 120 L 345 125 L 335 130 L 345 135 L 335 140 L 345 145 L 340 150"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="320" y="130" font-size="16" text-anchor="middle">R3</text>
+
+          <!-- R4 (vertical) -->
+          <rect
+            x="413"
+            y="100"
+            width="14"
+            height="50"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 420 100 L 425 105 L 415 110 L 425 115 L 415 120 L 425 125 L 415 130 L 425 135 L 415 140 L 425 145 L 420 150"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="400" y="130" font-size="16" text-anchor="middle">R4</text>
+
+          <!-- R6 (vertical) -->
+          <rect
+            x="573"
+            y="100"
+            width="14"
+            height="50"
+            fill="white"
+            stroke="none"
+          />
+          <path
+            d="M 580 100 L 585 105 L 575 110 L 585 115 L 575 120 L 585 125 L 575 130 L 585 135 L 575 140 L 585 145 L 580 150"
+            fill="none"
+            stroke="black"
+            stroke-width="2"
+          />
+          <text x="600" y="130" font-size="16" text-anchor="middle">R6</text>
+        </svg>
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+        "
+      >
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              background-color: #eee;
+              padding: 5px;
+            "
+          >
+            Analisis del circuito:
+            <br />
+            - R₁ y R₂ estan en serie
+            <br />
+            - R₃, R₄, R₅, R₆ estan en paralelo
+            <br />
+            - El conjunto (R₁+R₂) esta en serie con el paralelo de R₃, R₄, R₅,
+            R₆
+          </td>
+        </tr>
+      </table>
+
+      <p>Conversion de unidades:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_1=15\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_T=5.7\,k\Omega=5.7\times10^3=5700\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_3=0.033\,M\Omega=0.033\times10^6=33000\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_4=0.18\,k\Omega=0.18\times10^3=180\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_5=2700000\,m\Omega=2700000\times10^{-3}=2700\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        /><br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_6=82\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        />
+      </p>
+
+      <p>Paso 1: Paralelo de R₃, R₄, R₅, R₆:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small \frac{1}{R_{3456}}=\frac{1}{R_3}+\frac{1}{R_4}+\frac{1}{R_5}+\frac{1}{R_6}"
+          style="vertical-align: top"
+        />
+        <br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small \frac{1}{R_{3456}}=\frac{1}{33000}+\frac{1}{180}+\frac{1}{2700}+\frac{1}{82}"
+          style="vertical-align: top; margin-top: 10px"
+        />
+        <br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small \frac{1}{R_{3456}}=0.00003+0.00556+0.00037+0.01220=0.01816"
+          style="vertical-align: top; margin-top: 10px"
+        />
+        <br />
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_{3456}=55.07\,\Omega"
+          style="vertical-align: top; margin-top: 10px"
+        />
+      </p>
+
+      <p>Paso 2: Resistencia total:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_T=R_1+R_2+R_{3456}"
+          style="vertical-align: top"
+        />
+      </p>
+
+      <p>Despejando R₂:</p>
+      <p>
+        <img
+          src="https://latex.codecogs.com/svg.image?\small R_2=R_T-R_1-R_{3456}=5700-15-55.07=5629.93\,\Omega"
+          style="vertical-align: top"
+        />
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+        "
+      >
+        <tr>
+          <td style="border: 1px solid black; padding: 5px">
+            <strong>Respuesta:</strong><br />
+            <img
+              src="https://latex.codecogs.com/svg.image?\small R_2=5629.93\,\Omega"
+              style="vertical-align: top; margin-top: 10px"
+            />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

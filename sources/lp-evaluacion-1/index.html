@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evaluacion 1 - Lenguaje de Programacion - Jeffrey Agudelo</title>
+    
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    
+    <!-- Estilos para CodeMirror - Tema Dark Modern VSCode -->
+    <style>
+      .code-editor {
+        display: none;
+      }
+      
+      /* Tema Dark Modern de VSCode */
+      .CodeMirror {
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        border: 1px solid #3c3c3c;
+        border-radius: 4px;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: smaller;
+      }
+      
+      .CodeMirror-scroll {
+        overflow: visible !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 5px !important;
+      }
+      
+      .CodeMirror-vscrollbar,
+      .CodeMirror-hscrollbar {
+        display: none !important;
+      }
+      
+      .CodeMirror-gutters {
+        background-color: #1e1e1e;
+        border-right: 1px solid #3c3c3c;
+      }
+      
+      .CodeMirror-linenumber {
+        color: #858585;
+      }
+      
+      .CodeMirror-cursor {
+        border-left: 1px solid #aeafad;
+      }
+      
+      /* Resaltado de sintaxis - Dark Modern */
+      .cm-s-vscode-dark .cm-keyword {
+        color: #569cd6;
+      }
+      
+      .cm-s-vscode-dark .cm-atom,
+      .cm-s-vscode-dark .cm-number {
+        color: #b5cea8;
+      }
+      
+      .cm-s-vscode-dark .cm-def {
+        color: #dcdcaa;
+      }
+      
+      .cm-s-vscode-dark .cm-variable {
+        color: #9cdcfe;
+      }
+      
+      .cm-s-vscode-dark .cm-variable-2 {
+        color: #4fc1ff;
+      }
+      
+      .cm-s-vscode-dark .cm-variable-3 {
+        color: #4ec9b0;
+      }
+      
+      .cm-s-vscode-dark .cm-property {
+        color: #9cdcfe;
+      }
+      
+      .cm-s-vscode-dark .cm-operator {
+        color: #d4d4d4;
+      }
+      
+      .cm-s-vscode-dark .cm-comment {
+        color: #6a9955;
+        font-style: italic;
+      }
+      
+      .cm-s-vscode-dark .cm-string {
+        color: #ce9178;
+      }
+      
+      .cm-s-vscode-dark .cm-string-2 {
+        color: #ce9178;
+      }
+      
+      .cm-s-vscode-dark .cm-meta {
+        color: #d4d4d4;
+      }
+      
+      .cm-s-vscode-dark .cm-qualifier {
+        color: #4ec9b0;
+      }
+      
+      .cm-s-vscode-dark .cm-builtin {
+        color: #4ec9b0;
+      }
+      
+      .cm-s-vscode-dark .cm-bracket {
+        color: #d4d4d4;
+      }
+      
+      .cm-s-vscode-dark .cm-tag {
+        color: #569cd6;
+      }
+      
+      .cm-s-vscode-dark .cm-attribute {
+        color: #9cdcfe;
+      }
+      
+      .cm-s-vscode-dark .cm-type {
+        color: #4ec9b0;
+      }
+      
+      .CodeMirror-selected {
+        background-color: #264f78;
+      }
+      
+      .CodeMirror-line::selection,
+      .CodeMirror-line > span::selection,
+      .CodeMirror-line > span > span::selection {
+        background-color: #264f78;
+      }
+      
+      /* Evitar cortes de página en elementos */
+      table {
+        page-break-inside: avoid !important;
+      }
+      
+      /* Evitar huérfanas y viudas */
+      p {
+        orphans: 3;
+        widows: 3;
+      }
+      
+      /* Contenedores de código */
+      .code-block {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        display: block;
+        margin: 5px 0 !important;
+        padding: 0 !important;
+      }
+      
+      .code-block strong {
+        display: block;
+        margin: 5px 0 !important;
+        padding: 0 !important;
+      }
+      
+      .code-block h4,
+      .code-block p {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        margin: 5px 0 !important;
+      }
+      
+      /* Padding para contenido de texto */
+      p, h1, h2, h3, h4, h5, ul, ol, table, pre {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      /* Centros sin padding adicional */
+      div[style*="text-align: center"] {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      "
+    >
+      <!-- PORTADA -->
+
+      <div
+        style="
+          page-break-after: always;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          height: 100vh;
+          text-align: center;
+        "
+      >
+        <div style="margin-top: 80px">
+          <h1
+            style="
+              font-size: 14pt;
+              font-weight: normal;
+              margin: 0;
+              line-height: 1.5;
+            "
+          >
+            INGENIERÍA DE SISTEMAS
+          </h1>
+
+          <p style="font-size: 12pt; margin: 5px 0; line-height: 1.5">
+            LENGUAJE DE PROGRAMACIÓN - 2510B01G1
+          </p>
+        </div>
+
+        <div>
+          <h2
+            style="
+              font-size: 14pt;
+              font-weight: bold;
+              margin: 20px 0;
+              line-height: 1.5;
+            "
+          >
+            Primer parcial (25%)
+          </h2>
+
+          <p style="font-size: 12pt; margin: 10px 0; line-height: 1.5">
+            JEFFREY ALEXANDER AGUDELO ESPITIA
+          </p>
+
+          <p style="font-size: 12pt; margin: 5px 0; line-height: 1.5">
+            CC: 1094955981
+          </p>
+        </div>
+
+        <div style="margin-bottom: 80px">
+          <p style="font-size: 12pt; margin: 0 0 20px 0; line-height: 1.5">
+            TULUÁ - VALLE DEL CAUCA
+          </p>
+
+          <img
+            src="imgs/logo-universdad.png"
+            alt="Logo Universidad"
+            style="width: 200px; height: auto"
+          />
+        </div>
+      </div>
+
+      <!-- CONTENIDO -->
+      <div style="page-break-before: always"></div>
+
+
+      <h2>1. ¿Qué es una API?</h2>
+
+      <h3>Definición</h3>
+      <p style="text-align: justify">
+        Una <strong>API (Application Programming Interface)</strong> o Interfaz
+        de Programación de Aplicaciones es un conjunto de definiciones,
+        protocolos y herramientas que permite que diferentes aplicaciones de
+        software se comuniquen entre sí. Actúa como un intermediario que permite
+        que dos aplicaciones intercambien datos y funcionalidades de manera
+        estandarizada y segura.
+      </p>
+
+      <p style="text-align: justify">
+        Una API define las reglas y especificaciones que los desarrolladores
+        deben seguir para interactuar con un sistema, servicio o biblioteca.
+        Estas reglas incluyen qué solicitudes se pueden hacer, cómo hacerlas,
+        qué formatos de datos utilizar y qué respuestas esperar.
+      </p>
+
+      <div style="text-align: center; margin: 20px 0">
+        <img
+          src="https://kroki.io/mermaid/svg/eNpLL0osyFDwCeJSAALHaOeczNS8ktRYBV1du5qA1JLM5MzDm_MUPEJCAmoUnKIdAzxjwSqdIAqK8pNTixNrFJyjg1OLyjJT8osg0s5gaef8vOLSnBKgvEu0hlNicapCSqqCS2JJfrEmRJkLWBlYBGgGks6g1OKC0tRikFYnJPvgwlAHOQIAq6w5Mg"
+        />
+      </div>
+
+      <h3>Importancia de las APIs en la comunicación de aplicaciones</h3>
+
+      <p style="text-align: justify">
+        Las APIs son fundamentales en el desarrollo de software moderno por las
+        siguientes razones:
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              width: 30%;
+              background-color: #f0f0f0;
+            "
+          >
+            <strong>Aspecto</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #f0f0f0;
+            "
+          >
+            <strong>Importancia</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Interoperabilidad</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Permiten que sistemas desarrollados en diferentes lenguajes y
+            plataformas se comuniquen sin problemas
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Reutilización</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Los desarrolladores pueden aprovechar funcionalidades existentes sin
+            necesidad de reinventar la rueda
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Escalabilidad</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Facilitan la construcción de sistemas modulares que pueden crecer y
+            adaptarse
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Seguridad</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Proporcionan una capa controlada de acceso a datos y funcionalidades
+            sensibles
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Integración</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Permiten conectar servicios de terceros (pagos, autenticación,
+            mapas, etc.)
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Mantenimiento</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Separan la lógica del negocio de la interfaz de usuario, facilitando
+            actualizaciones
+          </td>
+        </tr>
+      </table>
+
+      <!-- Sección 2: APIs RESTful -->
+      <div style="page-break-before: always"></div>
+      <h2>2. Principios de una API RESTful</h2>
+
+      <h3>¿Qué es REST?</h3>
+      <p style="text-align: justify">
+        <strong>REST (Representational State Transfer)</strong> es un estilo
+        arquitectónico para diseñar APIs que se basa en el protocolo HTTP. Fue
+        definido por Roy Fielding en el año 2000 y se ha convertido en el
+        estándar de facto para el desarrollo de servicios web modernos.
+      </p>
+
+      <h3>Principios fundamentales de REST</h3>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              width: 25%;
+              background-color: #f0f0f0;
+            "
+          >
+            <strong>Principio</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #f0f0f0;
+            "
+          >
+            <strong>Descripción</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Cliente-Servidor</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Separación clara entre el cliente (interfaz de usuario) y el
+            servidor (almacenamiento de datos). Permite que evolucionen
+            independientemente.
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Sin estado (Stateless)</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Cada petición del cliente debe contener toda la información
+            necesaria. El servidor no guarda información de sesión entre
+            peticiones.
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Cacheable</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Las respuestas deben indicar si son cacheables o no, mejorando el
+            rendimiento al reducir peticiones innecesarias.
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Interfaz uniforme</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Uso consistente de URLs, métodos HTTP y formatos de datos
+            (generalmente JSON).
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Sistema de capas</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            El cliente no necesita saber si está conectado directamente al
+            servidor o a través de intermediarios.
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>Recursos</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Todo se representa como recursos identificados por URIs únicas.
+          </td>
+        </tr>
+      </table>
+
+      <h3>Métodos HTTP en APIs RESTful</h3>
+      <p style="text-align: justify">
+        Los métodos HTTP definen las operaciones que se pueden realizar sobre
+        los recursos. Los cuatro métodos principales corresponden a las
+        operaciones CRUD:
+      </p>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              width: 15%;
+              background-color: #e3f2fd;
+            "
+          >
+            <strong>Método HTTP</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              width: 15%;
+              background-color: #e3f2fd;
+            "
+          >
+            <strong>Operación CRUD</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              width: 35%;
+              background-color: #e3f2fd;
+            "
+          >
+            <strong>Descripción</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              width: 35%;
+              background-color: #e3f2fd;
+            "
+          >
+            <strong>Ejemplo</strong>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+            "
+          >
+            <strong>GET</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">Read (Leer)</td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtiene uno o varios recursos. No modifica datos.
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            GET /api/products<br />GET /api/products/5
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #fff9c4;
+            "
+          >
+            <strong>POST</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">Create (Crear)</td>
+          <td style="border: 1px solid black; padding: 10px">
+            Crea un nuevo recurso en el servidor.
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            POST /api/products<br />{name: "Laptop", price: 500}
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #bbdefb;
+            "
+          >
+            <strong>PUT</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Update (Actualizar)
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Actualiza completamente un recurso existente.
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            PUT /api/products/5<br />{name: "Laptop Pro", price: 600}
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #ffccbc;
+            "
+          >
+            <strong>DELETE</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Delete (Eliminar)
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Elimina un recurso del servidor.
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            DELETE /api/products/5
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #e1bee7;
+            "
+          >
+            <strong>PATCH</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">Update parcial</td>
+          <td style="border: 1px solid black; padding: 10px">
+            Actualiza parcialmente un recurso (solo campos específicos).
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            PATCH /api/products/5<br />{price: 550}
+          </td>
+        </tr>
+      </table>
+
+      <h3>Convenciones comunes en APIs RESTful</h3>
+      <ul>
+        <li>
+          <strong>URLs descriptivas:</strong> Usar sustantivos en plural para
+          recursos (<code>/products</code>, <code>/users</code>)
+        </li>
+        <li>
+          <strong>Jerarquía de recursos:</strong>
+          <code>/users/1/orders/5</code> para relaciones anidadas
+        </li>
+        <li>
+          <strong>Códigos de estado HTTP:</strong>
+          <ul>
+            <li><code>200 OK</code> - Operación exitosa</li>
+            <li><code>201 Created</code> - Recurso creado exitosamente</li>
+            <li>
+              <code>400 Bad Request</code> - Error en la petición del cliente
+            </li>
+            <li><code>401 Unauthorized</code> - Autenticación requerida</li>
+            <li><code>404 Not Found</code> - Recurso no encontrado</li>
+            <li><code>500 Internal Server Error</code> - Error del servidor</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Formato JSON:</strong> Usar JSON como formato estándar de
+          intercambio de datos
+        </li>
+        <li>
+          <strong>Versionado:</strong> <code>/api/v1/products</code> para
+          mantener compatibilidad
+        </li>
+        <li>
+          <strong>Filtrado y paginación:</strong>
+          <code>/products?category=electronics&page=2&limit=10</code>
+        </li>
+      </ul>
+
+      <!-- Sección 3: Instalación -->
+      <div style="page-break-before: always"></div>
+      <h2>3. Instalación de Node.js y NestJS</h2>
+
+      <h3>¿Por qué NestJS en lugar de Express?</h3>
+      <p style="text-align: justify">
+        Aunque el trabajo solicitaba Express, se ha optado por
+        <strong>NestJS</strong> por las siguientes razones:
+      </p>
+      <ul>
+        <li>
+          <strong>Arquitectura estructurada:</strong> NestJS proporciona una
+          arquitectura modular basada en TypeScript
+        </li>
+        <li>
+          <strong>Escalabilidad:</strong> Ideal para proyectos empresariales
+          grandes
+        </li>
+        <li>
+          <strong>Integración con Swagger:</strong> Documentación automática de
+          APIs
+        </li>
+        <li>
+          <strong>Decoradores y DI:</strong> Sistema de inyección de
+          dependencias robusto
+        </li>
+        <li>
+          <strong>Basado en Express:</strong> Internamente usa Express (o
+          Fastify)
+        </li>
+      </ul>
+
+      <h3>Paso 1: Instalación de Node.js</h3>
+      <p style="text-align: justify">
+        Node.js es el entorno de ejecución de JavaScript que permite ejecutar
+        código fuera del navegador.
+      </p>
+
+      <div style="text-align: center; margin: 20px 0">
+        <img src="imgs/LENGUAJE-PROGRAMACIÓN-EV1-NODE.png" width="80%" alt="" style="width: 80%;" />
+      </div>
+
+      <p style="text-align: justify">
+        <strong>Comandos de verificación:</strong>
+      </p>
+      <div
+        style="
+          background-color: #f5f5f5;
+          padding: 15px;
+          border-left: 4px solid #4caf50;
+          font-family: monospace;
+          margin: 10px 0;
+        "
+      >
+        <code>node --version</code><br />
+        <code>npm --version</code>
+      </div>
+
+      <div style="text-align: center; margin: 20px 0">
+        <img src="imgs/LENGUAJE-PROGRAMACIÓN-EV1-CMD.png" width="80%" alt="" style="width: 80%;" />
+      </div>
+
+      <h3>Paso 2: Instalación de NestJS CLI</h3>
+      <p style="text-align: justify">
+        El CLI de NestJS facilita la creación y gestión de proyectos.
+      </p>
+
+      <div
+        style="
+          background-color: #f5f5f5;
+          padding: 15px;
+          border-left: 4px solid #2196f3;
+          font-family: monospace;
+          margin: 10px 0;
+        "
+      >
+        <code>npm install -g @nestjs/cli</code>
+      </div>
+
+      <div style="text-align: center; margin: 20px 0">
+        <img src="imgs/LENGUAJE-PROGRAMACIÓN-EV1-CMD2.png" width="80%" alt="" style="width: 80%;" />
+      </div>
+
+      <h3>Paso 3: Crear proyecto NestJS</h3>
+      <div
+        style="
+          background-color: #f5f5f5;
+          padding: 15px;
+          border-left: 4px solid #ff9800;
+          font-family: monospace;
+          margin: 10px 0;
+        "
+      >
+        <code>nest new farmacia-api</code><br />
+        <code>cd farmacia-api</code>
+      </div>
+
+      <div style="text-align: center; margin: 20px 0">
+        <img src="imgs/LENGUAJE-PROGRAMACIÓN-EV1-CMD3.png" width="80%" alt="" style="width: 80%;" />
+      </div>
+
+      <h3>Paso 4: Instalación de Swagger para documentación</h3>
+      <div
+        style="
+          background-color: #f5f5f5;
+          padding: 15px;
+          border-left: 4px solid #9c27b0;
+          font-family: monospace;
+          margin: 10px 0;
+        "
+      >
+        <code>npm install @nestjs/swagger swagger-ui-express</code>
+      </div>
+
+      <div style="text-align: center; margin: 20px 0">
+        <img src="imgs/LENGUAJE-PROGRAMACIÓN-EV1-CMD4.png" width="80%" alt="" style="width: 80%;" />
+      </div>
+
+      <h3>Paso 5: Iniciar el servidor</h3>
+      <div
+        style="
+          background-color: #f5f5f5;
+          padding: 15px;
+          border-left: 4px solid #4caf50;
+          font-family: monospace;
+          margin: 10px 0;
+        "
+      >
+        <code>npm run start:dev</code>
+      </div>
+
+      <div style="text-align: center; margin: 20px 0">
+        <img src="imgs/LENGUAJE-PROGRAMACIÓN-EV1-CMD5.png" width="80%" alt="" style="width: 80%;" />
+      </div>
+
+      <!-- Subsección: Configuración y Endpoints -->
+      <h3>Configuración de Swagger y Creación de Endpoints</h3>
+
+      <div class="code-block">
+        <h4>Paso 6: Configurar Swagger en main.ts</h4>
+        <p style="text-align: justify">
+          Para habilitar la documentación automática de la API, configuramos Swagger en el archivo principal:
+        </p>
+        <strong>src/main.ts:</strong>
+        <textarea class="code-editor" data-mode="javascript">import { NestFactory } from '@nestjs/core';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  // Configuración de Swagger
+  const config = new DocumentBuilder()
+    .setTitle('API Farmacia')
+    .setDescription('API para gestión de farmacia')
+    .setVersion('1.0')
+    .addTag('medicamentos')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
+  await app.listen(3000);
+  console.log('Servidor corriendo en http://localhost:3000');
+  console.log('Documentación Swagger en http://localhost:3000/api');
+}
+bootstrap();</textarea>
+      </div>
+
+      <div style="page-break-before: always"></div>
+      <h4>Paso 7: Crear módulo de Medicamentos</h4>
+      <p style="text-align: justify">
+        Generamos el módulo completo con controlador y servicio usando el CLI de NestJS:
+      </p>
+
+      <div style="background-color: #f5f5f5; padding: 15px; border-left: 4px solid #FF9800; font-family: monospace; margin: 10px 0">
+        <code>nest generate resource medicamentos</code>
+      </div>
+
+      <p style="text-align: justify">
+        Esto crea automáticamente:
+      </p>
+      <ul>
+        <li><code>medicamentos.module.ts</code> - Módulo</li>
+        <li><code>medicamentos.controller.ts</code> - Controlador con endpoints</li>
+        <li><code>medicamentos.service.ts</code> - Lógica de negocio</li>
+        <li><code>dto/</code> - Carpeta para objetos de transferencia de datos</li>
+        <li><code>entities/</code> - Carpeta para entidades</li>
+      </ul>
+
+      <div class="code-block">
+        <h4>Paso 8: Crear DTOs (Data Transfer Objects)</h4>
+        <p style="text-align: justify">
+          Definimos la estructura de datos para crear medicamentos:
+        </p>
+        <strong>src/medicamentos/dto/create-medicamento.dto.ts:</strong>
+        <textarea class="code-editor" data-mode="javascript">import { ApiProperty } from '@nestjs/swagger';
+
+export class CreateMedicamentoDto {
+  @ApiProperty({ example: 'Ibuprofeno 400mg' })
+  nombre: string;
+
+  @ApiProperty({ example: 'Ibuprofeno' })
+  principioActivo: string;
+
+  @ApiProperty({ example: 15000 })
+  precio: number;
+
+  @ApiProperty({ example: 100 })
+  stock: number;
+
+  @ApiProperty({ example: '2025-12-31' })
+  fechaVencimiento: string;
+
+  @ApiProperty({ example: 'Analgésico antiinflamatorio' })
+  descripcion?: string;
+
+  @ApiProperty({ example: 1 })
+  idCategoria: number;
+
+  @ApiProperty({ example: 1 })
+  idProveedor: number;
+}</textarea>
+      </div>
+
+      <div class="code-block">
+        <h4>Paso 9: Implementar el Controlador</h4>
+        <p style="text-align: justify">
+          Definimos los endpoints RESTful en el controlador:
+        </p>
+        <strong>src/medicamentos/medicamentos.controller.ts:</strong>
+        <textarea class="code-editor" data-mode="javascript">import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { MedicamentosService } from './medicamentos.service';
+import { CreateMedicamentoDto } from './dto/create-medicamento.dto';
+import { UpdateMedicamentoDto } from './dto/update-medicamento.dto';
+
+@ApiTags('medicamentos')
+@Controller('medicamentos')
+export class MedicamentosController {
+  constructor(private readonly medicamentosService: MedicamentosService) {}
+
+  @Post()
+  @ApiOperation({ summary: 'Crear un nuevo medicamento' })
+  @ApiResponse({ status: 201, description: 'Medicamento creado exitosamente' })
+  create(@Body() createMedicamentoDto: CreateMedicamentoDto) {
+    return this.medicamentosService.create(createMedicamentoDto);
+  }
+
+  @Get()
+  @ApiOperation({ summary: 'Obtener todos los medicamentos' })
+  findAll() {
+    return this.medicamentosService.findAll();
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Obtener un medicamento por ID' })
+  findOne(@Param('id') id: string) {
+    return this.medicamentosService.findOne(+id);
+  }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Actualizar un medicamento' })
+  update(@Param('id') id: string, @Body() updateDto: UpdateMedicamentoDto) {
+    return this.medicamentosService.update(+id, updateDto);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: 'Eliminar un medicamento' })
+  remove(@Param('id') id: string) {
+    return this.medicamentosService.remove(+id);
+  }
+}</textarea>
+      </div>
+
+      <div class="code-block">
+        <h4>Paso 10: Implementar el Servicio</h4>
+        <p style="text-align: justify">
+          El servicio contiene la lógica de negocio. Por ahora, usaremos datos en memoria:
+        </p>
+        <strong>src/medicamentos/medicamentos.service.ts:</strong>
+        <textarea class="code-editor" data-mode="javascript">import { Injectable } from '@nestjs/common';
+import { CreateMedicamentoDto } from './dto/create-medicamento.dto';
+import { UpdateMedicamentoDto } from './dto/update-medicamento.dto';
+
+@Injectable()
+export class MedicamentosService {
+  private medicamentos = [];
+  private idCounter = 1;
+
+  create(createMedicamentoDto: CreateMedicamentoDto) {
+    const nuevoMedicamento = {
+      id: this.idCounter++,
+      ...createMedicamentoDto,
+      fechaCreacion: new Date().toISOString()
+    };
+    this.medicamentos.push(nuevoMedicamento);
+    return nuevoMedicamento;
+  }
+
+  findAll() {
+    return this.medicamentos;
+  }
+
+  findOne(id: number) {
+    return this.medicamentos.find(med => med.id === id);
+  }
+
+  update(id: number, updateDto: UpdateMedicamentoDto) {
+    const index = this.medicamentos.findIndex(med => med.id === id);
+    if (index !== -1) {
+      this.medicamentos[index] = { ...this.medicamentos[index], ...updateDto };
+      return this.medicamentos[index];
+    }
+    return null;
+  }
+
+  remove(id: number) {
+    const index = this.medicamentos.findIndex(med => med.id === id);
+    if (index !== -1) {
+      this.medicamentos.splice(index, 1);
+      return { mensaje: 'Medicamento eliminado' };
+    }
+    return null;
+  }
+}</textarea>
+      </div>
+
+      <div style="page-break-before: always"></div>
+      <h4>Paso 11: Probar los Endpoints</h4>
+      <p style="text-align: justify">
+        Una vez configurado todo, reinicia el servidor y accede a:
+      </p>
+      
+      <ul>
+        <li><strong>Swagger UI:</strong> <code>http://localhost:3000/api</code></li>
+        <li><strong>GET todos los medicamentos:</strong> <code>http://localhost:3000/medicamentos</code></li>
+        <li><strong>GET medicamento por ID:</strong> <code>http://localhost:3000/medicamentos/1</code></li>
+      </ul>
+
+      <div style="background-color: #e3f2fd; padding: 15px; border-left: 4px solid #2196F3; margin: 20px 0">
+        <strong>💡 Tip:</strong> Swagger UI proporciona una interfaz interactiva donde puedes probar todos los endpoints directamente desde el navegador, ver los esquemas de datos y los códigos de respuesta HTTP.
+      </div>
+
+      <div style="page-break-before: always"></div>
+      <h4>Resultado Final</h4>
+      <p style="text-align: justify">
+        Con estos pasos, habrás creado:
+      </p>
+      <ul>
+        <li>✅ Servidor NestJS corriendo en puerto 3000</li>
+        <li>✅ Documentación Swagger interactiva</li>
+        <li>✅ Endpoints CRUD completos para medicamentos</li>
+        <li>✅ Arquitectura modular y escalable</li>
+        <li>✅ DTOs para validación de datos</li>
+        <li>✅ Separación de responsabilidades (Controlador/Servicio)</li>
+      </ul>
+
+      <div style="text-align: center; margin: 20px 0">
+        <img width="80%" src="imgs/LENGUAJE-PROGRAMACIÓN-EV1-SWAGGER.png" alt="Swagger UI - Endpoints de medicamentos" style="width: 80%; border: 1px solid #ddd; border-radius: 4px;" />
+      </div>
+
+      <!-- Sección 4: Contexto de la API -->
+      <div style="page-break-before: always"></div>
+      <h2>4. Contexto de la API: Sistema de Gestión de Farmacia</h2>
+
+      <h3>Descripción del contexto</h3>
+      <p style="text-align: justify">
+        La API desarrollada está enfocada en un
+        <strong>Sistema de Gestión de Farmacia</strong>, que permite administrar
+        el inventario de medicamentos, gestionar ventas, controlar el stock, y
+        llevar un registro de proveedores y clientes.
+      </p>
+
+      <h3>Funcionalidades principales</h3>
+      <ul>
+        <li>
+          <strong>Gestión de Medicamentos:</strong> Crear, consultar, actualizar
+          y eliminar información de medicamentos
+        </li>
+        <li>
+          <strong>Control de Inventario:</strong> Monitorear stock, fechas de
+          vencimiento y alertas de reabastecimiento
+        </li>
+        <li>
+          <strong>Gestión de Ventas:</strong> Registrar transacciones de venta y
+          generar recibos
+        </li>
+        <li>
+          <strong>Gestión de Proveedores:</strong> Mantener información de los
+          proveedores de medicamentos
+        </li>
+        <li>
+          <strong>Gestión de Clientes:</strong> Registrar información de
+          clientes y sus compras
+        </li>
+        <li>
+          <strong>Gestión de Categorías:</strong> Clasificar medicamentos por
+          tipo (antibióticos, analgésicos, etc.)
+        </li>
+      </ul>
+
+      <h3>Ventajas del sistema</h3>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #e8f5e9;
+            "
+          >
+            <strong>Eficiencia</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Automatización de procesos de venta e inventario
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #e3f2fd;
+            "
+          >
+            <strong>Trazabilidad</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Registro completo de todas las transacciones
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #fff3e0;
+            "
+          >
+            <strong>Control de vencimiento</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Alertas automáticas para medicamentos próximos a vencer
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #f3e5f5;
+            "
+          >
+            <strong>Reportes</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Generación de estadísticas de ventas y movimientos de inventario
+          </td>
+        </tr>
+      </table>
+
+      <!-- Sección 5: Rutas CRUD -->
+      <div style="page-break-before: always"></div>
+      <h2>5. Definición de Rutas CRUD para la API de Farmacia</h2>
+
+      <h3>Arquitectura de endpoints</h3>
+      <p style="text-align: justify">
+        La API de farmacia implementa endpoints RESTful para gestionar las
+        diferentes entidades del sistema. A continuación se detallan las rutas
+        organizadas por módulos:
+      </p>
+
+      <div class="code-block">
+        <h3>5.1 Módulo de Medicamentos</h3>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+          page-break-inside: avoid;
+        "
+      >
+        <tr style="background-color: #2d2d2d; color: white">
+          <td style="border: 1px solid black; padding: 10px; width: 15%">
+            <strong>Método</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 35%">
+            <strong>Ruta</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 50%">
+            <strong>Descripción</strong>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/medicamentos
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener lista completa de medicamentos con paginación
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/medicamentos/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener un medicamento específico por ID
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/medicamentos/buscar/:nombre
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Buscar medicamentos por nombre
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/medicamentos/categoria/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener medicamentos por categoría
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #fff9c4;
+              font-family: monospace;
+            "
+          >
+            POST
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/medicamentos
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Crear un nuevo medicamento en el inventario
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #bbdefb;
+              font-family: monospace;
+            "
+          >
+            PUT
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/medicamentos/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Actualizar información completa de un medicamento
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #e1bee7;
+              font-family: monospace;
+            "
+          >
+            PATCH
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/medicamentos/:id/stock
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Actualizar solo el stock de un medicamento
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #ffccbc;
+              font-family: monospace;
+            "
+          >
+            DELETE
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/medicamentos/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Eliminar un medicamento del sistema (soft delete)
+          </td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="code-block">
+        <h3>5.2 Módulo de Categorías</h3>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr style="background-color: #2d2d2d; color: white">
+          <td style="border: 1px solid black; padding: 10px; width: 15%">
+            <strong>Método</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 35%">
+            <strong>Ruta</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 50%">
+            <strong>Descripción</strong>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/categorias
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener todas las categorías de medicamentos
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/categorias/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener una categoría específica
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #fff9c4;
+              font-family: monospace;
+            "
+          >
+            POST
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/categorias
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Crear una nueva categoría
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #bbdefb;
+              font-family: monospace;
+            "
+          >
+            PUT
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/categorias/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Actualizar una categoría existente
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #ffccbc;
+              font-family: monospace;
+            "
+          >
+            DELETE
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/categorias/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Eliminar una categoría
+          </td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="code-block">
+        <h3>5.3 Módulo de Ventas</h3>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr style="background-color: #2d2d2d; color: white">
+          <td style="border: 1px solid black; padding: 10px; width: 15%">
+            <strong>Método</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 35%">
+            <strong>Ruta</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 50%">
+            <strong>Descripción</strong>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/ventas
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener historial de ventas con filtros por fecha
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/ventas/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener detalle de una venta específica
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/ventas/cliente/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener ventas de un cliente específico
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #fff9c4;
+              font-family: monospace;
+            "
+          >
+            POST
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/ventas
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Registrar una nueva venta (actualiza stock automáticamente)
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #ffccbc;
+              font-family: monospace;
+            "
+          >
+            DELETE
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/ventas/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Anular una venta (devuelve stock)
+          </td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="code-block">
+        <h3>5.4 Módulo de Clientes</h3>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr style="background-color: #2d2d2d; color: white">
+          <td style="border: 1px solid black; padding: 10px; width: 15%">
+            <strong>Método</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 35%">
+            <strong>Ruta</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 50%">
+            <strong>Descripción</strong>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/clientes
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener lista de clientes registrados
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/clientes/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener información de un cliente
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #fff9c4;
+              font-family: monospace;
+            "
+          >
+            POST
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/clientes
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Registrar un nuevo cliente
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #bbdefb;
+              font-family: monospace;
+            "
+          >
+            PUT
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/clientes/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Actualizar datos de un cliente
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #ffccbc;
+              font-family: monospace;
+            "
+          >
+            DELETE
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/clientes/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Desactivar un cliente
+          </td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="code-block">
+        <h3>5.5 Módulo de Proveedores</h3>
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr style="background-color: #2d2d2d; color: white">
+          <td style="border: 1px solid black; padding: 10px; width: 15%">
+            <strong>Método</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 35%">
+            <strong>Ruta</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 50%">
+            <strong>Descripción</strong>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/proveedores
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener lista de proveedores
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #c8e6c9;
+              font-family: monospace;
+            "
+          >
+            GET
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/proveedores/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Obtener información de un proveedor
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #fff9c4;
+              font-family: monospace;
+            "
+          >
+            POST
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/proveedores
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Registrar un nuevo proveedor
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #bbdefb;
+              font-family: monospace;
+            "
+          >
+            PUT
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/proveedores/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Actualizar información de proveedor
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              background-color: #ffccbc;
+              font-family: monospace;
+            "
+          >
+            DELETE
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            /api/proveedores/:id
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Desactivar un proveedor
+          </td>
+        </tr>
+      </table>
+      </div>
+
+      <!-- Sección 6: APIs de uso diario -->
+      <div style="page-break-before: always"></div>
+      <h2>6. APIs que Utilizo a Diario</h2>
+
+
+      <p style="text-align: justify">
+        En mi actividad profesional y personal, interactúo constantemente con
+        diversas APIs. A continuación se describen tres de las más importantes:
+      </p>
+
+      <div class="code-block">
+        <h3>6.1 API de WhatsApp Business (Meta)</h3>
+
+      <div
+        style="
+          border: 2px solid #25d366;
+          padding: 15px;
+          margin: 20px 0;
+          border-radius: 8px;
+        "
+      >
+        <h4 style="color: #25d366">¿Qué es?</h4>
+        <p style="text-align: justify">
+          La API de WhatsApp Business de Meta permite a las empresas integrar
+          WhatsApp en sus sistemas para enviar notificaciones, responder
+          mensajes de clientes y automatizar conversaciones.
+        </p>
+
+        <h4 style="color: #25d366">¿De qué se trata?</h4>
+        <p style="text-align: justify">Proporciona endpoints RESTful para:</p>
+        <ul>
+          <li>
+            <strong>Enviar mensajes:</strong> Texto, imágenes, documentos,
+            plantillas aprobadas
+          </li>
+          <li>
+            <strong>Recibir mensajes:</strong> Webhooks para procesar mensajes
+            entrantes
+          </li>
+          <li>
+            <strong>Gestionar contactos:</strong> Listas de difusión y etiquetas
+          </li>
+          <li>
+            <strong>Mensajes interactivos:</strong> Botones de respuesta rápida,
+            listas
+          </li>
+        </ul>
+
+        <h4 style="color: #25d366">Importancia</h4>
+        <p style="text-align: justify">
+          Es fundamental para la comunicación empresarial moderna. Permite
+          automatizar el soporte al cliente, enviar notificaciones de pedidos,
+          recordatorios de citas y mantener una comunicación directa con los
+          usuarios a través de la plataforma de mensajería más utilizada en
+          Colombia (más de 40 millones de usuarios). Mejora significativamente
+          los tiempos de respuesta y la experiencia del cliente.
+        </p>
+
+        <div
+          style="
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+          "
+        >
+          <strong>Ejemplo de uso:</strong><br />
+          POST https://graph.facebook.com/v18.0/{phone-number-id}/messages<br />
+          Body: {"messaging_product": "whatsapp", "to": "573001234567", "text":
+          {"body": "Hola"}}
+        </div>
+      </div>
+      </div>
+
+      <div class="code-block">
+        <h3>6.2 API de Google Maps Platform</h3>
+
+      <div
+        style="
+          border: 2px solid #4285f4;
+          padding: 15px;
+          margin: 20px 0;
+          border-radius: 8px;
+        "
+      >
+        <h4 style="color: #4285f4">¿Qué es?</h4>
+        <p style="text-align: justify">
+          La API de Google Maps Platform es un conjunto de servicios que
+          permiten integrar mapas, geocodificación, rutas y lugares en
+          aplicaciones web y móviles.
+        </p>
+
+        <h4 style="color: #4285f4">¿De qué se trata?</h4>
+        <p style="text-align: justify">
+          Incluye múltiples APIs especializadas:
+        </p>
+        <ul>
+          <li>
+            <strong>Maps JavaScript API:</strong> Mapas interactivos en
+            aplicaciones web
+          </li>
+          <li>
+            <strong>Geocoding API:</strong> Conversión de direcciones a
+            coordenadas y viceversa
+          </li>
+          <li>
+            <strong>Directions API:</strong> Cálculo de rutas entre puntos
+          </li>
+          <li>
+            <strong>Places API:</strong> Búsqueda de lugares, negocios y puntos
+            de interés
+          </li>
+          <li>
+            <strong>Distance Matrix API:</strong> Cálculo de distancias y
+            tiempos de viaje
+          </li>
+        </ul>
+
+        <h4 style="color: #4285f4">Importancia</h4>
+        <p style="text-align: justify">
+          Es esencial para aplicaciones que requieren funcionalidades de
+          geolocalización. Permite crear sistemas de delivery con cálculo de
+          rutas óptimas, aplicaciones de servicio a domicilio, buscadores de
+          sucursales cercanas, y sistemas de rastreo en tiempo real. Su
+          precisión y actualización constante la convierten en el estándar de
+          facto para servicios basados en ubicación.
+        </p>
+
+        <div
+          style="
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+          "
+        >
+          <strong>Ejemplo de uso:</strong><br />
+          GET https://maps.googleapis.com/maps/api/geocode/json?<br />
+          address=Calle+80+%2353-45+Bogotá&key=YOUR_API_KEY
+        </div>
+      </div>
+      </div>
+
+      <div class="code-block">
+        <h3>6.3 API de Stripe (Pagos en línea)</h3>
+
+      <div
+        style="
+          border: 2px solid #635bff;
+          padding: 15px;
+          margin: 20px 0;
+          border-radius: 8px;
+        "
+      >
+        <h4 style="color: #635bff">¿Qué es?</h4>
+        <p style="text-align: justify">
+          Stripe es una plataforma de procesamiento de pagos que proporciona una
+          API robusta para aceptar y gestionar pagos en línea.
+        </p>
+
+        <h4 style="color: #635bff">¿De qué se trata?</h4>
+        <p style="text-align: justify">
+          Ofrece funcionalidades completas para comercio electrónico:
+        </p>
+        <ul>
+          <li>
+            <strong>Procesamiento de pagos:</strong> Tarjetas de crédito/débito,
+            PSE, transferencias
+          </li>
+          <li>
+            <strong>Suscripciones:</strong> Cobros recurrentes automatizados
+          </li>
+          <li><strong>Facturación:</strong> Generación y envío de facturas</li>
+          <li><strong>Webhooks:</strong> Notificaciones de eventos de pago</li>
+          <li>
+            <strong>Gestión de clientes:</strong> Almacenamiento seguro de
+            métodos de pago
+          </li>
+          <li>
+            <strong>Reembolsos:</strong> Proceso automatizado de devoluciones
+          </li>
+        </ul>
+
+        <h4 style="color: #635bff">Importancia</h4>
+        <p style="text-align: justify">
+          Es crucial para cualquier negocio digital que necesite monetizar sus
+          servicios. Simplifica la complejidad del procesamiento de pagos,
+          cumpliendo con estándares de seguridad PCI-DSS sin que el
+          desarrollador deba preocuparse por almacenar datos sensibles de
+          tarjetas. Soporta múltiples monedas y métodos de pago locales,
+          facilitando la expansión internacional. Su documentación clara y SDKs
+          en múltiples lenguajes aceleran significativamente el desarrollo.
+        </p>
+
+        <div
+          style="
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+          "
+        >
+          <strong>Ejemplo de uso:</strong><br />
+          POST https://api.stripe.com/v1/payment_intents<br />
+          Body: {"amount": 50000, "currency": "cop", "payment_method": "pm_123"}
+        </div>
+      </div>
+      </div>
+
+      <!-- Sección 7: Modelo Entidad-Relación -->
+      <div style="page-break-before: always"></div>
+      <h2>7. Modelo Entidad-Relación de la Base de Datos</h2>
+
+      <h3>Notación utilizada</h3>
+      <p style="text-align: justify">
+        El modelo entidad-relación está desarrollado siguiendo la
+        <strong>notación de Barker</strong>, la cual se caracteriza por:
+      </p>
+      <ul>
+        <li>Entidades representadas como cajas con esquinas redondeadas</li>
+        <li>Relaciones con líneas sólidas o discontinuas</li>
+        <li>Cardinalidad indicada con símbolos específicos (pata de cuervo)</li>
+        <li>Atributos obligatorios marcados con asterisco (*)</li>
+        <li>Atributos opcionales sin marcas especiales</li>
+      </ul>
+
+      <h3>Diagrama Entidad-Relación</h3>
+    
+
+    <div style="text-align: center; margin: 20px 0">
+      <img width="80%" style="width: 80%;" src="https://kroki.io/mermaid/svg/eNqdVdty2jAQfecrdvwcfiBvDDgdpiEwDM0ro0hrso3l9chyprn037vyhRpk0qS82JbO3s6eXabT6URzkdHhegKQqxeu_TVg_jSZyg26BamDU1buAOazXfptvV3O4P19OuU3WKWL5Xy2Su92a7gGceMJC2ywm-36Pk0X6-04tqotFVR5pxr08LLDL9Ld7PY23d_L4UwsqNB5_dI6n98u5TTtoT3EocrptfXYngXAe-zrmOlZWW_Nd_hR4YHMXiuPB3akYPMdkqVBsctIK8MO6oI0J0cLqYWKAxRsHxxCctc-DQqncHQTwQ1W2lGpiQtIFoMPbh4qby1-T85IjTItHT8jhry-lukebemwUpBs1avErVhTH3UIJi81LXeScA7HWBHMY44ZFwzJrn8TBgLdSvs4BUMOdVf78TWjSvKOsGgV5ZDM2TlkEShq73i0sD6ccCKioVKJ2QZdJXTG2XTMDgUYcWvRSEZWKOX_1YFmi26U2S5J4r0kRc8cSrQlFxICoT36a2NQk1WhA_Ii0E37lKqeBT8gLWReedZP4k5JskYZYbsSv_SQ48ChKBMy1I9qLx7EOTVVJjfhKPjFXyU5FRrzsXaXRcbONkBQQtdAvKPzdCM8bjFDF6IqGJ2RSNqR0ZkSu2b26yEe55waWj_bRMO6btuezNHUMskMMgQXml313a6aKemCRWBVYp6TYYHPjq8fGXxxqD4_KKPjJ66lAjINxadC8WR7sTg8hO09VEp_dNKKduNGjWjU-u82nAV9ZKf6gC_QfMXK70fEsw-Dv-LQvuYjqt-iZyNrQh2kjlRihGG7Aq_cT_TqCtDr5JKEYv1e6B5WXkqTXgfvQUCqECEZdULT6R9URJeRdPL8E7o9oTdKcWRHnG23yGRweWqo-62S_CjCU0Qv7o28VpfW1V6SFW4He0uuLLeRLzeyqh-6Xh43WSmVdyuw99nR-QfPxrgz" alt="Diagrama Entidad-Relación">
+    </div>
+
+      <div class="code-block">
+        <h3>Descripción de Entidades</h3>
+
+      <table
+        style="
+          width: 100%;
+          border: 1px solid black;
+          border-collapse: collapse;
+          margin: 20px 0;
+        "
+      >
+        <tr style="background-color: #2d2d2d; color: white">
+          <td style="border: 1px solid black; padding: 10px; width: 20%">
+            <strong>Entidad</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 40%">
+            <strong>Atributos</strong>
+          </td>
+          <td style="border: 1px solid black; padding: 10px; width: 40%">
+            <strong>Descripción</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>MEDICAMENTO</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            *id_medicamento<br />
+            *nombre<br />
+            *principio_activo<br />
+            *precio<br />
+            *stock<br />
+            *fecha_vencimiento<br />
+            descripcion<br />
+            id_categoria (FK)<br />
+            id_proveedor (FK)
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Productos farmacéuticos disponibles en el inventario
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>CATEGORIA</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            *id_categoria<br />
+            *nombre<br />
+            descripcion
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Clasificación de medicamentos (ej: analgésicos, antibióticos)
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>PROVEEDOR</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            *id_proveedor<br />
+            *nombre_empresa<br />
+            *nit<br />
+            *telefono<br />
+            direccion<br />
+            email<br />
+            contacto_principal
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Empresas que suministran medicamentos
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>CLIENTE</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            *id_cliente<br />
+            *documento<br />
+            *nombres<br />
+            *apellidos<br />
+            telefono<br />
+            email<br />
+            direccion<br />
+            fecha_registro
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Personas que realizan compras en la farmacia
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>VENTA</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            *id_venta<br />
+            *fecha_hora<br />
+            *total<br />
+            *metodo_pago<br />
+            id_cliente (FK)<br />
+            estado
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Transacciones de venta realizadas
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid black; padding: 10px">
+            <strong>DETALLE_VENTA</strong>
+          </td>
+          <td
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              font-family: monospace;
+            "
+          >
+            *id_detalle<br />
+            *id_venta (FK)<br />
+            *id_medicamento (FK)<br />
+            *cantidad<br />
+            *precio_unitario<br />
+            *subtotal
+          </td>
+          <td style="border: 1px solid black; padding: 10px">
+            Ítems individuales de cada venta
+          </td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="code-block">
+        <h3>Relaciones principales</h3>
+      <ul>
+        <li>
+          <strong>CATEGORIA - MEDICAMENTO:</strong> Una categoría puede tener
+          muchos medicamentos (1:N)
+        </li>
+        <li>
+          <strong>PROVEEDOR - MEDICAMENTO:</strong> Un proveedor suministra
+          muchos medicamentos (1:N)
+        </li>
+        <li>
+          <strong>CLIENTE - VENTA:</strong> Un cliente puede realizar muchas
+          ventas (1:N)
+        </li>
+        <li>
+          <strong>VENTA - DETALLE_VENTA:</strong> Una venta contiene múltiples
+          detalles (1:N)
+        </li>
+        <li>
+          <strong>MEDICAMENTO - DETALLE_VENTA:</strong> Un medicamento puede
+          estar en múltiples detalles de venta (1:N)
+        </li>
+      </ul>
+      </div>
+
+      <h3>Reglas de negocio</h3>
+      <ul>
+        <li>Cada medicamento debe pertenecer a una categoría</li>
+        <li>
+          El stock de medicamentos se actualiza automáticamente al registrar una
+          venta
+        </li>
+        <li>No se pueden vender medicamentos con stock cero</li>
+        <li>Las ventas no se eliminan, solo se marcan como anuladas</li>
+        <li>
+          Se generan alertas para medicamentos próximos a vencer (30 días antes)
+        </li>
+        <li>
+          Un cliente puede realizar compras sin estar registrado (cliente
+          genérico)
+        </li>
+      </ul>
+
+      <!-- Sección 8: Conclusiones -->
+      <div style="page-break-before: always"></div>
+      <h2>8. Conclusiones</h2>
+
+      <p style="text-align: justify">
+        El desarrollo de este trabajo investigativo ha permitido comprender en
+        profundidad el concepto, funcionamiento e importancia de las APIs en el
+        desarrollo de software moderno. Las principales conclusiones son:
+      </p>
+
+      <div class="code-block">
+        <h3>Sobre las APIs en general</h3>
+      <ul>
+        <li>
+          Las APIs son componentes fundamentales de la arquitectura de software
+          actual, permitiendo la <strong>interoperabilidad</strong> entre
+          sistemas heterogéneos
+        </li>
+        <li>
+          Facilitan la <strong>reutilización de código</strong> y
+          funcionalidades, acelerando el desarrollo y reduciendo costos
+        </li>
+        <li>
+          Permiten la <strong>integración de servicios de terceros</strong>,
+          ampliando las capacidades de las aplicaciones sin necesidad de
+          desarrollar todo desde cero
+        </li>
+        <li>
+          Son esenciales para la
+          <strong>arquitectura de microservicios</strong>, permitiendo que
+          servicios independientes se comuniquen de manera eficiente
+        </li>
+      </ul>
+      </div>
+
+      <div class="code-block">
+        <h3>Sobre REST y diseño de APIs</h3>
+      <ul>
+        <li>
+          REST se ha consolidado como el <strong>estándar de facto</strong> para
+          el diseño de APIs web por su simplicidad y eficiencia
+        </li>
+        <li>
+          Los principios RESTful (stateless, cacheable, interfaz uniforme)
+          mejoran la <strong>escalabilidad y mantenibilidad</strong> de los
+          sistemas
+        </li>
+        <li>
+          El uso correcto de métodos HTTP (GET, POST, PUT, DELETE) proporciona
+          una <strong>semántica clara</strong> a las operaciones
+        </li>
+        <li>
+          Las convenciones de nomenclatura y códigos de estado HTTP facilitan la
+          <strong>comprensión y uso</strong> de las APIs
+        </li>
+      </ul>
+      </div>
+
+      <div class="code-block">
+        <h3>Sobre NestJS y herramientas modernas</h3>
+      <ul>
+        <li>
+          NestJS proporciona una
+          <strong>arquitectura robusta y escalable</strong> basada en
+          TypeScript, superando las capacidades de Express básico
+        </li>
+        <li>
+          La integración con <strong>Swagger</strong> permite documentación
+          automática e interactiva de APIs, mejorando la experiencia del
+          desarrollador
+        </li>
+        <li>
+          El uso de decoradores y la inyección de dependencias facilitan el
+          <strong>código limpio y mantenible</strong>
+        </li>
+        <li>
+          Node.js ha democratizado el desarrollo backend, permitiendo usar
+          JavaScript en todo el stack tecnológico
+        </li>
+      </ul>
+      </div>
+
+      <div class="code-block">
+        <h3>Sobre el caso práctico de farmacia</h3>
+      <ul>
+        <li>
+          La API de farmacia demuestra cómo aplicar principios RESTful en un
+          <strong>contexto de negocio real</strong>
+        </li>
+        <li>
+          El diseño modular (medicamentos, ventas, clientes, proveedores)
+          facilita el <strong>mantenimiento y escalabilidad</strong>
+        </li>
+        <li>
+          El modelo entidad-relación bien diseñado es fundamental para la
+          <strong>integridad de datos</strong> y eficiencia del sistema
+        </li>
+        <li>
+          Las reglas de negocio implementadas (control de stock, alertas de
+          vencimiento) añaden <strong>valor real</strong> al sistema
+        </li>
+      </ul>
+      </div>
+
+      <div class="code-block">
+        <h3>Sobre las APIs en la vida cotidiana</h3>
+      <ul>
+        <li>
+          WhatsApp Business API, Google Maps y Stripe demuestran cómo las APIs
+          han transformado la
+          <strong>comunicación, geolocalización y pagos digitales</strong>
+        </li>
+        <li>
+          Estas APIs permiten a pequeñas empresas acceder a
+          <strong>infraestructura empresarial</strong> sin inversión masiva
+        </li>
+        <li>
+          La <strong>documentación clara y SDKs</strong> en múltiples lenguajes
+          reducen la curva de aprendizaje
+        </li>
+        <li>
+          Los modelos de negocio basados en APIs (API-first) están redefiniendo
+          industrias completas
+        </li>
+      </ul>
+      </div>
+
+      <div class="code-block">
+        <h3>Reflexión final</h3>
+      <p style="text-align: justify">
+        Las APIs no son solo componentes técnicos, sino
+        <strong>habilitadores de innovación</strong> que permiten crear
+        ecosistemas digitales integrados. Comprender su diseño, implementación y
+        consumo es una habilidad esencial para cualquier ingeniero de sistemas
+        en la era digital. El futuro del desarrollo de software está fuertemente
+        ligado a la capacidad de diseñar, implementar y consumir APIs de manera
+        eficiente y segura.
+      </p>
+      </div>
+
+      <!-- Referencias -->
+      <div style="page-break-before: always"></div>
+      <h2>Referencias Bibliográficas</h2>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Fielding, R. T. (2000).
+        <em
+          >Architectural Styles and the Design of Network-based Software
+          Architectures</em
+        >
+        [Tesis doctoral, University of California, Irvine].<br>
+        <a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank" style="color: #0066cc; text-decoration: none;">https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Meta Platforms, Inc. (2024).
+        <em>WhatsApp Business Platform API Documentation</em>. Meta for
+        Developers.<br>
+        <a href="https://developers.facebook.com/docs/whatsapp" target="_blank" style="color: #0066cc; text-decoration: none;">https://developers.facebook.com/docs/whatsapp</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Google LLC. (2024). <em>Google Maps Platform Documentation</em>. Google
+        Cloud.<br>
+        <a href="https://developers.google.com/maps/documentation" target="_blank" style="color: #0066cc; text-decoration: none;">https://developers.google.com/maps/documentation</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Stripe, Inc. (2024). <em>Stripe API Reference</em>. Stripe
+        Documentation.<br>
+        <a href="https://stripe.com/docs/api" target="_blank" style="color: #0066cc; text-decoration: none;">https://stripe.com/docs/api</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        NestJS Contributors. (2024).
+        <em>NestJS - A progressive Node.js framework</em>. NestJS Documentation.<br>
+        <a href="https://docs.nestjs.com" target="_blank" style="color: #0066cc; text-decoration: none;">https://docs.nestjs.com</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        OpenAPI Initiative. (2024). <em>OpenAPI Specification</em>. Linux
+        Foundation.<br>
+        <a href="https://spec.openapis.org/oas/latest.html" target="_blank" style="color: #0066cc; text-decoration: none;">https://spec.openapis.org/oas/latest.html</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Masse, M. (2011). <em>REST API Design Rulebook</em>. O'Reilly Media.
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Richardson, L., & Ruby, S. (2013). <em>RESTful Web APIs</em>. O'Reilly
+        Media.
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Mozilla Developer Network. (2024). <em>HTTP Methods</em>. MDN Web Docs.<br>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank" style="color: #0066cc; text-decoration: none;">https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods</a>
+      </p>
+
+      <p
+        style="
+          text-align: justify;
+          margin-left: 40px;
+          text-indent: -40px;
+          margin-bottom: 12pt;
+        "
+      >
+        Barker, R. (1990). <em>CASE Method: Entity Relationship Modelling</em>.
+        Addison-Wesley.
+      </p>
+    </div>
+
+    <!-- Script para inicializar CodeMirror -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Obtener todos los textareas con clase code-editor
+        const codeEditors = document.querySelectorAll('.code-editor');
+        
+        codeEditors.forEach(function(textarea) {
+          const mode = textarea.getAttribute('data-mode') || 'javascript';
+          
+          // Crear instancia de CodeMirror
+          const editor = CodeMirror.fromTextArea(textarea, {
+            mode: mode,
+            theme: 'vscode-dark',
+            lineNumbers: true,
+            readOnly: true,
+            lineWrapping: true,
+            viewportMargin: Infinity
+          });
+          
+          // Ajustar altura para mostrar todo el contenido
+          editor.setSize(null, 'auto');
+          
+          // Forzar refresh para asegurar renderizado completo
+          setTimeout(function() {
+            editor.refresh();
+          }, 1);
+        });
+      });
+    </script>
+  </body>
+</html>

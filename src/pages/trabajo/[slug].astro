@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import WorkViewer from "../../components/WorkViewer.svelte";
+import { WORKS, findWork, assetBase } from "../../data/works";
+
+export function getStaticPaths() {
+   return WORKS.map((w) => ({ params: { slug: w.slug } }));
+}
+
+const { slug } = Astro.params as { slug: string };
+const work = findWork(slug);
+if (!work) {
+   throw new Error(`Work not found: ${slug}`);
+}
+
+const rawBase = import.meta.env.BASE_URL || "/";
+const base = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
+
+const htmlPath = `${base}${assetBase(work.slug)}/index.html`;
+const pdfPath = `${base}${assetBase(work.slug)}/document.pdf`;
+const hasPdf = work.hasPdf !== false;
+---
+
+<Layout title={`${work.title} — REMINGTON`} activeCourse={work.course} activeWork={work.slug}>
+   <WorkViewer client:only="svelte" slug={work.slug} title={work.title} htmlPath={htmlPath} pdfPath={pdfPath} hasPdf={hasPdf} student={work.student ?? ""} />
+</Layout>

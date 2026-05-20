@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación de una API RESTful - Trabajo Evaluativo 2</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/sql/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/json/json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/yaml/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/meta.min.js"></script>
+    <style>
+        @page {
+            size: letter;
+            margin: 1in;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.3;
+            color: #333;
+            padding: 1in;
+        }
+
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul,
+        ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .endpoint {
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: smaller;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+
+        .get {
+            background-color: #3498db;
+        }
+
+        .post {
+            background-color: #27ae60;
+        }
+
+        .put {
+            background-color: #f39c12;
+        }
+
+        .delete {
+            background-color: #e74c3c;
+        }
+
+        .requirements {
+            background-color: #e8f4f8;
+            border: 2px solid #3498db;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .requirements h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .deliverables {
+            background-color: #f0f8e8;
+            border: 2px solid #27ae60;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .deliverables h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #bdc3c7;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .code-editor {
+            display: none;
+        }
+
+        .CodeMirror {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid #3c3c3c;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.92em;
+            height: unset;
+            max-width: 90%;
+            margin: 15px auto;
+        }
+
+        .CodeMirror-gutters {
+            background-color: #1e1e1e;
+            border-right: 1px solid #3c3c3c;
+        }
+
+        .CodeMirror-linenumber {
+            color: #858585;
+        }
+
+        .CodeMirror-cursor {
+            border-left: 1px solid #aeafad;
+        }
+
+        .cm-s-vscode-dark .cm-keyword {
+            color: #569cd6;
+        }
+
+        .cm-s-vscode-dark .cm-atom,
+        .cm-s-vscode-dark .cm-number {
+            color: #b5cea8;
+        }
+
+        .cm-s-vscode-dark .cm-def {
+            color: #dcdcaa;
+        }
+
+        .cm-s-vscode-dark .cm-variable {
+            color: #9cdcfe;
+        }
+
+        .cm-s-vscode-dark .cm-variable-2 {
+            color: #4fc1ff;
+        }
+
+        .cm-s-vscode-dark .cm-variable-3 {
+            color: #4ec9b0;
+        }
+
+        .cm-s-vscode-dark .cm-property {
+            color: #9cdcfe;
+        }
+
+        .cm-s-vscode-dark .cm-operator {
+            color: #d4d4d4;
+        }
+
+        .cm-s-vscode-dark .cm-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        .cm-s-vscode-dark .cm-string,
+        .cm-s-vscode-dark .cm-string-2 {
+            color: #ce9178;
+        }
+
+        .cm-s-vscode-dark .cm-meta,
+        .cm-s-vscode-dark .cm-bracket {
+            color: #d4d4d4;
+        }
+
+        .cm-s-vscode-dark .cm-qualifier,
+        .cm-s-vscode-dark .cm-builtin,
+        .cm-s-vscode-dark .cm-type {
+            color: #4ec9b0;
+        }
+
+        .cm-s-vscode-dark .cm-tag {
+            color: #569cd6;
+        }
+
+        .cm-s-vscode-dark .cm-attribute {
+            color: #9cdcfe;
+        }
+
+        .folder-structure {
+            background-color: #f8f9fb;
+            border: 1px solid #dfe6e9;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .folder-structure code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.85em;
+            white-space: pre;
+        }
+
+        .evidence-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .evidence-grid>.code-block {
+            background-color: #ffffff;
+            border: 1px solid #dfe6e9;
+            border-radius: 6px;
+            padding: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            width: 100%;
+        }
+
+        .evidence-grid img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #bdc3c7;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        img {
+            max-width: 90vw;
+            max-height: 400px;
+            object-fit: contain;
+            margin: 0px auto;
+        }
+
+        ul li,
+        h3 {
+            margin: 2px 0;
+            padding: 0;
+        }
+
+        /* Contenedores de código */
+        .code-block {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            display: block;
+            margin: 20px 0 5px 0 !important;
+            font-size: small;
+        }
+
+        .code-block strong {
+            display: block;
+            margin: 5px 0 !important;
+        }
+
+        .endpoint-label {
+            display: inline-block;
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin-top: 10px;
+            background-color: #486685;
+            color: white;
+        }
+
+        .code-subtitle {
+            display: block;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+        }
+
+        .code-block h4,
+        .code-block p {
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+            margin: 5px 0 !important;
+        }
+
+        .badge {
+            height: 22px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="
+          page-break-after: always;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          height: 100vh;
+          width: 100%;
+          text-align: center;
+        ">
+        <div style="margin-top: 80px; width: 100%;">
+            <h1 style="
+              font-size: 14pt;
+              font-weight: normal;
+              margin: 0;
+              line-height: 1.5;
+            ">
+                INGENIERIA DE SISTEMAS
+            </h1>
+
+            <p style="font-size: 12pt; text-align: center; margin: 5px 0; line-height: 1.5">
+                LENGUAJE DE PROGRAMACION - 2510B04G2
+            </p>
+        </div>
+
+        <div style="width: 100%;">
+            <h2 style="
+              font-size: 14pt;
+              font-weight: bold;
+              margin: 20px 0;
+              line-height: 1.5;
+              text-align: center;
+            ">
+                Trabajo Evaluativo 2 (25%)
+            </h2>
+
+            <p style="font-size: 12pt; text-align: center; margin: 10px 0; line-height: 1.5">
+                JEFFREY ALEXANDER AGUDELO ESPITIA
+            </p>
+
+            <p style="font-size: 12pt; text-align: center; margin: 5px 0; line-height: 1.5">
+                <b>CC: 1094955981</b>
+            </p>
+        </div>
+
+        <div style="margin-bottom: 80px; width: 100%;">
+            <p style="font-size: 12pt; text-align: center; margin: 0 0 20px 0; line-height: 1.5">
+                TULUA - VALLE DEL CAUCA
+            </p>
+
+            <img src="../../imgs/logo-universdad.png" alt="Logo Universidad" style="width: 200px; height: auto" />
+        </div>
+    </div>
+
+    <header>
+        <h1>Creación de una API RESTful</h1>
+        <p><strong>1. Objetivo</strong></p>
+        <p style="text-align: justify; margin: 20px 0;">
+            Diseñar e implementar una <span class="highlight">API RESTful</span> que orqueste un ciclo completo de vida
+            para recursos de negocio, habilitando operaciones <strong>CRUD</strong>
+            (Crear, Leer, Actualizar y Eliminar) y garantizando consistencia transaccional. El entregable debe
+            evidenciar dominio de patrones arquitectonicos modernos y buenas practicas de ingenieria de software.
+        </p>
+    </header>
+
+
+    <div style="text-align: left;">
+        <a href="https://nodejs.org/en/docs" target="_blank" rel="noopener noreferrer"><img class="badge"
+                src="https://img.shields.io/badge/Node.js-LTS%2020.x-339933?logo=nodedotjs&logoColor=white"
+                alt="Node.js LTS" /></a>
+        <a href="https://expressjs.com/" target="_blank" rel="noopener noreferrer"><img class="badge"
+                src="https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white"
+                alt="Express 4" /></a>
+        <a href="https://www.typescriptlang.org/docs/" target="_blank" rel="noopener noreferrer"><img class="badge"
+                src="https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white"
+                alt="TypeScript" /></a>
+        <a href="https://docs.nestjs.com/" target="_blank" rel="noopener noreferrer"><img class="badge"
+                src="https://img.shields.io/badge/NestJS-11.x-E0234E?logo=nestjs&logoColor=white" alt="NestJS" /></a>
+        <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer"><img class="badge"
+                src="https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white" alt="MySQL" /></a>
+        <a href="https://swagger.io/docs/" target="_blank" rel="noopener noreferrer"><img class="badge"
+                src="https://img.shields.io/badge/Swagger-6.x-85EA2D?logo=swagger&logoColor=black" alt="Swagger" /></a>
+        <a href="https://github.com/scottie1984/swagger-ui-express" target="_blank" rel="noopener noreferrer"><img
+                class="badge"
+                src="https://img.shields.io/badge/Swagger%20UI%20Express-5.0.1-158876?logo=swagger&logoColor=white"
+                alt="Swagger UI Express" /></a>
+    </div>
+
+    <div style="
+              background-color: #f5f5f5;
+              border-left: 4px solid #1976d2;
+              padding: 16px;
+              margin: 0;
+            ">
+        <h3 style="margin-top: 0">Stack tecnologico de implementacion</h3>
+        <p style="text-align: justify">
+            La tecnologia protagonista es <strong>NestJS</strong>, framework modular construido sobre el runtime de
+            <strong>Node.js</strong> (modelo <em>event-driven</em> y <em>non-blocking I/O</em> documentado en
+            <a href="https://nodejs.org/en/docs" target="_blank" rel="noopener noreferrer">nodejs.org</a>) y que
+            aprovecha <strong>Express</strong> como adaptador HTTP (referencia oficial en
+            <a href="https://expressjs.com/" target="_blank" rel="noopener noreferrer">expressjs.com</a>) para
+            habilitar middlewares de validacion, serializacion y manejo centralizado de errores.
+        </p>
+        <ul style="text-align: justify; margin-left: 40px">
+            <li>
+                <strong>Runtime:</strong> Node.js LTS 20.x con gestor de paquetes <code>npm</code>, habilitando scripts
+                de
+                compilacion, linting y ejecucion en caliente (<code>npm run start:dev</code>).
+            </li>
+            <li>
+                <strong>Framework HTTP:</strong> Express 4.x integrado con middleware <code>express.json()</code> para
+                parser
+                de solicitudes REST y gestion de rutas modulares.
+            </li>
+            <li>
+                <strong>Lenguaje:</strong> TypeScript 5.7 con reglas estrictas de tipado y soporte para decoradores en
+                capas
+                de infraestructura.
+            </li>
+            <li>
+                <strong>Documentacion:</strong> Swagger UI expuesto en <code>/api</code>, generando especificaciones
+                OpenAPI a partir de decoradores y anotaciones de la capa de controlador.
+            </li>
+        </ul>
+    </div>
+
+    <section style="page-break-before: always;">
+        <h2>2. Requisitos Técnicos</h2>
+        <div class="requirements">
+            <h3>Tecnologías Requeridas</h3>
+            <ul>
+                <li><strong>Framework:</strong> Express.js (Node.js)</li>
+                <li><strong>Base de Datos:</strong> MySQL</li>
+                <li><strong>Herramienta de Pruebas:</strong> Postman</li>
+                <li><strong>Lenguaje:</strong> JavaScript/TypeScript</li>
+            </ul>
+            <h3>Dependencias Clave</h3>
+            <ul>
+                <li><code>@nestjs/core</code>, <code>@nestjs/common</code>: kernel del framework NestJS utilizado para
+                    orquestar modulos, controladores y servicios.</li>
+                <li><code>mysql2</code>: cliente SQL con soporte para conexiones pool y promesas.</li>
+                <li><code>@nestjs/swagger</code> y <code>swagger-ui-express</code>: generacion de especificaciones
+                    OpenAPI y renderizado de la UI documental.</li>
+                <li><code>class-validator</code>/<code>class-transformer</code> (opcional): validacion declarativa de
+                    DTOs y transformacion de payloads.</li>
+            </ul>
+            <h3>Configuracion de compilacion</h3>
+            <ul>
+                <li><strong>TypeScript:</strong> Target ES2020, decoradores habilitados, strict mode activo.</li>
+                <li><strong>Scripts npm:</strong> <code>npm run start:dev</code> (modo watch),
+                    <code>npm run build</code> (transpilacion), <code>npm run test</code> (Jest).
+                </li>
+                <li><strong>Linting/Formato:</strong> ESLint 9 + Configuracion Prettier para mantener convenciones de
+                    estilo.</li>
+            </ul>
+            <h3>Infraestructura de ejecucion</h3>
+            <ul>
+                <li><strong>Runtime:</strong> Node.js LTS 20.x</li>
+                <li><strong>Gestor de paquetes:</strong> npm 10.x</li>
+                <li><strong>Servidor HTTP:</strong> Express como adaptador interno de NestJS</li>
+                <li><strong>Documentacion en vivo:</strong> Swagger UI disponible en <code>/api</code></li>
+            </ul>
+        </div>
+
+        <h3>Estructura del Proyecto</h3>
+        <p>Establecer una estructura modular mantenible conforme al siguiente blueprint:</p>
+        <div class="folder-structure">
+            <pre><code>project/
+├── src/
+│   ├── routes/
+│   ├── controllers/
+│   ├── models/
+│   ├── config/
+│   └── app.js
+├── database/
+│   └── schema.sql
+├── package.json
+├── .env
+└── README.md</code></pre>
+        </div>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>3. Especificación de Endpoints</h2>
+        <p>
+            Definir rutas para cada operación CRUD con base en el módulo de medicamentos implementado en NestJS.
+            La API expone <span class="highlight">7 endpoints</span> principales que cubren todo el ciclo de vida del
+            recurso:
+        </p>
+
+        <div class="code-block">
+            <h3>Operaciones CRUD Básicas</h3>
+        </div>
+
+        <div class="code-block">
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <strong>/</strong>
+                <p style="margin-top: 10px;">Exponer un mensaje de bienvenida (hola mundo) para verificar disponibilidad
+                    del servicio</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <strong>/medicamentos</strong>
+                <p style="margin-top: 10px;">Listar todos los medicamentos disponibles</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <strong>/medicamentos/{id}</strong>
+                <p style="margin-top: 10px;">Consultar el detalle de un medicamento por identificador</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <strong>/medicamentos</strong>
+                <p style="margin-top: 10px;">Registrar un nuevo medicamento en el inventario</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="endpoint">
+                <span class="method put">PUT</span>
+                <strong>/medicamentos/{id}</strong>
+                <p style="margin-top: 10px;">Actualizar la informacion completa de un medicamento existente</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="endpoint">
+                <span class="method delete">DELETE</span>
+                <strong>/medicamentos/{id}</strong>
+                <p style="margin-top: 10px;">Eliminar lógicamente un medicamento</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <strong>/medicamentos/estado/{estado}</strong>
+                <p style="margin-top: 10px;">Filtrar medicamentos por estado operativo (activo, inactivo, descontinuado)
+                </p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h3>Tabla de Especificación de Endpoints</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Método</th>
+                        <th>Endpoint</th>
+                        <th>Descripción</th>
+                        <th>Parámetros</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GET</td>
+                        <td>/</td>
+                        <td>Mostrar mensaje de saludo para comprobar estado de la API</td>
+                        <td>Query: ninguno</td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td>/medicamentos</td>
+                        <td>Listar todos los medicamentos</td>
+                        <td>Query: ninguno</td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td>/medicamentos/{id}</td>
+                        <td>Obtener medicamento por identificador</td>
+                        <td>Path: id</td>
+                    </tr>
+                    <tr>
+                        <td>POST</td>
+                        <td>/medicamentos</td>
+                        <td>Crear nuevo medicamento</td>
+                        <td>Body: JSON con campos de medicamento</td>
+                    </tr>
+                    <tr>
+                        <td>PUT</td>
+                        <td>/medicamentos/{id}</td>
+                        <td>Actualizar informacion existente</td>
+                        <td>Path: id, Body: JSON</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td>/medicamentos/{id}</td>
+                        <td>Eliminar medicamento</td>
+                        <td>Path: id</td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td>/medicamentos/estado/{estado}</td>
+                        <td>Filtrar por estado del medicamento</td>
+                        <td>Path: estado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>4. Documentación de la API</h2>
+        <p>
+            Redactar una breve guía que describa cómo utilizar la API, detallando cada endpoint
+            y los datos esperados. Los endpoints deberán ser consistentes con el tema que eligieron
+            en el trabajo uno.
+        </p>
+
+        <div class="code-block">
+            <h3>Formato de Respuestas</h3>
+            <p>Todas las respuestas deben seguir el siguiente formato JSON:</p>
+            <b>Respuesta JSON</b>
+            <textarea class="code-editor" data-mode="application/json">
+
+{
+  "success": true,
+  "message": "Descripción de la operación",
+  "data": { /* datos de respuesta */ },
+  "timestamp": "2025-10-27T23:03:00Z"
+}
+            </textarea>
+        </div>
+
+        <div class="code-block">
+            <h3>Códigos de Estado HTTP</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Significado</th>
+                        <th>Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>200</td>
+                        <td>OK</td>
+                        <td>Solicitud exitosa</td>
+                    </tr>
+                    <tr>
+                        <td>201</td>
+                        <td>Created</td>
+                        <td>Recurso creado exitosamente</td>
+                    </tr>
+                    <tr>
+                        <td>400</td>
+                        <td>Bad Request</td>
+                        <td>Datos inválidos en la solicitud</td>
+                    </tr>
+                    <tr>
+                        <td>404</td>
+                        <td>Not Found</td>
+                        <td>Recurso no encontrado</td>
+                    </tr>
+                    <tr>
+                        <td>500</td>
+                        <td>Internal Server Error</td>
+                        <td>Error en el servidor</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>5. Configuración de la Base de Datos</h2>
+        <p>
+            Crear un archivo <strong>schema.sql</strong> que contenga la estructura de la base de datos MySQL.
+            Este archivo debe incluir:
+        </p>
+        <ul>
+            <li>Creación de la base de datos</li>
+            <li>Creación de tablas con campos apropiados</li>
+            <li>Definición de claves primarias y foráneas</li>
+            <li>Índices para optimizar consultas</li>
+        </ul>
+
+        <div class="code-block">
+            <h3>Ejemplo de Estructura SQL</h3>
+            <span class="code-subtitle">Script SQL</span>
+            <textarea class="code-editor" data-mode="text/x-sql">
+
+CREATE DATABASE IF NOT EXISTS api_db;
+USE api_db;
+
+CREATE TABLE tasks (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    status ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+            </textarea>
+        </div>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>6. Pruebas con Postman</h2>
+        <div class="evidence-grid">
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/postman/get-meds.png" alt="Listado de medicamentos desde Postman">
+                    <span class="endpoint-label">GET /medicamentos</span>
+                </div>
+                <b class="code-subtitle">Codigo TypeScript</b>
+                <textarea class="code-editor" data-mode="text/typescript">
+
+@Get()
+@ApiOperation({ summary: 'Obtener todos los medicamentos' })
+findAll() {
+  return this.medicamentosService.findAll();
+}
+                </textarea>
+                <b class="code-subtitle">Consulta SQL</b>
+                <textarea class="code-editor" data-mode="text/x-sql">
+
+SELECT *
+FROM medicamentos;
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/postman/get-id-med.png" alt="Detalle de medicamento por ID en Postman">
+                    <span class="endpoint-label">GET /medicamentos/:id</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+
+@Get(':id')
+@ApiOperation({ summary: 'Obtener un medicamento por ID' })
+findOne(@Param('id') id: string) {
+  return this.medicamentosService.findOne(+id);
+}
+                </textarea>
+                <span class="code-subtitle">Consulta SQL</span>
+                <textarea class="code-editor" data-mode="text/x-sql">
+SELECT *
+FROM medicamentos
+WHERE id = ?;
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/postman/filt-med.png" alt="Medicamentos filtrados por estado en Postman">
+                    <span class="endpoint-label">GET /medicamentos/estado/:estado</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+
+@Get('estado/:estado')
+@ApiOperation({ summary: 'Obtener medicamentos por estado' })
+findByEstado(@Param('estado') estado: string) {
+  return this.medicamentosService.findByEstado(estado);
+}
+                </textarea>
+                <span class="code-subtitle">Consulta SQL</span>
+                <textarea class="code-editor" data-mode="text/x-sql">
+SELECT *
+FROM medicamentos
+WHERE estado = ?;
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/postman/post-med.png" alt="Creación de medicamento en Postman">
+                    <span class="endpoint-label">POST /medicamentos (registro principal)</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+
+@Post()
+@ApiOperation({ summary: 'Crear un nuevo medicamento' })
+@ApiResponse({ status: 201, description: 'Medicamento creado exitosamente' })
+create(@Body() createMedicamentoDto: CreateMedicamentoDto) {
+  return this.medicamentosService.create(createMedicamentoDto);
+}
+                </textarea>
+                <span class="code-subtitle">Consulta SQL</span>
+                <textarea class="code-editor" data-mode="text/x-sql">
+
+INSERT INTO medicamentos (nombre, descripcion, precio, cantidad, presentacion, laboratorio, estado)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/postman/post-med2.png" alt="Creación de segundo medicamento en Postman">
+                    <span class="endpoint-label">POST /medicamentos (registro alterno)</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+
+@Post()
+@ApiOperation({ summary: 'Crear un nuevo medicamento' })
+@ApiResponse({ status: 201, description: 'Medicamento creado exitosamente' })
+create(@Body() createMedicamentoDto: CreateMedicamentoDto) {
+  return this.medicamentosService.create(createMedicamentoDto);
+}
+                </textarea>
+                <span class="code-subtitle">Consulta SQL</span>
+                <textarea class="code-editor" data-mode="text/x-sql">
+INSERT INTO medicamentos (nombre, descripcion, precio, cantidad, presentacion, laboratorio, estado)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/postman/put-med.png" alt="Actualización de medicamento en Postman">
+                    <span class="endpoint-label">PUT /medicamentos/:id</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+
+@Put(':id')
+@ApiOperation({ summary: 'Actualizar un medicamento' })
+update(
+  @Param('id') id: string,
+  @Body() updateMedicamentoDto: UpdateMedicamentoDto,
+) {
+  return this.medicamentosService.update(+id, updateMedicamentoDto);
+}
+                </textarea>
+                <span class="code-subtitle">Consulta SQL</span>
+                <textarea class="code-editor" data-mode="text/x-sql">
+
+UPDATE medicamentos
+SET nombre = ?, descripcion = ?, precio = ?, cantidad = ?, presentacion = ?, laboratorio = ?, estado = ?
+WHERE id = ?;
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/postman/del-med.png" alt="Eliminación de medicamento en Postman">
+                    <span class="endpoint-label">DELETE /medicamentos/:id</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+
+@Delete(':id')
+@ApiOperation({ summary: 'Eliminar un medicamento' })
+remove(@Param('id') id: string) {
+  return this.medicamentosService.remove(+id);
+}
+                </textarea>
+                <span class="code-subtitle">Consulta SQL</span>
+                <textarea class="code-editor" data-mode="text/x-sql">
+
+DELETE FROM medicamentos
+WHERE id = ?;
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/postman/ev-sql.png" alt="Consulta SQL de respaldo ejecutada en Postman">
+                    <span class="endpoint-label">Evidencia SQL ejecutada</span>
+                </div>
+                <span class="code-subtitle">Consulta SQL</span>
+                <textarea class="code-editor" data-mode="text/x-sql">
+
+SELECT * FROM medicamentos;
+                </textarea>
+            </div>
+        </div>
+
+        <h3>Evidencias en Swagger</h3>
+        <div class="evidence-grid">
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/root-isalive.png" alt="Ruta raiz activa en Swagger">
+                    <span class="endpoint-label">Estado general de la API</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/get-medicamentos.png" alt="Listado de medicamentos en Swagger">
+                    <span class="endpoint-label">GET /medicamentos</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+@Get()
+@ApiOperation({ summary: 'Obtener todos los medicamentos' })
+findAll() {
+  return this.medicamentosService.findAll();
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/get-med-id=1.png" alt="Detalle de medicamento en Swagger">
+                    <span class="endpoint-label">GET /medicamentos/{id}</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+@Get(':id')
+@ApiOperation({ summary: 'Obtener un medicamento por ID' })
+findOne(@Param('id') id: string) {
+  return this.medicamentosService.findOne(+id);
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/get-medicamentos-activo.png"
+                        alt="Filtrado de medicamentos activos en Swagger">
+                    <span class="endpoint-label">GET estado = activo</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+@Get('estado/:estado')
+@ApiOperation({ summary: 'Obtener medicamentos por estado' })
+findByEstado(@Param('estado') estado: string) {
+  return this.medicamentosService.findByEstado(estado);
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/get-medicamentos-inactivo.png"
+                        alt="Filtrado de medicamentos inactivos en Swagger">
+                    <span class="endpoint-label">GET estado = inactivo</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+@Get('estado/:estado')
+@ApiOperation({ summary: 'Obtener medicamentos por estado' })
+findByEstado(@Param('estado') estado: string) {
+  return this.medicamentosService.findByEstado(estado);
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/get-medicamentos-descontinuado.png"
+                        alt="Filtrado de medicamentos descontinuados en Swagger">
+                    <span class="endpoint-label">GET estado = descontinuado</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+@Get('estado/:estado')
+@ApiOperation({ summary: 'Obtener medicamentos por estado' })
+findByEstado(@Param('estado') estado: string) {
+  return this.medicamentosService.findByEstado(estado);
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/post-medicamentos.png"
+                        alt="Creacion de medicamento documentada en Swagger">
+                    <span class="endpoint-label">POST /medicamentos</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+@Post()
+@ApiOperation({ summary: 'Crear un nuevo medicamento' })
+@ApiResponse({ status: 201, description: 'Medicamento creado exitosamente' })
+create(@Body() createMedicamentoDto: CreateMedicamentoDto) {
+  return this.medicamentosService.create(createMedicamentoDto);
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/put-med.png" alt="Actualizacion de medicamento en Swagger">
+                    <span class="endpoint-label">PUT /medicamentos/{id}</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+@Put(':id')
+@ApiOperation({ summary: 'Actualizar un medicamento' })
+update(
+  @Param('id') id: string,
+  @Body() updateMedicamentoDto: UpdateMedicamentoDto,
+) {
+  return this.medicamentosService.update(+id, updateMedicamentoDto);
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/delete-med.png" alt="Eliminacion de medicamento en Swagger">
+                    <span class="endpoint-label">DELETE /medicamentos/{id}</span>
+                </div>
+                <span class="code-subtitle">Codigo TypeScript</span>
+                <textarea class="code-editor" data-mode="text/typescript">
+@Delete(':id')
+@ApiOperation({ summary: 'Eliminar un medicamento' })
+remove(@Param('id') id: string) {
+  return this.medicamentosService.remove(+id);
+}
+                </textarea>
+            </div>
+            <div class="code-block">
+                <div>
+                    <img src="../../imgs/lpev2/swagger/evidencia-sql.png" alt="Soporte SQL mostrado en Swagger">
+                    <span class="endpoint-label">Referencias SQL documentadas</span>
+                </div>
+                <span class="code-subtitle">Consulta SQL</span>
+                <textarea class="code-editor" data-mode="text/x-sql">
+
+SELECT id, nombre, estado
+FROM medicamentos;
+                </textarea>
+            </div>
+        </div>
+    </section>
+
+    <section style="page-break-before: always;">
+        <h2>7. Lineamientos de Entrega</h2>
+        <div class="deliverables">
+            <h3>Archivos a Entregar</h3>
+            <ul>
+                <li><strong>Carpeta comprimida (.zip):</strong> Nombrada con el nombre y apellido de cada integrante
+                </li>
+                <li><strong>Proyecto Express:</strong> Sin la carpeta <code>node_modules</code></li>
+                <li><strong>Archivo SQL:</strong> <code>schema.sql</code> con la estructura de la base de datos</li>
+                <li><strong>Documentación PDF:</strong> Con especificación completa y pantallazos de Postman</li>
+                <li><strong>Archivo .env:</strong> Con configuración de conexión (sin credenciales sensibles)</li>
+                <li><strong>README.md:</strong> Con instrucciones de instalación y uso</li>
+            </ul>
+        </div>
+
+        <h3>Estructura de la Carpeta Comprimida</h3>
+        <div class="folder-structure">
+            <pre><code>[Nombre_Apellido].zip
+├── api-project/
+│   ├── src/
+│   ├── database/
+│   │   └── schema.sql
+│   ├── package.json
+│   ├── .env.example
+│   ├── README.md
+│   └── .gitignore
+└── Documentacion_API.pdf</code></pre>
+        </div>
+    </section>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeEditors = document.querySelectorAll('.code-editor');
+
+            codeEditors.forEach((textarea) => {
+                const mode = textarea.getAttribute('data-mode') || 'javascript';
+                const editor = CodeMirror.fromTextArea(textarea, {
+                    mode,
+                    theme: 'vscode-dark',
+                    lineNumbers: true,
+                    readOnly: true,
+                    lineWrapping: true,
+                    viewportMargin: Infinity,
+                });
+
+                editor.setSize(null, 'auto');
+
+                setTimeout(() => {
+                    editor.refresh();
+                }, 1);
+            });
+        });
+    </script>
+</body>
+
+</html>

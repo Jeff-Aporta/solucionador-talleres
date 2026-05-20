@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Solucionario — Taller de Recuperación de Física 1°P 2026</title>
+<style>
+	/* ============================================================
+	   Solucionario personal — Estilo moderno, técnico, A4-safe
+	   Página A4: 210×297mm. Márgenes balanceados 14mm.
+	   Portada: full-bleed (margin: 0) y ocupa 210×297mm exactos.
+	   ============================================================ */
+	@page { size: A4; margin: 14mm; }
+	@page :first { margin: 0; }
+
+	:root {
+		--ink: #0f172a;
+		--ink-soft: #334155;
+		--muted: #64748b;
+		--bg: #ffffff;
+		--bg-soft: #f8fafc;
+		--accent: #4f46e5;
+		--accent-2: #06b6d4;
+		--success: #16a34a;
+		--rule: #e2e8f0;
+	}
+
+	* { box-sizing: border-box; min-width: 0; }
+	html, body {
+		font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+		color: var(--ink);
+		background: var(--bg);
+		line-height: 1.5;
+		font-size: 10.5pt;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+	body { margin: 0; padding: 0; }
+	img, svg { max-width: 100%; height: auto; }
+
+	/* ---------- Portada (full-bleed exacta A4) ---------- */
+	.cover {
+		width: 210mm;
+		height: 297mm;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 30mm 24mm;
+		color: white;
+		background:
+			radial-gradient(ellipse at top right, rgba(6,182,212,0.45), transparent 60%),
+			radial-gradient(ellipse at bottom left, rgba(79,70,229,0.55), transparent 55%),
+			linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #082f49 100%);
+		page-break-after: always;
+		box-sizing: border-box;
+		overflow: hidden;
+	}
+	.cover .eyebrow {
+		font-size: 0.8rem; letter-spacing: 0.25em; text-transform: uppercase;
+		color: #93c5fd; margin: 0 0 1.25rem;
+	}
+	.cover h1 {
+		font-size: 2.4rem; font-weight: 700; margin: 0 0 0.5rem;
+		line-height: 1.15; letter-spacing: -0.02em;
+	}
+	.cover .subtitle {
+		font-size: 1rem; color: #cbd5e1; margin: 0 0 2.25rem; max-width: 36rem;
+	}
+	.cover .meta {
+		display: grid; grid-template-columns: max-content 1fr;
+		gap: 0.45rem 1.25rem; font-size: 0.88rem;
+	}
+	.cover .meta dt { color: #94a3b8; }
+	.cover .meta dd { margin: 0; color: white; font-weight: 500; }
+	.cover .stamp {
+		margin-top: auto;
+		display: inline-flex; align-items: center; gap: 0.5rem;
+		padding: 0.35rem 0.8rem;
+		border: 1px solid rgba(255,255,255,0.25); border-radius: 999px;
+		font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+		color: #e0e7ff; align-self: flex-start;
+		background: rgba(255,255,255,0.05);
+	}
+	.cover .stamp::before {
+		content: ""; width: 8px; height: 8px; border-radius: 50%;
+		background: #22d3ee; box-shadow: 0 0 12px #22d3ee;
+	}
+
+	/* ---------- Contenido (usa el ancho útil del @page: A4 - 2×14mm = 182mm) ---------- */
+	.content {
+		padding: 0;
+		margin: 0;
+	}
+	.section-title {
+		font-size: 1.2rem; font-weight: 700; color: var(--ink);
+		margin: 1.1rem 0 0.45rem; padding-bottom: 0.35rem;
+		border-bottom: 2px solid var(--accent);
+		display: flex; align-items: baseline; gap: 0.75rem;
+	}
+	.section-title .num {
+		font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+		text-transform: uppercase; color: var(--accent);
+	}
+
+	/* ---------- Tarjeta de ejercicio ---------- */
+	.ex {
+		page-break-inside: avoid;
+		border: 1px solid var(--rule);
+		border-left: 4px solid var(--success);
+		border-radius: 10px;
+		padding: 0.7rem 0.85rem 0.8rem;
+		margin: 0.6rem 0;
+		background: var(--bg);
+		box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+		overflow: hidden;
+	}
+	.ex header {
+		display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.45rem;
+	}
+	.ex .badge {
+		display: inline-flex; align-items: center; justify-content: center;
+		width: 26px; height: 26px; border-radius: 7px;
+		background: linear-gradient(135deg, var(--accent), var(--accent-2));
+		color: white; font-weight: 700; font-size: 0.82rem; flex-shrink: 0;
+	}
+	.ex h3 {
+		margin: 0; font-size: 0.97rem; font-weight: 600;
+		color: var(--ink); line-height: 1.3;
+	}
+	.ex .tag {
+		margin-left: auto;
+		font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+		padding: 0.15rem 0.5rem; border-radius: 999px;
+		background: #dcfce7; color: var(--success);
+	}
+	.ex .prompt {
+		font-size: 0.86rem; color: var(--ink-soft);
+		background: var(--bg-soft);
+		border-left: 3px solid var(--rule);
+		padding: 0.45rem 0.65rem; border-radius: 6px;
+		margin: 0 0 0.55rem;
+	}
+	.ex .steps { display: grid; gap: 0.35rem; }
+	.ex .step {
+		display: grid; grid-template-columns: max-content 1fr;
+		gap: 0.55rem; align-items: baseline;
+	}
+	.ex .step .label {
+		font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
+		color: var(--muted); font-weight: 600; white-space: nowrap;
+	}
+	.ex .step .body { margin: 0; font-size: 0.9rem; word-wrap: break-word; }
+	.ex .result {
+		margin-top: 0.6rem;
+		padding: 0.5rem 0.75rem;
+		background: linear-gradient(90deg, rgba(79,70,229,0.08), rgba(6,182,212,0.04));
+		border-radius: 8px; font-weight: 600;
+		display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.9rem;
+	}
+	.ex .result::before { content: "→"; color: var(--accent); font-weight: 700; }
+
+	/* ---------- Tablas modernas (con protección anti-clipping) ---------- */
+	table {
+		width: 100%; max-width: 100%;
+		border-collapse: separate; border-spacing: 0;
+		font-size: 0.8rem; margin: 0.5rem 0;
+		box-sizing: border-box;
+		border: 1px solid var(--rule);
+		border-radius: 8px;
+		overflow: hidden;
+		table-layout: auto;
+	}
+	thead th {
+		background: var(--bg-soft); font-weight: 600; color: var(--ink-soft);
+		text-align: center; padding: 0.35rem 0.5rem;
+		border-bottom: 2px solid var(--rule);
+	}
+	tbody td {
+		padding: 0.32rem 0.5rem; border-bottom: 1px solid var(--rule);
+		text-align: center;
+	}
+	tbody tr:last-child td { border-bottom: 0; }
+
+	/* ---------- Bloques de fórmula ---------- */
+	.formula {
+		background: #0f172a; color: #e0e7ff;
+		font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+		padding: 0.5rem 0.75rem; border-radius: 8px;
+		font-size: 0.82rem; margin: 0.4rem 0;
+		overflow-x: hidden;
+		white-space: pre-wrap; word-break: break-word;
+	}
+
+	/* ---------- Figuras (gráficos y diagramas) ---------- */
+	.fig { margin: 0.6rem 0 0.2rem; text-align: center; }
+	.fig img, .fig svg {
+		display: block; margin: 0 auto;
+		max-width: 100%;
+		border: 1px solid var(--rule);
+		border-radius: 8px;
+		background: white;
+	}
+	.fig .cap {
+		display: block; margin-top: 0.25rem;
+		font-size: 0.72rem; color: var(--muted);
+		font-style: italic;
+	}
+	.targets {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.5rem; margin: 0.4rem 0;
+	}
+	.targets figure { margin: 0; text-align: center; }
+	.targets figcaption { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+
+	/* ---------- KaTeX overrides ---------- */
+	.katex { font-size: 1em; }
+	.katex-block { margin: 0.35rem 0 !important; }
+
+	/* ---------- Pie ---------- */
+	.foot {
+		text-align: center; color: var(--muted);
+		font-size: 0.72rem; margin-top: 1.5rem;
+		padding-top: 0.8rem; border-top: 1px solid var(--rule);
+	}
+
+	@media print {
+		.cover, .ex, .result, .formula, thead th, .badge, .tag,
+		.fig img, .fig svg {
+			-webkit-print-color-adjust: exact; print-color-adjust: exact;
+		}
+		.ex, .fig, table { page-break-inside: avoid; }
+	}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<!-- ============== PORTADA ============== -->
+<section class="cover">
+	<p class="eyebrow">Solucionario personal</p>
+	<h1>Taller de Recuperación de Física<br>1° Periodo 2026</h1>
+	<p class="subtitle">Resolución comentada de los 20 ejercicios del taller de mejoramiento, con procedimientos paso a paso, conversiones, justificaciones, gráficos y diagramas vectoriales.</p>
+	<dl class="meta">
+		<dt>Estudiante</dt><dd>María José Hoyos Rodríguez</dd>
+		<dt>Grado</dt><dd>Décimo · Año 2026</dd>
+		<dt>Institución</dt><dd>I. E. CASD — Armenia, Quindío</dd>
+		<dt>Docentes</dt><dd>F. D. Bedoya · J. Gómez · L. F. Londoño</dd>
+	</dl>
+	<span class="stamp">Documento de estudio</span>
+</section>
+
+<!-- ============== CONTENIDO ============== -->
+<main class="content">
+
+	<h2 class="section-title"><span class="num">Parte 1</span> Ejercicios</h2>
+
+	<!-- ============ 1 ============ -->
+	<article class="ex">
+		<header>
+			<span class="badge">1</span>
+			<h3>Unidades de volumen y análisis dimensional</h3>
+			<span class="tag">Resuelto</span>
+		</header>
+		<p class="prompt">¿Cuáles son las unidades de volumen? Suponga que le dicen que un cilindro de radio <em>r</em> y altura <em>h</em> tiene un volumen dado por $\pi r^{3} h$. Explique por qué esto no puede ser correcto.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Unidades SI</span><p class="body">El volumen se mide en metros cúbicos ($\text{m}^3$). Equivalencias usuales: $1\ \text{m}^3 = 1000\ \text{L}$, $1\ \text{L} = 1000\ \text{cm}^3 = 1000\ \text{mL}$. También se usan unidades inglesas como $\text{ft}^3$ e $\text{in}^3$.</p></div>
+			<div class="step"><span class="label">Dimensional</span><p class="body">Todo volumen debe tener dimensión $[L^{3}]$. En $\pi r^{3} h$ las dimensiones son $[L^{3}]\cdot[L]=[L^{4}]$, lo que corresponde a un hipervolumen, no a un volumen.</p></div>
+			<div class="step"><span class="label">Fórmula correcta</span><p class="body">$$V_{\text{cil}} = \pi r^{2} h$$ donde $r^{2}$ aporta el área de la base ($L^{2}$) y $h$ la altura ($L$), dando $L^{3}$.</p></div>
+		</div>
+		<div class="result">La expresión $\pi r^{3} h$ es dimensionalmente incorrecta; lo correcto es $V=\pi r^{2} h$.</div>
+	</article>
+
+	<!-- ============ 2 ============ -->
+	<article class="ex">
+		<header><span class="badge">2</span><h3>Precisión vs. exactitud (arqueros)</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Juan, Mario y Felipe disparan cuatro flechas cada uno. Clasificar a cada arquero como exacto, preciso, ambos o ninguno.</p>
+		<div class="targets">
+			<figure>
+				<svg viewBox="0 0 120 120" width="120" height="120" aria-label="Juan: preciso">
+					<circle cx="60" cy="60" r="55" fill="#fff" stroke="#0f172a" stroke-width="1.2"/>
+					<circle cx="60" cy="60" r="42" fill="none" stroke="#475569" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="28" fill="none" stroke="#475569" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="14" fill="#fee2e2" stroke="#dc2626" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="5"  fill="#dc2626"/>
+					<g fill="#4f46e5" stroke="#1e1b4b" stroke-width="0.6">
+						<circle cx="92" cy="34" r="3"/><circle cx="95" cy="40" r="3"/>
+						<circle cx="89" cy="38" r="3"/><circle cx="93" cy="46" r="3"/>
+					</g>
+				</svg>
+				<figcaption><b>Juan</b> · preciso</figcaption>
+			</figure>
+			<figure>
+				<svg viewBox="0 0 120 120" width="120" height="120" aria-label="Mario: ninguno">
+					<circle cx="60" cy="60" r="55" fill="#fff" stroke="#0f172a" stroke-width="1.2"/>
+					<circle cx="60" cy="60" r="42" fill="none" stroke="#475569" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="28" fill="none" stroke="#475569" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="14" fill="#fee2e2" stroke="#dc2626" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="5"  fill="#dc2626"/>
+					<g fill="#4f46e5" stroke="#1e1b4b" stroke-width="0.6">
+						<circle cx="20" cy="30" r="3"/><circle cx="98" cy="25" r="3"/>
+						<circle cx="35" cy="95" r="3"/><circle cx="92" cy="92" r="3"/>
+					</g>
+				</svg>
+				<figcaption><b>Mario</b> · ninguno</figcaption>
+			</figure>
+			<figure>
+				<svg viewBox="0 0 120 120" width="120" height="120" aria-label="Felipe: ambos">
+					<circle cx="60" cy="60" r="55" fill="#fff" stroke="#0f172a" stroke-width="1.2"/>
+					<circle cx="60" cy="60" r="42" fill="none" stroke="#475569" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="28" fill="none" stroke="#475569" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="14" fill="#fee2e2" stroke="#dc2626" stroke-width="0.8"/>
+					<circle cx="60" cy="60" r="5"  fill="#dc2626"/>
+					<g fill="#4f46e5" stroke="#1e1b4b" stroke-width="0.6">
+						<circle cx="58" cy="60" r="3"/><circle cx="62" cy="58" r="3"/>
+						<circle cx="60" cy="63" r="3"/><circle cx="63" cy="62" r="3"/>
+					</g>
+				</svg>
+				<figcaption><b>Felipe</b> · preciso y exacto</figcaption>
+			</figure>
+		</div>
+		<div class="steps">
+			<div class="step"><span class="label">Definiciones</span><p class="body"><b>Exactitud:</b> cercanía al centro (valor verdadero). <b>Precisión:</b> agrupamiento de los disparos entre sí, sin importar dónde caigan.</p></div>
+			<div class="step"><span class="label">Juan</span><p class="body">Flechas muy juntas pero alejadas del centro → <b>preciso, no exacto</b>.</p></div>
+			<div class="step"><span class="label">Mario</span><p class="body">Flechas dispersas y lejos del centro → <b>ni preciso ni exacto</b>.</p></div>
+			<div class="step"><span class="label">Felipe</span><p class="body">Flechas agrupadas y centradas → <b>preciso y exacto</b>.</p></div>
+		</div>
+		<div class="result">Juan: preciso · Mario: ninguno · Felipe: ambos.</div>
+	</article>
+
+	<!-- ============ 3 ============ -->
+	<article class="ex">
+		<header><span class="badge">3</span><h3>Área y perímetro de un microcircuito</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Largo $L=3{,}45\times 10^{-4}\ \text{m}$, ancho $A=9{,}77\times 10^{-5}\ \text{m}$. (a) Área y perímetro. (b) Cambios si se duplica el ancho y se reduce a la mitad el largo.</p>
+		<div class="steps">
+			<div class="step"><span class="label">a) Área</span><p class="body">$$\acute{A} = L\cdot A = (3{,}45\times 10^{-4})(9{,}77\times 10^{-5}) = 3{,}37\times 10^{-8}\ \text{m}^{2}$$</p></div>
+			<div class="step"><span class="label">a) Perímetro</span><p class="body">$$P = 2(L+A) = 2(3{,}45\times 10^{-4} + 0{,}977\times 10^{-4}) = 8{,}85\times 10^{-4}\ \text{m}$$</p></div>
+			<div class="step"><span class="label">b) Nuevas dim.</span><p class="body">$L'=L/2=1{,}725\times 10^{-4}\ \text{m}$, $A'=2A=1{,}954\times 10^{-4}\ \text{m}$.</p></div>
+			<div class="step"><span class="label">b) Área'</span><p class="body">$\acute{A}'=(L/2)(2A)=L\cdot A=3{,}37\times 10^{-8}\ \text{m}^{2}$ → <b>no cambia</b>.</p></div>
+			<div class="step"><span class="label">b) Perímetro'</span><p class="body">$P'=2(1{,}725\times 10^{-4}+1{,}954\times 10^{-4})=7{,}36\times 10^{-4}\ \text{m}$ → <b>disminuye</b>.</p></div>
+		</div>
+		<div class="result">a) $\acute{A}=3{,}37\times 10^{-8}\ \text{m}^{2}$, $P=8{,}85\times 10^{-4}\ \text{m}$. b) Área igual, $P=7{,}36\times 10^{-4}\ \text{m}$.</div>
+	</article>
+
+	<!-- ============ 4 ============ -->
+	<article class="ex">
+		<header><span class="badge">4</span><h3>Conversión de unidades: campo de fútbol a pies</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Campo de $100\ \text{m}\times 60\ \text{m}$. Expresar en pies.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Factor</span><p class="body">$1\ \text{m} = 3{,}28084\ \text{ft}$.</p></div>
+			<div class="step"><span class="label">Largo</span><p class="body">$100\ \text{m}\times 3{,}28084 = 328{,}08\ \text{ft}$.</p></div>
+			<div class="step"><span class="label">Ancho</span><p class="body">$60\ \text{m}\times 3{,}28084 = 196{,}85\ \text{ft}$.</p></div>
+		</div>
+		<div class="result">Dimensiones: $328{,}08\ \text{ft}\times 196{,}85\ \text{ft}$.</div>
+	</article>
+
+	<!-- ============ 5 ============ -->
+	<article class="ex">
+		<header><span class="badge">5</span><h3>Densidad del bronce en SI</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Convertir $8{,}89\ \text{g/cm}^3$ a $\text{kg/m}^3$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Factor</span><p class="body">$$\dfrac{1\ \text{g}}{1\ \text{cm}^{3}} = \dfrac{10^{-3}\ \text{kg}}{10^{-6}\ \text{m}^{3}} = 1000\ \text{kg/m}^{3}$$</p></div>
+			<div class="step"><span class="label">Cálculo</span><p class="body">$\rho = 8{,}89\ \text{g/cm}^{3}\times 1000 = 8890\ \text{kg/m}^{3}$.</p></div>
+		</div>
+		<div class="result">$\rho = 8{,}89\times 10^{3}\ \text{kg/m}^{3} = 8890\ \text{kg/m}^{3}$.</div>
+	</article>
+
+	<!-- ============ 6 ============ -->
+	<article class="ex">
+		<header><span class="badge">6</span><h3>Motor Nissan: cilindrada y diámetro</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">$97{,}6\ \text{in}^3$ y diámetro $3{,}31\ \text{in}$ a $\text{cm}^3$ y $\text{cm}$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Factores</span><p class="body">$1\ \text{in}=2{,}54\ \text{cm}$; $1\ \text{in}^{3}=(2{,}54)^{3}\ \text{cm}^{3}=16{,}3871\ \text{cm}^{3}$.</p></div>
+			<div class="step"><span class="label">Volumen</span><p class="body">$V = 97{,}6\ \text{in}^{3}\times 16{,}3871\ \dfrac{\text{cm}^{3}}{\text{in}^{3}} \approx 1599{,}4\ \text{cm}^{3} \approx 1{,}6\ \text{L}$.</p></div>
+			<div class="step"><span class="label">Diámetro</span><p class="body">$d = 3{,}31\ \text{in}\times 2{,}54\ \dfrac{\text{cm}}{\text{in}} = 8{,}41\ \text{cm}$.</p></div>
+		</div>
+		<div class="result">$V \approx 1599\ \text{cm}^{3}\ (1{,}6\ \text{L})$ · $d \approx 8{,}41\ \text{cm}$.</div>
+	</article>
+
+	<!-- ============ 7 ============ -->
+	<article class="ex">
+		<header><span class="badge">7</span><h3>Distancias mixtas: km vs millas</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">$60\ \text{km}$ vs $50\ \text{mi}$: ¿cuál es más lejana? Diferencia en metros.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Factor</span><p class="body">$1\ \text{mi}=1{,}60934\ \text{km}=1609{,}34\ \text{m}$.</p></div>
+			<div class="step"><span class="label">Conversión</span><p class="body">$50\ \text{mi}\times 1{,}60934 = 80{,}467\ \text{km}$.</p></div>
+			<div class="step"><span class="label">Comparación</span><p class="body">$80{,}467\ \text{km} > 60\ \text{km}$ → las $50$ millas son más lejanas.</p></div>
+			<div class="step"><span class="label">Diferencia</span><p class="body">$\Delta = 80{,}467 - 60 = 20{,}467\ \text{km} = 20\,467\ \text{m}$.</p></div>
+		</div>
+		<div class="result">Más lejos: $50\ \text{mi}$ · diferencia $\approx 20\,467\ \text{m}\ (20{,}47\ \text{km})$.</div>
+	</article>
+
+	<!-- ============ 8 ============ -->
+	<article class="ex">
+		<header><span class="badge">8</span><h3>Cable subterráneo</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Convertir $5{,}20$ millas a metros.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Cálculo</span><p class="body">$d = 5{,}20\ \text{mi}\times 1609{,}34\ \dfrac{\text{m}}{\text{mi}} = 8368{,}6\ \text{m}$.</p></div>
+		</div>
+		<div class="result">$d \approx 8369\ \text{m} \approx 8{,}37\ \text{km}$.</div>
+	</article>
+
+	<!-- ============ 9 ============ -->
+	<article class="ex">
+		<header><span class="badge">9</span><h3>Crecimiento promedio</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Nació midiendo $20\ \text{in}$. Hoy mide $5\ \text{ft}\ 4\ \text{in}$ y tiene $18$ años. Calcular crecimiento promedio anual en cm.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Estatura inicial</span><p class="body">$h_0 = 20\ \text{in}\times 2{,}54 = 50{,}8\ \text{cm}$.</p></div>
+			<div class="step"><span class="label">Estatura actual</span><p class="body">$5\ \text{ft}\ 4\ \text{in} = (5\cdot 12+4)\ \text{in} = 64\ \text{in}$; $h_f = 64\times 2{,}54 = 162{,}56\ \text{cm}$.</p></div>
+			<div class="step"><span class="label">Crecimiento</span><p class="body">$\Delta h = h_f - h_0 = 111{,}76\ \text{cm}$.</p></div>
+			<div class="step"><span class="label">Promedio</span><p class="body">$$\bar v = \dfrac{\Delta h}{\Delta t} = \dfrac{111{,}76\ \text{cm}}{18\ \text{años}} \approx 6{,}21\ \text{cm/año}$$</p></div>
+		</div>
+		<div class="result">Crecimiento promedio $\approx 6{,}21\ \text{cm/año}$.</div>
+	</article>
+
+	<!-- ============ 10 ============ -->
+	<article class="ex">
+		<header><span class="badge">10</span><h3>Estatura y masa en Europa</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">$6\ \text{ft}\ 8\ \text{in}$ y $200\ \text{lb}$ a cm y kg.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Factores</span><p class="body">$1\ \text{in}=2{,}54\ \text{cm}$; $1\ \text{lb}=0{,}453592\ \text{kg}$.</p></div>
+			<div class="step"><span class="label">Estatura</span><p class="body">$80\ \text{in}\times 2{,}54 = 203{,}2\ \text{cm} = 2{,}032\ \text{m}$.</p></div>
+			<div class="step"><span class="label">Masa</span><p class="body">$200\ \text{lb}\times 0{,}453592 = 90{,}72\ \text{kg}$.</p></div>
+		</div>
+		<div class="result">Estatura: $203{,}2\ \text{cm}$ · Masa: $90{,}72\ \text{kg}$.</div>
+	</article>
+
+	<!-- ============ 11 ============ -->
+	<article class="ex">
+		<header><span class="badge">11</span><h3>Velocímetro: mi/h ↔ km/h</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">(a) Escala equivalente en km/h. (b) $55\ \text{mi/h}$ en km/h.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Factor</span><p class="body">$1\ \text{mi/h}\approx 1{,}60934\ \text{km/h}$.</p></div>
+			<div class="step"><span class="label">a) Escala</span></div>
+		</div>
+		<table>
+			<thead><tr><th>mi/h</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th><th>70</th><th>80</th></tr></thead>
+			<tbody><tr><td>km/h</td><td>16,1</td><td>32,2</td><td>48,3</td><td>64,4</td><td>80,5</td><td>96,6</td><td>112,7</td><td>128,7</td></tr></tbody>
+		</table>
+		<div class="steps">
+			<div class="step"><span class="label">b) 55 mi/h</span><p class="body">$v = 55\times 1{,}60934 = 88{,}51\ \text{km/h}$.</p></div>
+		</div>
+		<div class="result">$55\ \text{mi/h} \approx 88{,}5\ \text{km/h}$.</div>
+	</article>
+
+	<!-- ============ 12 ============ -->
+	<article class="ex">
+		<header><span class="badge">12</span><h3>El arca de Noé</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">$300\times 50\times 30$ codos. Codo $=\tfrac{1}{2}$ yarda. (a) Dimensiones en metros. (b) Volumen en $\text{m}^3$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Factor</span><p class="body">$1\ \text{yarda}=0{,}9144\ \text{m}\ \Rightarrow\ 1\ \text{codo}=0{,}4572\ \text{m}$.</p></div>
+			<div class="step"><span class="label">a) Largo</span><p class="body">$300\cdot 0{,}4572 = 137{,}16\ \text{m}$.</p></div>
+			<div class="step"><span class="label">a) Ancho</span><p class="body">$50\cdot 0{,}4572 = 22{,}86\ \text{m}$.</p></div>
+			<div class="step"><span class="label">a) Alto</span><p class="body">$30\cdot 0{,}4572 = 13{,}716\ \text{m}$.</p></div>
+			<div class="step"><span class="label">b) Volumen</span><p class="body">$$V = 137{,}16\cdot 22{,}86\cdot 13{,}716 \approx 4{,}30\times 10^{4}\ \text{m}^{3}$$</p></div>
+		</div>
+		<div class="result">a) $137{,}16\times 22{,}86\times 13{,}72\ \text{m}$ · b) $V\approx 43\,010\ \text{m}^{3}$.</div>
+	</article>
+
+	<!-- ============ 13 ============ -->
+	<article class="ex">
+		<header><span class="badge">13</span><h3>Presión vs temperatura</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Trazar gráfica $P$ vs $T$, hallar pendiente y estimar presión a $420\ \text{K}$ y $600\ \text{K}$.</p>
+		<table>
+			<thead><tr><th>$T\ (\text{K})$</th><th>300</th><th>350</th><th>400</th><th>450</th><th>500</th><th>550</th></tr></thead>
+			<tbody><tr><td>$P\ (\text{lb/in}^{2})$</td><td>400</td><td>467</td><td>535</td><td>598</td><td>668</td><td>733</td></tr></tbody>
+		</table>
+		<figure class="fig">
+			<img alt="Gráfica P vs T con ajuste lineal P=1.33T" src="https://quickchart.io/chart?w=560&h=260&bkg=white&c=%7B%22type%22%3A%22scatter%22%2C%22data%22%3A%7B%22datasets%22%3A%5B%7B%22label%22%3A%22Datos%22%2C%22data%22%3A%5B%7B%22x%22%3A300%2C%22y%22%3A400%7D%2C%7B%22x%22%3A350%2C%22y%22%3A467%7D%2C%7B%22x%22%3A400%2C%22y%22%3A535%7D%2C%7B%22x%22%3A450%2C%22y%22%3A598%7D%2C%7B%22x%22%3A500%2C%22y%22%3A668%7D%2C%7B%22x%22%3A550%2C%22y%22%3A733%7D%5D%2C%22backgroundColor%22%3A%22%234f46e5%22%2C%22pointRadius%22%3A5%7D%2C%7B%22type%22%3A%22line%22%2C%22label%22%3A%22Ajuste%20P%3D1.33T%22%2C%22data%22%3A%5B%7B%22x%22%3A280%2C%22y%22%3A372.4%7D%2C%7B%22x%22%3A620%2C%22y%22%3A824.6%7D%5D%2C%22borderColor%22%3A%22%2306b6d4%22%2C%22fill%22%3Afalse%2C%22pointRadius%22%3A0%7D%5D%7D%2C%22options%22%3A%7B%22plugins%22%3A%7B%22legend%22%3A%7B%22labels%22%3A%7B%22boxWidth%22%3A14%7D%7D%7D%2C%22scales%22%3A%7B%22x%22%3A%7B%22title%22%3A%7B%22display%22%3Atrue%2C%22text%22%3A%22T%20(K)%22%7D%7D%2C%22y%22%3A%7B%22title%22%3A%7B%22display%22%3Atrue%2C%22text%22%3A%22P%20(lb%2Fin%5E2)%22%7D%7D%7D%7D%7D">
+			<span class="cap">Figura 13.1 — La presión es proporcional a la temperatura (recta por el origen).</span>
+		</figure>
+		<div class="steps">
+			<div class="step"><span class="label">Cociente</span><p class="body">$P/T \approx 1{,}33\ \text{lb/in}^{2}\cdot \text{K}^{-1}$ constante para todos los pares → proporcionalidad directa.</p></div>
+			<div class="step"><span class="label">Pendiente</span><p class="body">$$m = \dfrac{\Delta P}{\Delta T} = \dfrac{733-400}{550-300} = \dfrac{333}{250} \approx 1{,}33\ \dfrac{\text{lb/in}^{2}}{\text{K}}$$</p></div>
+			<div class="step"><span class="label">Modelo</span><p class="body">$P(T) = 1{,}33\, T$ (en $\text{lb/in}^{2}$).</p></div>
+			<div class="step"><span class="label">$P(420)$</span><p class="body">$1{,}33\cdot 420 \approx 559\ \text{lb/in}^{2}$.</p></div>
+			<div class="step"><span class="label">$P(600)$</span><p class="body">$1{,}33\cdot 600 \approx 800\ \text{lb/in}^{2}$ (extrapolación).</p></div>
+		</div>
+		<div class="result">$P(420\ \text{K})\approx 559\ \text{lb/in}^{2}$ · $P(600\ \text{K})\approx 800\ \text{lb/in}^{2}$.</div>
+	</article>
+
+	<!-- ============ 14 ============ -->
+	<article class="ex">
+		<header><span class="badge">14</span><h3>Voltaje vs corriente (Ley de Ohm)</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Estimar $I$ para $V=26\ \text{V}$ y $V=48\ \text{V}$.</p>
+		<table>
+			<thead><tr><th>$V\ (\text{V})$</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th></tr></thead>
+			<tbody><tr><td>$I\ (\text{mA})$</td><td>145</td><td>289</td><td>435</td><td>581</td><td>724</td><td>870</td></tr></tbody>
+		</table>
+		<figure class="fig">
+			<img alt="Gráfica V vs I con ajuste lineal" src="https://quickchart.io/chart?w=560&h=260&bkg=white&c=%7B%22type%22%3A%22scatter%22%2C%22data%22%3A%7B%22datasets%22%3A%5B%7B%22label%22%3A%22Datos%22%2C%22data%22%3A%5B%7B%22x%22%3A10%2C%22y%22%3A145%7D%2C%7B%22x%22%3A20%2C%22y%22%3A289%7D%2C%7B%22x%22%3A30%2C%22y%22%3A435%7D%2C%7B%22x%22%3A40%2C%22y%22%3A581%7D%2C%7B%22x%22%3A50%2C%22y%22%3A724%7D%2C%7B%22x%22%3A60%2C%22y%22%3A870%7D%5D%2C%22backgroundColor%22%3A%22%234f46e5%22%2C%22pointRadius%22%3A5%7D%2C%7B%22type%22%3A%22line%22%2C%22label%22%3A%22Ajuste%20I%3D14.5V%22%2C%22data%22%3A%5B%7B%22x%22%3A0%2C%22y%22%3A0%7D%2C%7B%22x%22%3A65%2C%22y%22%3A942.5%7D%5D%2C%22borderColor%22%3A%22%2306b6d4%22%2C%22fill%22%3Afalse%2C%22pointRadius%22%3A0%7D%5D%7D%2C%22options%22%3A%7B%22plugins%22%3A%7B%22legend%22%3A%7B%22labels%22%3A%7B%22boxWidth%22%3A14%7D%7D%7D%2C%22scales%22%3A%7B%22x%22%3A%7B%22title%22%3A%7B%22display%22%3Atrue%2C%22text%22%3A%22V%20(V)%22%7D%7D%2C%22y%22%3A%7B%22title%22%3A%7B%22display%22%3Atrue%2C%22text%22%3A%22I%20(mA)%22%7D%7D%7D%7D%7D">
+			<span class="cap">Figura 14.1 — Relación lineal entre $V$ e $I$ (conductor óhmico).</span>
+		</figure>
+		<div class="steps">
+			<div class="step"><span class="label">Resistencia</span><p class="body">$$R = \dfrac{V}{I} \approx \dfrac{10\ \text{V}}{0{,}145\ \text{A}} \approx 69\ \Omega$$ (constante para todos los pares).</p></div>
+			<div class="step"><span class="label">Modelo</span><p class="body">$I(V)=V/R \approx 14{,}5\ \text{mA/V}$.</p></div>
+			<div class="step"><span class="label">$I(26\ \text{V})$</span><p class="body">$26\cdot 14{,}5 \approx 377\ \text{mA} \approx 0{,}377\ \text{A}$.</p></div>
+			<div class="step"><span class="label">$I(48\ \text{V})$</span><p class="body">$48\cdot 14{,}5 \approx 696\ \text{mA} \approx 0{,}696\ \text{A}$.</p></div>
+		</div>
+		<div class="result">$I(26\ \text{V})\approx 0{,}38\ \text{A}$ · $I(48\ \text{V})\approx 0{,}70\ \text{A}$ · $R\approx 69\ \Omega$.</div>
+	</article>
+
+	<!-- ============ 15 ============ -->
+	<article class="ex">
+		<header><span class="badge">15</span><h3>Vectores vs escalares</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Diferencias, ejemplos y comparación de la suma. ¿Puede una suma de vectores tener magnitud menor que cualquiera de los originales?</p>
+		<div class="steps">
+			<div class="step"><span class="label">Escalar</span><p class="body">Queda definido solo por una magnitud (número y unidad). Ejemplos: masa, temperatura, tiempo, energía, densidad.</p></div>
+			<div class="step"><span class="label">Vector</span><p class="body">Necesita magnitud, dirección y sentido. Ejemplos: desplazamiento, velocidad, aceleración, fuerza, campo eléctrico.</p></div>
+			<div class="step"><span class="label">Suma</span><p class="body">Los escalares se suman algebraicamente. Los vectores se suman por componentes: $$\vec{R}=\sum_i \vec{A}_i\ ,\quad R_x=\sum A_{ix},\ R_y=\sum A_{iy}$$ o por el método del paralelogramo / polígono.</p></div>
+			<div class="step"><span class="label">¿Resultante menor?</span><p class="body">Sí: vectores con direcciones cercanas a opuestas se cancelan parcialmente. Ej.: $7\ \text{N}$ y $5\ \text{N}$ opuestos ⇒ $R = 2\ \text{N}$, menor que ambos.</p></div>
+		</div>
+		<div class="result">Escalar: solo magnitud · Vector: magnitud y dirección · La resultante sí puede ser menor que las componentes.</div>
+	</article>
+
+	<!-- ============ 16 ============ -->
+	<article class="ex">
+		<header><span class="badge">16</span><h3>Resultantes mínima y máxima</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Fuerzas de $10\ \text{N}$ y $7\ \text{N}$ sobre el mismo objeto.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Reglas</span><p class="body">$$R_{\min}=|F_1-F_2|\quad\text{(opuestas)}\qquad R_{\max}=F_1+F_2\quad\text{(paralelas)}$$</p></div>
+			<div class="step"><span class="label">Mínima</span><p class="body">$R_{\min} = |10-7| = 3\ \text{N}$.</p></div>
+			<div class="step"><span class="label">Máxima</span><p class="body">$R_{\max} = 10+7 = 17\ \text{N}$.</p></div>
+		</div>
+		<div class="result">$R_{\min}=3\ \text{N}$ · $R_{\max}=17\ \text{N}$.</div>
+	</article>
+
+	<!-- ============ 17 ============ -->
+	<article class="ex">
+		<header><span class="badge">17</span><h3>Vector a 230°: signos y ambigüedad</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Signos de $R_x$, $R_y$; ángulos posibles cuando $R_y/R_x<0$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Componentes</span><p class="body">$R_x=R\cos(230°)$ y $R_y=R\sin(230°)$. Como $230°$ está en el III cuadrante: $\cos(230°)<0$ y $\sin(230°)<0$ → $\boxed{R_x<0,\ R_y<0}$.</p></div>
+			<div class="step"><span class="label">Cociente</span><p class="body">$R_y/R_x>0$ en el III cuadrante (negativo entre negativo).</p></div>
+			<div class="step"><span class="label">Ambigüedad</span><p class="body">Si $R_y/R_x<0$ ⇒ una componente positiva y la otra negativa. Esto pasa en el <b>II cuadrante</b> ($R_x<0,\ R_y>0,\ \theta\in(90°,180°)$) o en el <b>IV cuadrante</b> ($R_x>0,\ R_y<0,\ \theta\in(270°,360°)$).</p></div>
+			<div class="step"><span class="label">Conclusión</span><p class="body">El $\arctan$ devuelve el mismo valor en ambos casos; hay que mirar los signos de $R_x$ y $R_y$ para escoger el cuadrante correcto.</p></div>
+		</div>
+		<div class="result">A $230°$: $R_x<0$ y $R_y<0$ · $R_y/R_x<0$ ⇒ II o IV cuadrante.</div>
+	</article>
+
+	<!-- ============ 18 ============ -->
+	<article class="ex">
+		<header><span class="badge">18</span><h3>Pista circular: desplazamiento</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Radio $r=500\ \text{m}$. (a) De norte a sur. (b) Una vuelta completa.</p>
+		<figure class="fig">
+			<svg viewBox="0 0 300 190" width="320" height="200">
+				<circle cx="150" cy="95" r="72" fill="none" stroke="#475569" stroke-width="1" stroke-dasharray="3 3"/>
+				<line x1="150" y1="23" x2="150" y2="167" stroke="#4f46e5" stroke-width="2"/>
+				<polygon points="150,167 145,156 155,156" fill="#4f46e5"/>
+				<text x="156" y="22" font-size="10" fill="#0f172a">N</text>
+				<text x="156" y="180" font-size="10" fill="#0f172a">S</text>
+				<text x="160" y="95" font-size="10" fill="#4f46e5">|d| = 2r = 1000 m</text>
+				<circle cx="150" cy="95" r="3" fill="#dc2626"/>
+				<text x="80" y="186" font-size="9" fill="#64748b">Trayectoria circular vs. desplazamiento (segmento)</text>
+			</svg>
+			<span class="cap">Figura 18.1 — El desplazamiento es el vector que une el punto inicial y final, no la trayectoria.</span>
+		</figure>
+		<div class="steps">
+			<div class="step"><span class="label">a) N → S</span><p class="body">El desplazamiento es el segmento recto entre los extremos del diámetro: $|\vec d| = 2r = 2\cdot 500 = 1000\ \text{m}$ hacia el sur.</p></div>
+			<div class="step"><span class="label">b) Vuelta</span><p class="body">Vuelve al mismo punto inicial → $\vec d = \vec 0$. La distancia recorrida es $s = 2\pi r \approx 3141{,}6\ \text{m}$.</p></div>
+		</div>
+		<div class="result">a) $\vec d = 1000\ \text{m}$ al sur · b) $\vec d = \vec 0$ (distancia $\approx 3142\ \text{m}$).</div>
+	</article>
+
+	<!-- ============ 19 ============ -->
+	<article class="ex">
+		<header><span class="badge">19</span><h3>Empleado postal: desplazamiento resultante</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">$\vec v_1 = 2{,}6\ \text{km}$ S, $\vec v_2 = 4{,}0\ \text{km}$ E, $\vec v_3 = 3{,}1\ \text{km}$ NE ($45°$). Magnitud y dirección del desplazamiento total.</p>
+		<figure class="fig">
+			<svg viewBox="0 0 360 220" width="360" height="220">
+				<line x1="40" y1="180" x2="340" y2="180" stroke="#94a3b8" stroke-width="1"/>
+				<line x1="40" y1="180" x2="40"  y2="20"  stroke="#94a3b8" stroke-width="1"/>
+				<text x="320" y="195" font-size="9" fill="#64748b">E (x)</text>
+				<text x="20"  y="22"  font-size="9" fill="#64748b">N (y)</text>
+				<!-- v1: S desde (40,20) baja 78 px (escala 30 px/km, 2.6 km) -->
+				<line x1="40" y1="20" x2="40" y2="98" stroke="#4f46e5" stroke-width="2"/>
+				<polygon points="40,98 36,90 44,90" fill="#4f46e5"/>
+				<text x="46" y="60" font-size="10" fill="#4f46e5">v1 (S)</text>
+				<!-- v2: E desde (40,98) avanza 120 px (4 km) -->
+				<line x1="40" y1="98" x2="160" y2="98" stroke="#06b6d4" stroke-width="2"/>
+				<polygon points="160,98 152,94 152,102" fill="#06b6d4"/>
+				<text x="80" y="92" font-size="10" fill="#06b6d4">v2 (E)</text>
+				<!-- v3: NE 45 desde (160,98), 3.1 km => 66 px en x y y -->
+				<line x1="160" y1="98" x2="226" y2="32" stroke="#16a34a" stroke-width="2"/>
+				<polygon points="226,32 220,38 232,38" fill="#16a34a"/>
+				<text x="195" y="60" font-size="10" fill="#16a34a">v3 (NE)</text>
+				<!-- Resultante R -->
+				<line x1="40" y1="20" x2="226" y2="32" stroke="#dc2626" stroke-width="2.4" stroke-dasharray="4 3"/>
+				<polygon points="226,32 218,28 218,36" fill="#dc2626"/>
+				<text x="105" y="18" font-size="10" fill="#dc2626">R ≈ 6,21 km</text>
+			</svg>
+			<span class="cap">Figura 19.1 — Suma vectorial por el método del polígono.</span>
+		</figure>
+		<div class="steps">
+			<div class="step"><span class="label">$\vec v_1$ (S)</span><p class="body">$(0,\ -2{,}6)\ \text{km}$.</p></div>
+			<div class="step"><span class="label">$\vec v_2$ (E)</span><p class="body">$(+4{,}0,\ 0)\ \text{km}$.</p></div>
+			<div class="step"><span class="label">$\vec v_3$ (NE 45°)</span><p class="body">$(3{,}1\cos 45°,\ 3{,}1\sin 45°) = (2{,}192,\ 2{,}192)\ \text{km}$.</p></div>
+			<div class="step"><span class="label">Suma</span><p class="body">$\vec R = (0+4{,}0+2{,}192,\ -2{,}6+0+2{,}192) = (6{,}192,\ -0{,}408)\ \text{km}$.</p></div>
+			<div class="step"><span class="label">Magnitud</span><p class="body">$$|\vec R| = \sqrt{6{,}192^{2}+0{,}408^{2}} = \sqrt{38{,}51} \approx 6{,}21\ \text{km}$$</p></div>
+			<div class="step"><span class="label">Dirección</span><p class="body">$\theta = \arctan\!\big(\tfrac{-0{,}408}{6{,}192}\big) \approx -3{,}77°$ respecto al este (un poco al sur).</p></div>
+		</div>
+		<div class="result">$|\vec R| \approx 6{,}21\ \text{km}$ · dirección $\approx 3{,}8°$ al sur del este.</div>
+	</article>
+
+	<!-- ============ 20 ============ -->
+	<article class="ex">
+		<header><span class="badge">20</span><h3>Espeleóloga: cuarto desplazamiento</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">$180\ \text{m}$ O → $210\ \text{m}$ a $45°$ SE → $280\ \text{m}$ a $38°$ NE → $\vec v_4=?$ para volver al inicio.</p>
+		<figure class="fig">
+			<svg viewBox="0 0 380 230" width="380" height="230">
+				<line x1="20" y1="140" x2="360" y2="140" stroke="#94a3b8" stroke-width="1"/>
+				<line x1="200" y1="20" x2="200" y2="220" stroke="#94a3b8" stroke-width="1"/>
+				<text x="345" y="155" font-size="9" fill="#64748b">E</text>
+				<text x="205" y="22"  font-size="9" fill="#64748b">N</text>
+				<text x="25"  y="155" font-size="9" fill="#64748b">O</text>
+				<text x="205" y="220" font-size="9" fill="#64748b">S</text>
+				<!-- v1: O desde (200,140) a (110,140) (180 m, escala 0.5 px/m) -->
+				<line x1="200" y1="140" x2="110" y2="140" stroke="#4f46e5" stroke-width="2"/>
+				<polygon points="110,140 118,136 118,144" fill="#4f46e5"/>
+				<text x="130" y="135" font-size="10" fill="#4f46e5">v1</text>
+				<!-- v2: SE 45 (+74,+74) desde (110,140) a (184,214) -->
+				<line x1="110" y1="140" x2="184" y2="214" stroke="#06b6d4" stroke-width="2"/>
+				<polygon points="184,214 176,210 182,206" fill="#06b6d4"/>
+				<text x="125" y="180" font-size="10" fill="#06b6d4">v2</text>
+				<!-- v3: NE 38 (+110,-86) desde (184,214) a (294,128) -->
+				<line x1="184" y1="214" x2="294" y2="128" stroke="#16a34a" stroke-width="2"/>
+				<polygon points="294,128 286,128 290,134" fill="#16a34a"/>
+				<text x="230" y="170" font-size="10" fill="#16a34a">v3</text>
+				<!-- v4: regreso al inicio (200,140) desde (294,128) -->
+				<line x1="294" y1="128" x2="200" y2="140" stroke="#dc2626" stroke-width="2.4" stroke-dasharray="4 3"/>
+				<polygon points="200,140 208,136 208,144" fill="#dc2626"/>
+				<text x="220" y="120" font-size="10" fill="#dc2626">v4 ≈ 190,6 m</text>
+			</svg>
+			<span class="cap">Figura 20.1 — Los tres primeros vectores y el de regreso al origen.</span>
+		</figure>
+		<div class="steps">
+			<div class="step"><span class="label">$\vec v_1$ (O)</span><p class="body">$(-180,\ 0)\ \text{m}$.</p></div>
+			<div class="step"><span class="label">$\vec v_2$ (SE 45°)</span><p class="body">$(210\cos(-45°),\ 210\sin(-45°)) = (148{,}49,\ -148{,}49)\ \text{m}$.</p></div>
+			<div class="step"><span class="label">$\vec v_3$ (NE 38°)</span><p class="body">$(280\cos 38°,\ 280\sin 38°) = (220{,}65,\ 172{,}36)\ \text{m}$.</p></div>
+			<div class="step"><span class="label">Suma parcial</span><p class="body">$\vec S = (-180+148{,}49+220{,}65,\ 0-148{,}49+172{,}36) = (189{,}14,\ 23{,}87)\ \text{m}$.</p></div>
+			<div class="step"><span class="label">$\vec v_4 = -\vec S$</span><p class="body">$\vec v_4 = (-189{,}14,\ -23{,}87)\ \text{m}$.</p></div>
+			<div class="step"><span class="label">Magnitud</span><p class="body">$$|\vec v_4| = \sqrt{189{,}14^{2} + 23{,}87^{2}} \approx 190{,}6\ \text{m}$$</p></div>
+			<div class="step"><span class="label">Dirección</span><p class="body">$\alpha = \arctan\!\big(\tfrac{23{,}87}{189{,}14}\big) \approx 7{,}2°$. Como ambas componentes son negativas, apunta al <b>suroeste</b>: $7{,}2°$ al sur del oeste.</p></div>
+		</div>
+		<div class="result">$|\vec v_4| \approx 190{,}6\ \text{m}$ · dirección: $7{,}2°$ al sur del oeste (SO).</div>
+	</article>
+
+	<p class="foot">Solucionario personal — María José Hoyos Rodríguez · 1° periodo 2026 · I. E. CASD</p>
+</main>
+
+</body>
+</html>

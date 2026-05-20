@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Taller de Recuperación — Física 10° — 2026</title>
+    <style>
+      @page {
+        size: letter;
+        margin: 1in;
+      }
+      body {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+        line-height: 1.6;
+        color: #000;
+        margin: 0;
+      }
+      h1, h2, h3, h4 { font-family: 'Times New Roman', Times, serif; }
+      table { border-collapse: collapse; width: 100%; margin: 8px 0; page-break-inside: avoid; }
+      table.data th, table.data td { border: 1px solid #000; padding: 6px 8px; font-size: 11pt; text-align: center; }
+      table.data thead th { background: #eee; }
+      .page-break { page-break-before: always; }
+      ol.questions { padding-left: 1.4em; }
+      ol.questions > li { margin-bottom: 14pt; text-align: justify; }
+      ol.options { list-style-type: upper-alpha; padding-left: 1.4em; margin: 6px 0 0 0; }
+      ol.options > li { margin: 2px 0; }
+      .header-card {
+        display: flex;
+        align-items: stretch;
+        border: 1px solid #000;
+        margin-bottom: 12pt;
+        page-break-inside: avoid;
+      }
+      .header-card .logo {
+        flex: 0 0 130px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid #000;
+        padding: 8px;
+        text-align: center;
+      }
+      .header-card .logo .crest {
+        width: 64px;
+        height: 64px;
+        border: 2px solid #000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14pt;
+        margin-bottom: 6px;
+      }
+      .header-card .logo small { font-size: 8pt; line-height: 1.1; }
+      .header-card .title-block {
+        flex: 1 1 auto;
+        padding: 10px 14px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .header-card .title-block h1 {
+        margin: 0;
+        font-size: 13pt;
+        font-weight: bold;
+        line-height: 1.3;
+      }
+      .header-card .title-block .docentes {
+        font-size: 11pt;
+        font-weight: bold;
+        margin-top: 6px;
+      }
+      .student-card {
+        border: 1px solid #000;
+        padding: 8px 12px;
+        margin-bottom: 14pt;
+        font-size: 11pt;
+        line-height: 1.45;
+      }
+      .student-card strong { display: inline-block; min-width: 110px; }
+      .objective { text-align: justify; margin-bottom: 10pt; }
+      .crono { margin: 6pt 0 14pt 0; padding-left: 1.2em; }
+      .crono li { margin: 3pt 0; }
+      .nota {
+        border: 1px solid #000;
+        padding: 8px 12px;
+        font-style: italic;
+        background: #f4f4f4;
+        margin: 10pt 0 16pt 0;
+      }
+      .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 13pt;
+        margin: 18pt 0 6pt 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .figure-note {
+        font-size: 10pt;
+        color: #333;
+        font-style: italic;
+        margin: 4px 0 0 1em;
+      }
+      img.math-img { vertical-align: middle; }
+      .answer-space {
+        border-bottom: 1px solid #aaa;
+        display: block;
+        height: 1.6em;
+      }
+    </style>
+  	<link rel="stylesheet" href="/katex/katex.min.css" />
+</head>
+  <body>
+
+    <!-- Encabezado institucional -->
+    <div class="header-card">
+      <div class="logo">
+        <div class="crest">CASD</div>
+        <small><strong>INSTITUCIÓN EDUCATIVA CASD</strong><br />ARMENIA QUINDÍO</small>
+      </div>
+      <div class="title-block">
+        <h1>TALLER DE RECUPERACIÓN DE FÍSICA DÉCIMO<br />PRIMER PERIODO 2026</h1>
+        <div class="docentes">
+          DOCENTES: Fernán Diego Bedoya Grajales, Javier Gómez Giraldo,<br />
+          Luis Fernando Londoño Cuervo
+        </div>
+      </div>
+    </div>
+
+    <!-- Datos de la estudiante -->
+    <div class="student-card">
+      <div><strong>Estudiante:</strong> María José Hoyos Rodríguez</div>
+      <div><strong>Grado:</strong> Décimo &nbsp;&nbsp; <strong>Periodo:</strong> Primero &nbsp;&nbsp; <strong>Año:</strong> 2026</div>
+      <div><strong>Institución:</strong> Institución Educativa CASD — Armenia, Quindío</div>
+    </div>
+
+    <!-- Objetivo -->
+    <p class="objective">
+      <strong>Objetivo general:</strong> Ejecutar el plan de mejoramiento del área de ciencias naturales física del primer periodo, por parte de estudiantes del grado décimo, en el que se evidencie la superación de las dificultades que se evidenciaron durante el desarrollo del periodo sobre generalidades de la física (conceptos, factor de conversión, notación científica con uso de calculadora, magnitudes vectoriales y escalares y suma de vectores por métodos gráficos y analíticos).
+    </p>
+
+    <h3 style="margin: 12pt 0 6pt 0;">A tener en cuenta…</h3>
+    <p class="objective">
+      Estimado estudiante, a continuación, encontrará las actividades que debe ejecutar para la recuperación del primer periodo. Recuerde que, dichas actividades deben ser sustentadas, teniendo un valor del 80% de la nota de recuperación, el taller un 20%. El cronograma de recuperación es el siguiente:
+    </p>
+    <ul class="crono">
+      <li><strong>9 de mayo.</strong> Entrega de talleres a los estudiantes (estos se dejan en fotocopiadora de la institución).</li>
+      <li><strong>Del 19 al 22 de mayo:</strong> Entrega de talleres resueltos por parte de estudiantes a los docentes.</li>
+      <li><strong>Del 25 al 29 de mayo:</strong> Devolución de talleres de docentes a estudiantes.</li>
+      <li><strong>Del 1 al 5 de junio:</strong> Retroalimentación y asesoría para estudiantes.</li>
+      <li><strong>Del 9 al 18 de junio:</strong> Evaluaciones (Es requisito haber entregado el taller para presentar la evaluación).</li>
+    </ul>
+    <div class="nota">
+      El taller debe ser entregado escrito a mano, ordenado y sin omitir pasos en los procedimientos y/o justificaciones verbales inclusive justificaciones de la preguntas tipo prueba saber.
+    </div>
+
+    <!-- PARTE 1 -->
+    <div class="page-break"></div>
+    <div class="section-title">Parte 1 — Ejercicios</div>
+
+    <ol class="questions">
+      <li>
+        ¿Cuáles son las unidades de volumen? Suponga que le dicen que un cilindro de radio <em>r</em> y altura <em>h</em> tiene un volumen dado por
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mord mathnormal">h</span></span></span></span></span>. Explique por qué esto no puede ser correcto.
+      </li>
+      <li>
+        Tres arqueros disparan cuatro flechas cada uno hacia un blanco. Las cuatro flechas de Juan quedan: 10 cm arriba, 10 cm abajo, 10 cm a la derecha y 10 cm a la izquierda del centro del blanco. Las cuatro flechas de Mario quedan a menos de 1 cm de un punto que está a 20 cm del centro. Y las cuatro flechas de Felipe quedan a menos de 1 cm del centro del blanco. El juez del concurso dice que uno de los arqueros es preciso, pero no exacto, otro es exacto, pero no preciso, y el tercero es exacto y preciso. ¿Cuál descripción corresponde a cada arquero? Explique su razonamiento.
+      </li>
+      <li>
+        La longitud de un microcircuito diminuto es
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">45</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">m</span></span></span></span></span></span>
+        y su ancho es de
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">9</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">77</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">5</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">m</span></span></span></span></span></span>.
+        (a) Halle el área y el perímetro del chip. (b) Si el ancho se duplica y la longitud se reduce a la mitad, ¿cuál será el cambio en el área y cuál será el cambio en el perímetro del microcircuito?
+      </li>
+      <li>
+        Un campo de fútbol soccer mide 100 m de largo y 60 m de ancho. ¿Cuáles son la longitud y el ancho del campo en pies?
+      </li>
+      <li>
+        La densidad del bronce es de
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.204em;vertical-align:-0.25em;"></span><span class="mord">8</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">89</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord text"><span class="mord">g/cm</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span></span>.
+        ¿Cuál es su densidad en kilogramos por metro cúbico?
+      </li>
+      <li>
+        Un motor Nissan tiene
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0663em;vertical-align:-0.1944em;"></span><span class="mord">97</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">6</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord text"><span class="mord">in</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8719em;"><span style="top:-3.1208em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span></span>
+        de cilindrada (volumen) y un diámetro interior de
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8623em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">31</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">in</span></span></span></span></span></span>.
+        Exprese estas medidas en centímetros cúbicos y en centímetros.
+      </li>
+      <li>
+        Al convertir una señal del camino al sistema métrico, sólo se ha cambiado parcialmente. Se indica que una población está a 60 km de distancia, y otra a 50 millas de distancia. ¿Cuál población está más distante y en cuántos metros?
+      </li>
+      <li>
+        Un electricista va a instalar un cable subterráneo desde la carretera hasta una vivienda que se localiza a una distancia de 5,20 millas en el bosque. ¿Cuántos metros de cable va a necesitar?
+      </li>
+      <li>
+        Un estudiante ha determinado que medía 20 pulg de largo cuando nació. Ahora tiene 5 pies 4 pulg y tiene 18 años de edad. ¿Cuántos centímetros creció, en promedio, por año?
+      </li>
+      <li>
+        Un equipo de baloncesto de los Estados Unidos tiene un centro que tiene 6 pies 8 pulg de alto y pesa 200 lb. Si el equipo participa en juegos de exhibición en Europa ¿cuáles serán allá las cifras listadas en los programas para los aficionados para la altura y la masa?
+      </li>
+      <li>
+        En la figura se muestra el velocímetro de un automóvil. (a) ¿Cuáles serían las lecturas equivalentes de la escala en km/h? (b) ¿Cuál sería el límite de velocidad de 55 millas/h en km/h?
+      </li>
+      <li>
+        Según la Biblia, Noé recibió instrucciones de construir un arca de 300 codos de largo, 50 codos de ancho y 30 codos de alto (vea la figura). El codo era una unidad de longitud basada en el largo del antebrazo e igual a la mitad de una yarda. (a) ¿Cuáles pudieron ser las dimensiones del arca en metros? (b) ¿Cuál pudo ser su volumen en metros cúbicos? Considere que el arca tenía caras rectangulares.
+      </li>
+      <li>
+        La presión en un depósito de almacenamiento depende de la temperatura. Se han registrado las mediciones siguientes:
+        <table class="data">
+          <thead>
+            <tr><th>Temperatura, K</th><th>300</th><th>350</th><th>400</th><th>450</th><th>500</th><th>550</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Presión, lb/in²</th><td>400</td><td>467</td><td>535</td><td>598</td><td>668</td><td>733</td></tr>
+          </tbody>
+        </table>
+        Trace una gráfica con estos datos. ¿Cuál es la pendiente de la gráfica? ¿Puede usted escribir una descripción de la relación entre la presión y la temperatura, tomando como base esa información? ¿Cuál esperaría que fuera la presión a temperaturas de 420 y 600 kelvin (K)?
+      </li>
+      <li>
+        Se tiene el voltaje (V), en voltios, y la corriente eléctrica (I), en miliamperios (mA), de una resistencia. A continuación, presentamos los datos registrados:
+        <table class="data">
+          <thead>
+            <tr><th>Voltaje, V</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Corriente, mA</th><td>145</td><td>289</td><td>435</td><td>581</td><td>724</td><td>870</td></tr>
+          </tbody>
+        </table>
+        Elabore una gráfica con estos datos. ¿Qué valor espera usted que tenga la corriente en la resistencia cuando se le aplican voltajes de 26 y 48 V?
+      </li>
+      <li>
+        Señale la diferencia entre cantidades vectoriales y escalares, y cite ejemplos de cada una. Explique la diferencia entre sumar vectores y sumar escalares. ¿Es posible que la suma de dos vectores tenga una magnitud menor que cualquiera de los vectores originales?
+      </li>
+      <li>
+        ¿Cuáles son las resultantes mínima y máxima de dos fuerzas de 10 N y 7 N si ambas actúan sobre el mismo objeto?
+      </li>
+      <li>
+        Si un vector tiene una dirección de 230° a partir del eje <em>x</em> positivo, ¿qué signos tendrán sus componentes <em>x</em> y <em>y</em>? Si la razón
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4308em;vertical-align:-0.4451em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9857em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1645em;"><span style="top:-2.357em;margin-left:-0.0077em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.5073em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1645em;"><span style="top:-2.357em;margin-left:-0.0077em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2819em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4451em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+        es negativa, ¿cuáles son los ángulos posibles de <em>R</em>, medidos a partir del eje <em>x</em> positivo?
+      </li>
+      <li>
+        Una pista de carreras circular tiene un radio de 500 m. ¿Cuál es el desplazamiento de una ciclista que sigue la pista del extremo norte al extremo sur? ¿Y cuándo da una vuelta completa? Explique su razonamiento.
+      </li>
+      <li>
+        Un empleado postal conduce su camión por la ruta de la figura. Determine la magnitud y la dirección del desplazamiento resultante dibujando un diagrama a escala.
+        <div class="figure-note">Datos de la figura: 2,6 km al sur desde INICIO, luego 4,0 km al este, luego 3,1 km al noreste con ángulo de 45°, hasta FIN.</div>
+      </li>
+      <li>
+        Una espeleóloga está explorando una cueva y sigue un pasadizo 180 m al oeste, luego 210 m a 45° al sureste, y después 280 m a 38° al noreste. Tras un cuarto desplazamiento no medido, vuelve al punto inicial. Con un diagrama a escala determine la magnitud y la dirección del cuarto desplazamiento.
+      </li>
+      <li>
+        Con los vectores
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0966em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span></span></span></span></span>
+        y
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span></span></span></span></span>
+        de la figura, use un dibujo a escala para obtener la magnitud y la dirección de:
+        (a) la resultante
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0497em;vertical-align:-0.0833em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0966em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span></span></span></span></span>;
+        (b) la diferencia
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0497em;vertical-align:-0.0833em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0966em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span></span></span></span></span>.
+        Con base en sus respuestas, determine la magnitud y la dirección de:
+        (c)
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0497em;vertical-align:-0.0833em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0966em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0497em;vertical-align:-0.0833em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0497em;vertical-align:-0.0833em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1799em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span></span></span></span></span>;
+        (d)
+        <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0497em;vertical-align:-0.0833em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0966em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span></span></span></span></span>.
+        <div class="figure-note">De la figura: B = 15,0 m a 30,0°; D = 10,0 m a 53,0°; C = 12,0 m a 25,0° (cuadrante III); A = 8,00 m sobre eje −y.</div>
+      </li>
+      <li>
+        Un profesor de física desorientado conduce 3,25 km al norte, 4,75 km al oeste y 1,50 km al sur. Calcule la magnitud y la dirección del desplazamiento resultante, usando el método de componentes.
+      </li>
+      <li>
+        Un río fluye de sur a norte a 5 km/h. En este río, una lancha va de este a oeste, perpendicular a la corriente, a 7 km/h. Vista por un águila suspendida en reposo sobre la ribera, ¿qué tan rápido y en qué dirección viaja la lancha?
+      </li>
+      <li>
+        En un plano vertical, dos cuerdas ejercen fuerzas de igual magnitud sobre un peso colgante, pero tiran con un ángulo de 86° entre sí. ¿Qué tirón ejerce cada cuerda si el tirón resultante es de 372 N directamente hacia arriba?
+      </li>
+    </ol>
+
+    <!-- PARTE 2 -->
+    <div class="page-break"></div>
+    <div class="section-title">Parte 2 — Preguntas tipo prueba saber</div>
+    <p style="font-weight: bold; text-align: center;">DEBE JUSTIFICAR TODAS SUS RESPUESTAS.</p>
+
+    <ol class="questions">
+      <li>
+        Si un carro recorre 120 km en 1 hora y 40 minutos, su velocidad media vale:
+        <ol class="options">
+          <li>60 km/h</li>
+          <li>23,81 m/s</li>
+          <li>85,71 km/h</li>
+          <li>20 m/s</li>
+        </ol>
+      </li>
+      <li>
+        Dos ciclistas que parten simultáneamente del mismo sitio se mueven con rapideces constantes de 14,4 km/h y 6 m/s respectivamente. Al cabo de 5 minutos la ventaja que el uno le lleva al otro es de:
+        <ol class="options">
+          <li>600 m</li>
+          <li>60 m</li>
+          <li>6 m</li>
+          <li>10 m</li>
+        </ol>
+      </li>
+      <li>
+        Durante la primera hora el caracol Guttemberto avanza 64 centímetros. Durante la siguiente hora avanza otros 6,4 centímetros y durante la tercera hora 6,4 milímetros más, tras de lo cual se pone a dormir. La rapidez media del movimiento de Guttemberto es igual a:
+        <div class="figure-note">Ayuda: sume todas las distancias y divídalas por el tiempo total del recorrido, así se obtiene la rapidez media.</div>
+        <ol class="options">
+          <li>71,04 km/h</li>
+          <li>23,68 mm/h</li>
+          <li>23,68 m/h</li>
+          <li>23,68 cm/h</li>
+        </ol>
+      </li>
+      <li>
+        La posición de un móvil es un vector que nos determina localización temporal del mismo, es decir el lugar y el tiempo, donde se encuentra ubicado un objeto o partícula, y se puede expresar por medio de puntos es decir coordenadas. El desplazamiento por su parte es un vector que se determina la posición de un móvil respecto de la posición anterior. Y la distancia recorrida que es de tipo escalar, corresponde a la longitud del camino recorrido por el móvil durante su movimiento.
+        <div class="figure-note">De la gráfica X(m) vs t(s): el móvil sube de 0 a 18 m entre t = 0 y t ≈ 60 s, y luego baja de regreso a 0 m hacia t ≈ 100 s.</div>
+        De lo anterior es correcto afirmar que el móvil de la figura:
+        <ol class="options">
+          <li>se desplazó y recorrió una distancia igual a su desplazamiento.</li>
+          <li>recorrió una distancia y sin embargo, su desplazamiento es cero.</li>
+          <li>recorrió una distancia y sin embargo, su desplazamiento es negativo y diferente al espacio recorrido.</li>
+          <li>recorrió una distancia y sin embargo, su desplazamiento es positivo y diferente al espacio recorrido.</li>
+        </ol>
+      </li>
+      <li>
+        De la figura anterior se puede decir acerca del comportamiento del móvil que hay dos trayectos, el primero de 0 a los 60 segundos y el otro mayor a 60 segundos, sobre las velocidades del móvil durante el movimiento es correcto afirmar que:
+        <ol class="options">
+          <li>la velocidad del móvil en ambos trayectos llevaba la misma dirección.</li>
+          <li>las velocidades en ambos trayectos son de la misma magnitud, pero sentido contrario.</li>
+          <li>las velocidades del móvil durante ambos trayectos eran constantes.</li>
+          <li>la velocidad del primer trayecto es superior a la velocidad del segundo trayecto.</li>
+        </ol>
+      </li>
+      <li>
+        Al realizar la operación
+        <div style="text-align: center; margin: 8px 0;">
+          <span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.59em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.07em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">2</span><span class="mord mtight"><span class="mpunct mtight">,</span></span><span class="mord mtight">3</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mclose mtight"><span class="mclose mtight">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4461em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span><span class="mord mtight"><span class="mpunct mtight">,</span></span><span class="mord mtight">0</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span><span class="mbin mtight">⋅</span><span class="mord mtight">6</span><span class="mord mtight"><span class="mpunct mtight">,</span></span><span class="mord mtight">10</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span><span class="mbin mtight">⋅</span><span class="mord mtight">13</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.59em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.07em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">3</span><span class="mord mtight"><span class="mpunct mtight">,</span></span><span class="mord mtight">3</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mclose mtight"><span class="mclose mtight">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4461em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span><span class="mord mtight"><span class="mpunct mtight">,</span></span><span class="mord mtight">0</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span><span class="mbin mtight">⋅</span><span class="mord mtight">8</span><span class="mord mtight"><span class="mpunct mtight">,</span></span><span class="mord mtight">20</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span><span class="mbin mtight">⋅</span><span class="mord mtight">10</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+        </div>
+        y expresar el resultado en notación científica nos queda:
+        <ol class="options">
+          <li><span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">6</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">72</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+          <li><span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">72</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+          <li><span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">6</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">72</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+          <li><span class="katex-inline" style="display:inline-block;vertical-align:middle"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">6</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">72</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+        </ol>
+      </li>
+      <li>
+        Si continuamente sopla un viento a razón de 50 m/s y un barco avanza respecto al agua a 10 m/s, ¿con qué rapidez horizontal en metros por segundo respecto al aire debe avanzar el helicóptero para posarse suavemente sobre el barco?
+        <ol class="options">
+          <li>10</li>
+          <li>60</li>
+          <li>40</li>
+          <li>50</li>
+        </ol>
+      </li>
+      <li>
+        Una paloma vuela a 60 km/h. Si vuela en una dirección contraria a la del viento y este tiene ¼ de la velocidad del vuelo de la paloma, la velocidad real de la paloma en km/h es:
+        <ol class="options">
+          <li>15 km/h</li>
+          <li>75 km/h</li>
+          <li>30 km/h</li>
+          <li>45 km/h</li>
+        </ol>
+      </li>
+      <li>
+        Un grupo de estudiantes quiere comprobar si la temperatura afecta el proceso de disolución de un colorante en agua. Para este fin, los estudiantes usaron 100 mL de agua a 4 °C, 20 °C y 90 °C, y luego adicionaron dos gotas del colorante a cada muestra y contabilizaron el tiempo en que se llevaba a cabo el proceso de disolución. Los resultados obtenidos por los estudiantes se presentan en la siguiente tabla:
+        <table class="data">
+          <thead>
+            <tr><th>Muestra</th><th>Temperatura del agua (°C)</th><th>Tiempo de disolución (horas)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>4</td><td>10,0</td></tr>
+            <tr><td>2</td><td>20</td><td>3,0</td></tr>
+            <tr><td>3</td><td>90</td><td>0,8</td></tr>
+          </tbody>
+        </table>
+        Para estar seguros sobre los datos que proporciona el experimento, ¿cuál de las siguientes actividades deben realizar los estudiantes?
+        <ol class="options">
+          <li>Reproducir el experimento en las mismas condiciones para corroborar los resultados obtenidos.</li>
+          <li>Establecer el efecto de la presión sobre el tiempo de disolución del colorante.</li>
+          <li>Subir la temperatura de cada recipiente durante el proceso de disolución hasta 100 °C.</li>
+          <li>Agregar cinco gotas de otro colorante a cada recipiente para analizar el efecto de la concentración.</li>
+        </ol>
+      </li>
+      <li>
+        Un estudiante toma una cuerda elástica y la estira con diferentes fuerzas. Él se pregunta cómo cambia la longitud de la cuerda elástica cuando aumenta la fuerza, por lo cual realiza un experimento y obtiene los resultados que se muestran en la tabla:
+        <table class="data">
+          <thead>
+            <tr><th>Fuerza (N)</th><th>Longitud de cuerda (cm)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2</td><td>10</td></tr>
+            <tr><td>4</td><td>11</td></tr>
+            <tr><td>6</td><td>12</td></tr>
+          </tbody>
+        </table>
+        De acuerdo con los datos de la tabla, ¿a qué conclusión debe llegar el estudiante?
+        <ol class="options">
+          <li>A medida que la fuerza aumenta, la longitud aumenta.</li>
+          <li>A medida que la fuerza aumenta, la longitud disminuye.</li>
+          <li>El aumento de la fuerza no modifica la longitud.</li>
+          <li>La fuerza es constante mientras que la longitud aumenta.</li>
+        </ol>
+      </li>
+      <li>
+        Un taco eléctrico es un dispositivo que limita la corriente eléctrica que circula por un circuito. En muchas ocasiones, la red eléctrica de una casa cuenta con un taco central que corta la corriente si esta sobrepasa un cierto límite. En una casa se cuenta con los siguientes electrodomésticos de alta potencia, es decir, de alto consumo de energía por unidad de tiempo. Si el taco eléctrico de una casa puede soportar hasta una potencia de 3500 vatios, ¿cuál de los siguientes pares de aparatos harían que se corte la corriente, si se usan al mismo tiempo?
+        <table class="data" style="width: 60%; margin-left: auto; margin-right: auto;">
+          <thead>
+            <tr><th>Equipo</th><th>Potencia (vatios)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Licuadora</td><td>400</td></tr>
+            <tr><td>Horno microondas</td><td>1000</td></tr>
+            <tr><td>Ventilador</td><td>200</td></tr>
+            <tr><td>Aire acondicionado</td><td>3000</td></tr>
+          </tbody>
+        </table>
+        <ol class="options">
+          <li>El horno microondas y el aire acondicionado.</li>
+          <li>El horno microondas y el ventilador.</li>
+          <li>El ventilador y el aire acondicionado.</li>
+          <li>La licuadora y el ventilador.</li>
+        </ol>
+      </li>
+      <li>
+        La siguiente gráfica muestra cómo varía la temperatura y el volumen de un gas a presión constante. Un estudiante tiene un gas ideal en un recipiente cerrado de paredes flexibles sobre el cual se aplica una presión externa constante de 1 atm. ¿Qué pasará si hay un aumento en su temperatura?
+        <ol class="options">
+          <li>Aumentará la presión del gas, ya que se eleva la presión externa.</li>
+          <li>Disminuirá la presión del gas, ya que se eleva la cantidad de choques entre sus partículas.</li>
+          <li>Aumentará el volumen del gas, ya que se eleva la cantidad de choques entre sus partículas.</li>
+          <li>Disminuirá el volumen del gas, ya que se eleva la presión externa.</li>
+        </ol>
+      </li>
+      <li>
+        Para efectuar un procedimiento, un estudiante tiene las sustancias que se relacionan en la tabla. Si el estudiante debe usar una sustancia cuyo punto de ebullición sea menor que 130 °C, soluble en agua y que no conduzca la electricidad, ¿cuál sustancia debe elegir?
+        <table class="data">
+          <thead>
+            <tr><th>Propiedad</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Punto de ebullición (°C)</th><td>−196</td><td>59</td><td>−188</td><td>−34</td></tr>
+            <tr><th>¿Es soluble en agua?</th><td>Sí</td><td>Sí</td><td>No</td><td>Sí</td></tr>
+            <tr><th>¿Es conductora?</th><td>Sí</td><td>Sí</td><td>No</td><td>No</td></tr>
+          </tbody>
+        </table>
+        <ol class="options">
+          <li>La sustancia 1.</li>
+          <li>La sustancia 2.</li>
+          <li>La sustancia 3.</li>
+          <li>La sustancia 4.</li>
+        </ol>
+      </li>
+      <li>
+        En una industria que maneja gases medicinales necesitan conocer el volumen ocupado por un gas cuando este se somete a diferentes rangos de temperatura y presión; para esto, los operarios realizaron dos pruebas: una donde se mantiene constante la temperatura (tabla 1) y otra donde se mantiene constante la presión (tabla 2), obteniendo los siguientes datos.
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; margin: 8px 0;">
+          <div style="flex: 1 1 240px;">
+            <div style="font-size: 10pt; text-align: center; font-weight: bold;">Tabla 1. Temperatura constante</div>
+            <table class="data">
+              <thead><tr><th>Presión (atm)</th><th>Volumen (L)</th></tr></thead>
+              <tbody>
+                <tr><td>1,00</td><td>23,4</td></tr>
+                <tr><td>1,23</td><td>21,2</td></tr>
+                <tr><td>1,45</td><td>20,1</td></tr>
+                <tr><td>1,60</td><td>18,6</td></tr>
+                <tr><td>1,72</td><td>16,7</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="flex: 1 1 240px;">
+            <div style="font-size: 10pt; text-align: center; font-weight: bold;">Tabla 2. Presión constante</div>
+            <table class="data">
+              <thead><tr><th>Temperatura (°C)</th><th>Volumen (L)</th></tr></thead>
+              <tbody>
+                <tr><td>30</td><td>23,4</td></tr>
+                <tr><td>25</td><td>21,2</td></tr>
+                <tr><td>20</td><td>20,1</td></tr>
+                <tr><td>15</td><td>18,6</td></tr>
+                <tr><td>10</td><td>16,7</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        Se necesita almacenar el gas en un tanque que tiene capacidad de 15 L. Teniendo en cuenta la información anterior, ¿qué variaciones deben realizar los operarios para poder almacenar el gas?
+        <ol class="options">
+          <li>Se debe disminuir la presión y aumentar la temperatura para que el volumen del gas aumente.</li>
+          <li>Se debe aumentar la presión y el tamaño del tanque para almacenar mayor volumen de gas.</li>
+          <li>Se debe aumentar la presión y disminuir la temperatura para que el volumen del gas disminuya.</li>
+          <li>Se debe disminuir la presión y la temperatura para que el volumen del gas disminuya.</li>
+        </ol>
+      </li>
+      <li>
+        En un laboratorio, un estudiante debe transportar los materiales para un experimento utilizando una mesa con ruedas. Para esto, el estudiante ejerce primero una fuerza a la mesa, que aumenta a medida que se desplaza hasta recorrer 4 m; luego, ejerce una fuerza constante hasta finalizar el recorrido a los 6 m. Teniendo en cuenta la información anterior, ¿cuál de las siguientes gráficas representa la fuerza como función de la posición en esta situación?
+        <ol class="options">
+          <li>Fuerza creciente durante todo el recorrido.</li>
+          <li>Fuerza creciente hasta 4 m y luego constante hasta 6 m.</li>
+          <li>Fuerza decreciente durante todo el recorrido.</li>
+          <li>Fuerza constante durante todo el recorrido.</li>
+        </ol>
+      </li>
+      <li>
+        La tensión superficial es la propiedad que hace que la superficie de los líquidos tienda a contraerse, comportándose como si fuera una membrana elástica. De esta manera se explica la forma esférica de las gotas de los líquidos. La tensión superficial de algunos líquidos se ve en la siguiente tabla.
+        <table class="data">
+          <thead>
+            <tr><th>Líquido</th><th>Temperatura (°C)</th><th>N/m</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acetona</td><td>20</td><td>23,7 × 10⁻³</td></tr>
+            <tr><td>Éter etílico</td><td>20</td><td>17 × 10⁻³</td></tr>
+            <tr><td>Etanol</td><td>20</td><td>22,27 × 10⁻³</td></tr>
+            <tr><td>Glicerol</td><td>20</td><td>63 × 10⁻³</td></tr>
+            <tr><td>Mercurio</td><td>15</td><td>487 × 10⁻³</td></tr>
+            <tr><td>Agua</td><td>0</td><td>75,64 × 10⁻³</td></tr>
+            <tr><td>Agua</td><td>25</td><td>71,97 × 10⁻³</td></tr>
+            <tr><td>Agua</td><td>50</td><td>67,91 × 10⁻³</td></tr>
+            <tr><td>Agua</td><td>100</td><td>58,85 × 10⁻³</td></tr>
+          </tbody>
+        </table>
+        Con base en la tabla, el agua presenta la tensión superficial menor a la temperatura de:
+        <ol class="options">
+          <li>0 °C</li>
+          <li>100 °C</li>
+          <li>50 °C</li>
+          <li>25 °C</li>
+        </ol>
+      </li>
+      <li>
+        En el siguiente gráfico se muestra el comportamiento de la intensidad del campo eléctrico <em>E</em> con respecto a la distancia <em>r</em> (<em>r</em> es la distancia que va desde donde se mide el campo, hasta el centro de la carga generadora). Con base en esta gráfica, ¿qué sucede con la intensidad del campo a medida que la distancia es más pequeña?
+        <ol class="options">
+          <li>Disminuye.</li>
+          <li>Es uniforme.</li>
+          <li>Es constante.</li>
+          <li>Aumenta.</li>
+        </ol>
+      </li>
+    </ol>
+
+  </body>
+</html>
