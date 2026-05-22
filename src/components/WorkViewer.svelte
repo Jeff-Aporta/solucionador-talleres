@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { onMount, tick } from "svelte";
+	import { onMount } from "svelte";
 	import { marked } from "marked";
-	import renderMathInElement from "katex/contrib/auto-render";
+	import katex from "katex";
 	import PdfViewer from "./PdfViewer.svelte";
 
 	export let slug: string = "";
@@ -22,7 +22,6 @@
 	let markdownActive: string = "";
 	let markdownContent: string = "";
 	let markdownLoading: boolean = false;
-	let originalLightbox: string = "";
 
 	let iframeDocEl: HTMLIFrameElement;
 	let iframeSolEl: HTMLIFrameElement;
@@ -75,28 +74,31 @@
 
 	marked.setOptions({ gfm: true, breaks: false });
 
-	function renderMarkdown(src: string): string {
-		if (!src) return "";
-		return marked.parse(src) as string;
+	function renderKatex(expr: string, displayMode: boolean): string {
+		try {
+			return katex.renderToString(expr, { displayMode, throwOnError: false });
+		} catch {
+			return `<span class="katex-error">${expr}</span>`;
+		}
 	}
 
-	let mdBodyEl: HTMLDivElement | undefined;
-	async function renderMathIn(el: HTMLElement | undefined): Promise<void> {
-		if (!el) return;
-		await tick();
-		try {
-			renderMathInElement(el, {
-				delimiters: [
-					{ left: "$$", right: "$$", display: true },
-					{ left: "$", right: "$", display: false },
-					{ left: "\\(", right: "\\)", display: false },
-					{ left: "\\[", right: "\\]", display: true },
-				],
-				throwOnError: false,
-			});
-		} catch {
-			/* katex error: ignorar */
-		}
+	function renderMarkdown(src: string): string {
+		if (!src) return "";
+		const stash: string[] = [];
+		const push = (html: string): string => {
+			const i = stash.length;
+			stash.push(html);
+			return `@@MDX${i}@@`;
+		};
+		// 1) Bloques $$...$$ (display).
+		let prepared = src.replace(/\$\$([\s\S]+?)\$\$/g, (_, c: string) => push(renderKatex(c.trim(), true)));
+		// 2) Inline $...$ (no captura \$ literal y exige no-espacios al borde).
+		prepared = prepared.replace(/(^|[^\\])\$([^\n$]+?)\$/g, (_, pre: string, c: string) => `${pre}${push(renderKatex(c, false))}`);
+		// 3) Dólares literales escapados \$ -> placeholder con entidad para no confundir a marked/KaTeX.
+		prepared = prepared.replace(/\\\$/g, () => push("&#36;"));
+		let html = marked.parse(prepared) as string;
+		html = html.replace(/@@MDX(\d+)@@/g, (_, i: string) => stash[Number(i)] ?? "");
+		return html;
 	}
 
 	async function loadMarkdown(name: string): Promise<void> {
@@ -115,7 +117,6 @@
 	}
 
 	$: markdownHtml = renderMarkdown(markdownContent);
-	$: if (markdownHtml) renderMathIn(mdBodyEl);
 
 	// Base de Astro (p. ej. "/estudio/"). Las rutas de PDF viven en el mismo servidor
 	// de Astro durante `astro dev` vía integración; en `astro build` (gh-pages) no
@@ -170,6 +171,41 @@
 		if (await probePdf(sidecarPath)) return sidecarPath;
 		return "";
 	}
+
+	type GLightboxFactory = (opts: Record<string, unknown>) => { destroy: () => void; reload: () => void };
+	let glightbox: { destroy: () => void; reload: () => void } | null = null;
+
+	function loadGLightbox(): Promise<GLightboxFactory> {
+		const w = window as unknown as { GLightbox?: GLightboxFactory };
+		if (w.GLightbox) return Promise.resolve(w.GLightbox);
+		return new Promise((resolve, reject) => {
+			const existing = document.querySelector<HTMLScriptElement>('script[data-glightbox]');
+			if (existing) {
+				existing.addEventListener("load", () => w.GLightbox ? resolve(w.GLightbox) : reject(new Error("GLightbox missing")), { once: true });
+				return;
+			}
+			const s = document.createElement("script");
+			s.src = "https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js";
+			s.async = true;
+			s.dataset.glightbox = "1";
+			s.onload = () => w.GLightbox ? resolve(w.GLightbox) : reject(new Error("GLightbox missing"));
+			s.onerror = () => reject(new Error("No se pudo cargar GLightbox"));
+			document.head.appendChild(s);
+		});
+	}
+
+	async function refreshLightbox(): Promise<void> {
+		if (!originalsAvailable) return;
+		try {
+			const factory = await loadGLightbox();
+			if (glightbox) glightbox.destroy();
+			glightbox = factory({ selector: `.glb-item[data-gallery="orig-${slug}"]`, loop: true, touchNavigation: true, zoomable: true });
+		} catch {
+			/* sin red: dejar el <a> normal como fallback */
+		}
+	}
+
+	$: if (typeof window !== "undefined" && originals.length > 0) refreshLightbox();
 
 	// Resuelve documento.pdf y solucionario.pdf desde estático o sidecar, y muestra split si hay.
 	onMount(async () => {
@@ -312,6 +348,7 @@
 
 <svelte:head>
 	<link rel="stylesheet" href={`${SITE_BASE}katex/katex.min.css`} />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 </svelte:head>
 
 <div class="viewer">
@@ -402,9 +439,9 @@
 						<div class="originals" class:hidden={htmlKind !== "originales"}>
 							{#each originals as fname}
 								<figure class="orig-item">
-									<button class="orig-btn" on:click={() => (originalLightbox = `${worksBaseFromHtml(htmlPath)}originals/${fname}`)} title={fname}>
+									<a class="orig-btn glb-item" href={`${worksBaseFromHtml(htmlPath)}originals/${fname}`} data-gallery={`orig-${slug}`}>
 										<img src={`${worksBaseFromHtml(htmlPath)}originals/${fname}`} alt={fname} loading="lazy" />
-									</button>
+									</a>
 									<figcaption>{fname}</figcaption>
 								</figure>
 							{/each}
@@ -419,7 +456,7 @@
 									{/each}
 								</div>
 							{/if}
-							<div class="md-body" bind:this={mdBodyEl}>
+							<div class="md-body">
 								{#if markdownLoading}
 									<p class="hint">Cargando…</p>
 								{:else}
@@ -461,13 +498,6 @@
 
 {#if toastMsg}
 	<div class="toast" role="status" aria-live="polite">{toastMsg}</div>
-{/if}
-
-{#if originalLightbox}
-	<div class="lightbox" on:click={() => (originalLightbox = "")} role="presentation">
-		<img src={originalLightbox} alt="Original" />
-		<button class="btn ghost lb-close" on:click|stopPropagation={() => (originalLightbox = "")} aria-label="Cerrar">✕</button>
-	</div>
 {/if}
 
 {#if shareOpen}
@@ -678,6 +708,8 @@
 		padding: 0;
 		cursor: zoom-in;
 		display: block;
+		text-decoration: none;
+		color: inherit;
 	}
 	.orig-btn img {
 		width: 100%;
@@ -753,33 +785,6 @@
 		z-index: 1200;
 		max-width: min(90vw, 480px);
 		text-align: center;
-	}
-
-	.lightbox {
-		position: fixed;
-		inset: 0;
-		background: rgba(5, 11, 24, 0.88);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 1100;
-		padding: 1.5rem;
-		cursor: zoom-out;
-	}
-	.lightbox img {
-		max-width: 95vw;
-		max-height: 95vh;
-		object-fit: contain;
-		border-radius: 8px;
-		box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-	}
-	.lb-close {
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		background: rgba(0, 0, 0, 0.4);
-		color: white;
-		border: 1px solid rgba(255, 255, 255, 0.2);
 	}
 
 	@media (max-width: 900px) {
