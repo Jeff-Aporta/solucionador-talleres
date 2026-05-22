@@ -216,6 +216,32 @@
 	.katex { font-size: 1em; }
 	.katex-block { margin: 0.35rem 0 !important; }
 
+	/* ---------- Opciones múltiple choice ---------- */
+	.opts {
+		list-style: none; padding: 0; margin: 0.4rem 0 0.2rem;
+		display: grid; gap: 0.3rem;
+	}
+	.opts li {
+		display: grid; grid-template-columns: max-content 1fr;
+		gap: 0.55rem; align-items: baseline;
+		padding: 0.32rem 0.55rem;
+		border: 1px solid var(--rule); border-radius: 6px;
+		font-size: 0.85rem;
+		background: var(--bg);
+	}
+	.opts li .letter {
+		font-weight: 700; color: var(--muted);
+		width: 1.3rem; text-align: center;
+	}
+	.opts li.ok {
+		border-color: var(--success); background: #f0fdf4;
+	}
+	.opts li.ok .letter { color: var(--success); }
+	.opts li.ok::after {
+		content: "✓"; color: var(--success); font-weight: 700;
+		margin-left: 0.4rem;
+	}
+
 	/* ---------- Pie ---------- */
 	.foot {
 		text-align: center; color: var(--muted);
@@ -642,6 +668,369 @@
 			<div class="step"><span class="label">Dirección</span><p class="body">$\alpha = \arctan\!\big(\tfrac{23{,}87}{189{,}14}\big) \approx 7{,}2°$. Como ambas componentes son negativas, apunta al <b>suroeste</b>: $7{,}2°$ al sur del oeste.</p></div>
 		</div>
 		<div class="result">$|\vec v_4| \approx 190{,}6\ \text{m}$ · dirección: $7{,}2°$ al sur del oeste (SO).</div>
+	</article>
+
+	<!-- ============ 21 ============ -->
+	<article class="ex">
+		<header><span class="badge">21</span><h3>Suma y diferencia de vectores (A, B, C, D)</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">De la figura: $A = 8{,}00\ \text{m}$ sobre el eje $-y$; $B = 15{,}0\ \text{m}$ a $30°$; $C = 12{,}0\ \text{m}$ a $25°$ en el cuadrante III ($\theta = 205°$); $D = 10{,}0\ \text{m}$ a $53°$. Hallar magnitud y dirección de (a) $\vec A+\vec B$, (b) $\vec A-\vec B$, (c) $\vec A+\vec B+\vec C+\vec D$, (d) $\vec B-\vec A$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Componentes</span><p class="body">
+				$\vec A = (0,\ -8{,}00)\ \text{m}$<br>
+				$\vec B = (15\cos 30°,\ 15\sin 30°) = (12{,}99,\ 7{,}50)\ \text{m}$<br>
+				$\vec C = (12\cos 205°,\ 12\sin 205°) = (-10{,}88,\ -5{,}07)\ \text{m}$<br>
+				$\vec D = (10\cos 53°,\ 10\sin 53°) = (6{,}02,\ 7{,}99)\ \text{m}$
+			</p></div>
+			<div class="step"><span class="label">a) $\vec A+\vec B$</span><p class="body">$(12{,}99,\ -0{,}50)\ \text{m}$; $|\cdot| = \sqrt{12{,}99^{2}+0{,}50^{2}} \approx 13{,}0\ \text{m}$; $\theta \approx -2{,}2°$ (justo por debajo del eje $+x$).</p></div>
+			<div class="step"><span class="label">b) $\vec A-\vec B$</span><p class="body">$(-12{,}99,\ -15{,}50)\ \text{m}$; $|\cdot| = \sqrt{168{,}74+240{,}25} \approx 20{,}2\ \text{m}$; $\theta = 180°+\arctan\tfrac{15{,}50}{12{,}99} \approx 230°$ (III cuadrante).</p></div>
+			<div class="step"><span class="label">c) Suma total</span><p class="body">$\vec R = (8{,}13,\ 2{,}42)\ \text{m}$; $|\vec R| = \sqrt{66{,}10+5{,}86} \approx 8{,}48\ \text{m}$; $\theta \approx 16{,}6°$ sobre el eje $+x$.</p></div>
+			<div class="step"><span class="label">d) $\vec B-\vec A$</span><p class="body">$(12{,}99,\ 15{,}50)\ \text{m}$; $|\cdot| \approx 20{,}2\ \text{m}$ (igual magnitud que (b), opuesto en dirección); $\theta \approx 50°$ (I cuadrante).</p></div>
+		</div>
+		<div class="result">a) $13{,}0\ \text{m}$, $-2{,}2°$ · b) $20{,}2\ \text{m}$, $230°$ · c) $8{,}48\ \text{m}$, $16{,}6°$ · d) $20{,}2\ \text{m}$, $50°$.</div>
+	</article>
+
+	<!-- ============ 22 ============ -->
+	<article class="ex">
+		<header><span class="badge">22</span><h3>Profesor desorientado: método de componentes</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Recorre $3{,}25\ \text{km}$ N, $4{,}75\ \text{km}$ O y $1{,}50\ \text{km}$ S. Hallar magnitud y dirección del desplazamiento resultante.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Componentes</span><p class="body">Con $+x$ al este y $+y$ al norte:<br>
+				$\vec v_1 = (0,\ +3{,}25)$, $\vec v_2 = (-4{,}75,\ 0)$, $\vec v_3 = (0,\ -1{,}50)$ (todo en km).</p></div>
+			<div class="step"><span class="label">Suma</span><p class="body">$\vec R = (-4{,}75,\ 1{,}75)\ \text{km}$.</p></div>
+			<div class="step"><span class="label">Magnitud</span><p class="body">$$|\vec R| = \sqrt{(-4{,}75)^{2}+(1{,}75)^{2}} = \sqrt{22{,}5625+3{,}0625} \approx 5{,}06\ \text{km}$$</p></div>
+			<div class="step"><span class="label">Dirección</span><p class="body">II cuadrante: $\alpha = \arctan\tfrac{1{,}75}{4{,}75} \approx 20{,}2°$ al norte del oeste (equivale a $\theta \approx 159{,}8°$ respecto al $+x$).</p></div>
+		</div>
+		<div class="result">$|\vec R| \approx 5{,}06\ \text{km}$ · dirección: $20{,}2°$ al norte del oeste (N $69{,}8°$ O).</div>
+	</article>
+
+	<!-- ============ 23 ============ -->
+	<article class="ex">
+		<header><span class="badge">23</span><h3>Lancha y corriente: velocidad relativa</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Río fluye de S a N a $5\ \text{km/h}$. La lancha (respecto al agua) viaja de E a O a $7\ \text{km/h}$, perpendicular a la corriente. ¿Qué ve un águila en reposo sobre la ribera?</p>
+		<div class="steps">
+			<div class="step"><span class="label">Suma de velocidades</span><p class="body">$$\vec v_{L/T} = \vec v_{L/A} + \vec v_{A/T} = (-7,\ 0) + (0,\ +5) = (-7,\ +5)\ \text{km/h}$$</p></div>
+			<div class="step"><span class="label">Magnitud</span><p class="body">$|\vec v_{L/T}| = \sqrt{49+25} = \sqrt{74} \approx 8{,}60\ \text{km/h}$.</p></div>
+			<div class="step"><span class="label">Dirección</span><p class="body">II cuadrante: $\alpha = \arctan\tfrac{5}{7} \approx 35{,}5°$ al norte del oeste (NNO).</p></div>
+		</div>
+		<div class="result">$v \approx 8{,}60\ \text{km/h}$ · $35{,}5°$ al norte del oeste.</div>
+	</article>
+
+	<!-- ============ 24 ============ -->
+	<article class="ex">
+		<header><span class="badge">24</span><h3>Dos cuerdas con ángulo de 86°</h3><span class="tag">Resuelto</span></header>
+		<p class="prompt">Dos cuerdas en un plano vertical ejercen fuerzas de igual magnitud sobre un peso, tirando con $86°$ entre sí. La resultante es de $372\ \text{N}$ hacia arriba. Hallar el tirón de cada cuerda.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Simetría</span><p class="body">Por iguales magnitudes y resultante vertical, cada cuerda forma un ángulo $\beta = 86°/2 = 43°$ con la vertical (los componentes horizontales se cancelan).</p></div>
+			<div class="step"><span class="label">Equilibrio vertical</span><p class="body">$$2T\cos(43°) = 372\ \text{N}$$</p></div>
+			<div class="step"><span class="label">Despeje</span><p class="body">$$T = \dfrac{372}{2\cos 43°} = \dfrac{372}{2\cdot 0{,}7314} \approx 254{,}3\ \text{N}$$</p></div>
+		</div>
+		<div class="result">Cada cuerda tira con $T \approx 254\ \text{N}$.</div>
+	</article>
+
+	<!-- ============================================================
+		 PARTE 2 — PREGUNTAS TIPO PRUEBA SABER (17 preguntas)
+		 ============================================================ -->
+	<h2 class="section-title"><span class="num">Parte 2</span> Preguntas tipo prueba Saber</h2>
+	<p style="font-size: 0.85rem; color: var(--ink-soft); margin: 0.3rem 0 0.8rem;">Para cada ítem se justifica la respuesta correcta (marcada en verde con ✓).</p>
+
+	<!-- ============ P2.1 ============ -->
+	<article class="ex">
+		<header><span class="badge">1</span><h3>Velocidad media de un automóvil</h3><span class="tag">d</span></header>
+		<p class="prompt">Un carro recorre $120\ \text{km}$ en $1\ \text{h}\ 40\ \text{min}$. ¿Su velocidad media vale?</p>
+		<div class="steps">
+			<div class="step"><span class="label">Tiempo</span><p class="body">$1\ \text{h}\ 40\ \text{min} = \tfrac{5}{3}\ \text{h} = 6000\ \text{s}$.</p></div>
+			<div class="step"><span class="label">$v$ (km/h)</span><p class="body">$v = \tfrac{120\ \text{km}}{5/3\ \text{h}} = 72\ \text{km/h}$.</p></div>
+			<div class="step"><span class="label">$v$ (m/s)</span><p class="body">$v = \tfrac{120\,000\ \text{m}}{6000\ \text{s}} = 20\ \text{m/s}$.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>$60\ \text{km/h}$</span></li>
+			<li><span class="letter">B</span><span>$23{,}81\ \text{m/s}$</span></li>
+			<li><span class="letter">C</span><span>$85{,}71\ \text{km/h}$</span></li>
+			<li class="ok"><span class="letter">D</span><span>$20\ \text{m/s}$</span></li>
+		</ol>
+		<div class="result">$v = 20\ \text{m/s}$ (equivale a $72\ \text{km/h}$).</div>
+	</article>
+
+	<!-- ============ P2.2 ============ -->
+	<article class="ex">
+		<header><span class="badge">2</span><h3>Ventaja entre dos ciclistas</h3><span class="tag">a</span></header>
+		<p class="prompt">Dos ciclistas con rapideces $14{,}4\ \text{km/h}$ y $6\ \text{m/s}$. ¿Ventaja al cabo de $5\ \text{min}$?</p>
+		<div class="steps">
+			<div class="step"><span class="label">Igualar unidades</span><p class="body">$14{,}4\ \text{km/h} = \tfrac{14\,400\ \text{m}}{3600\ \text{s}} = 4\ \text{m/s}$.</p></div>
+			<div class="step"><span class="label">Distancias en $5\ \text{min}=300\ \text{s}$</span><p class="body">$d_1 = 4\cdot 300 = 1200\ \text{m}$; $d_2 = 6\cdot 300 = 1800\ \text{m}$.</p></div>
+			<div class="step"><span class="label">Diferencia</span><p class="body">$\Delta d = 1800-1200 = 600\ \text{m}$.</p></div>
+		</div>
+		<ol class="opts">
+			<li class="ok"><span class="letter">A</span><span>$600\ \text{m}$</span></li>
+			<li><span class="letter">B</span><span>$60\ \text{m}$</span></li>
+			<li><span class="letter">C</span><span>$6\ \text{m}$</span></li>
+			<li><span class="letter">D</span><span>$10\ \text{m}$</span></li>
+		</ol>
+		<div class="result">Ventaja $= 600\ \text{m}$.</div>
+	</article>
+
+	<!-- ============ P2.3 ============ -->
+	<article class="ex">
+		<header><span class="badge">3</span><h3>Rapidez media del caracol</h3><span class="tag">d</span></header>
+		<p class="prompt">Avanza $64\ \text{cm}$, luego $6{,}4\ \text{cm}$, luego $6{,}4\ \text{mm}$, en tres horas consecutivas.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Distancias en cm</span><p class="body">$64 + 6{,}4 + 0{,}64 = 71{,}04\ \text{cm}$.</p></div>
+			<div class="step"><span class="label">Tiempo total</span><p class="body">$3\ \text{h}$.</p></div>
+			<div class="step"><span class="label">Promedio</span><p class="body">$\bar v = \tfrac{71{,}04\ \text{cm}}{3\ \text{h}} \approx 23{,}68\ \text{cm/h}$.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>$71{,}04\ \text{km/h}$</span></li>
+			<li><span class="letter">B</span><span>$23{,}68\ \text{mm/h}$</span></li>
+			<li><span class="letter">C</span><span>$23{,}68\ \text{m/h}$</span></li>
+			<li class="ok"><span class="letter">D</span><span>$23{,}68\ \text{cm/h}$</span></li>
+		</ol>
+		<div class="result">$\bar v \approx 23{,}68\ \text{cm/h}$.</div>
+	</article>
+
+	<!-- ============ P2.4 ============ -->
+	<article class="ex">
+		<header><span class="badge">4</span><h3>Posición vs desplazamiento (gráfica X-t)</h3><span class="tag">b</span></header>
+		<p class="prompt">El móvil sube de $0$ a $18\ \text{m}$ entre $t=0$ y $t\approx 60\ \text{s}$, y vuelve a $0\ \text{m}$ hacia $t\approx 100\ \text{s}$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Distancia</span><p class="body">$s = 18 + 18 = 36\ \text{m}$ (sube y baja).</p></div>
+			<div class="step"><span class="label">Desplazamiento</span><p class="body">$\Delta x = x_f - x_0 = 0 - 0 = 0$.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>distancia $=$ desplazamiento.</span></li>
+			<li class="ok"><span class="letter">B</span><span>recorrió distancia y, sin embargo, su desplazamiento es cero.</span></li>
+			<li><span class="letter">C</span><span>desplazamiento negativo y diferente al espacio recorrido.</span></li>
+			<li><span class="letter">D</span><span>desplazamiento positivo y diferente al espacio recorrido.</span></li>
+		</ol>
+		<div class="result">Distancia $36\ \text{m}$, desplazamiento $0$.</div>
+	</article>
+
+	<!-- ============ P2.5 ============ -->
+	<article class="ex">
+		<header><span class="badge">5</span><h3>Velocidades en los dos trayectos</h3><span class="tag">c</span></header>
+		<p class="prompt">Dos tramos rectilíneos en la gráfica $X$-$t$: $0$–$60\ \text{s}$ y $>60\ \text{s}$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Pendiente</span><p class="body">En una gráfica $X$-$t$ la velocidad es la pendiente. Dos rectas ⇒ dos velocidades, cada una constante dentro de su tramo.</p></div>
+			<div class="step"><span class="label">Magnitudes</span><p class="body">$v_1 = \tfrac{18\ \text{m}}{60\ \text{s}} = 0{,}30\ \text{m/s}$ (subiendo); $v_2 = \tfrac{-18\ \text{m}}{40\ \text{s}} = -0{,}45\ \text{m/s}$ (bajando). Distintas en magnitud y sentido.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>misma dirección.</span></li>
+			<li><span class="letter">B</span><span>igual magnitud, sentido contrario.</span></li>
+			<li class="ok"><span class="letter">C</span><span>velocidades constantes en cada trayecto.</span></li>
+			<li><span class="letter">D</span><span>la primera supera a la segunda.</span></li>
+		</ol>
+		<div class="result">Cada tramo es lineal ⇒ velocidad constante dentro de cada tramo.</div>
+	</article>
+
+	<!-- ============ P2.6 ============ -->
+	<article class="ex">
+		<header><span class="badge">6</span><h3>Notación científica: ley de Coulomb</h3><span class="tag">d</span></header>
+		<p class="prompt">Evaluar la diferencia y expresar en notación científica.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Primer término</span><p class="body">$\dfrac{9\times 10^{9}\cdot 6{,}10\times 10^{-6}\cdot 13\times 10^{-6}}{(2{,}3\times 10^{-4})^{2}} = \dfrac{7{,}137\times 10^{-1}}{5{,}29\times 10^{-8}} \approx 1{,}349\times 10^{7}$.</p></div>
+			<div class="step"><span class="label">Segundo término</span><p class="body">$\dfrac{9\times 10^{9}\cdot 8{,}20\times 10^{-6}\cdot 10\times 10^{-6}}{(3{,}3\times 10^{-4})^{2}} = \dfrac{7{,}38\times 10^{-1}}{1{,}089\times 10^{-7}} \approx 6{,}777\times 10^{6}$.</p></div>
+			<div class="step"><span class="label">Diferencia</span><p class="body">$1{,}349\times 10^{7} - 6{,}777\times 10^{6} \approx 6{,}72\times 10^{6}$.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>$6{,}72\times 10^{7}$</span></li>
+			<li><span class="letter">B</span><span>$3{,}72\times 10^{7}$</span></li>
+			<li><span class="letter">C</span><span>$6{,}72\times 10^{-6}$</span></li>
+			<li class="ok"><span class="letter">D</span><span>$6{,}72\times 10^{6}$</span></li>
+		</ol>
+		<div class="result">Resultado $\approx 6{,}72\times 10^{6}$.</div>
+	</article>
+
+	<!-- ============ P2.7 ============ -->
+	<article class="ex">
+		<header><span class="badge">7</span><h3>Helicóptero, viento y barco</h3><span class="tag">c</span></header>
+		<p class="prompt">Viento a $50\ \text{m/s}$, barco a $10\ \text{m/s}$ (respecto al agua). ¿Velocidad horizontal del helicóptero respecto al aire para posarse?</p>
+		<div class="steps">
+			<div class="step"><span class="label">Condición</span><p class="body">El helicóptero debe tener la misma velocidad que el barco respecto a tierra: $\vec v_{H/T} = \vec v_{B/T} = 10\ \text{m/s}$ (mismo sentido del viento).</p></div>
+			<div class="step"><span class="label">Velocidad relativa al aire</span><p class="body">$\vec v_{H/A} = \vec v_{H/T} - \vec v_{A/T} = 10 - 50 = -40\ \text{m/s}$.</p></div>
+			<div class="step"><span class="label">Magnitud</span><p class="body">$|\vec v_{H/A}| = 40\ \text{m/s}$ (en contra del viento).</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>$10$</span></li>
+			<li><span class="letter">B</span><span>$60$</span></li>
+			<li class="ok"><span class="letter">C</span><span>$40$</span></li>
+			<li><span class="letter">D</span><span>$50$</span></li>
+		</ol>
+		<div class="result">$v \approx 40\ \text{m/s}$ respecto al aire.</div>
+	</article>
+
+	<!-- ============ P2.8 ============ -->
+	<article class="ex">
+		<header><span class="badge">8</span><h3>Paloma contra el viento</h3><span class="tag">d</span></header>
+		<p class="prompt">La paloma vuela a $60\ \text{km/h}$; el viento es contrario y vale $\tfrac{1}{4}$ de su rapidez.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Velocidad del viento</span><p class="body">$v_w = 60/4 = 15\ \text{km/h}$ en sentido contrario.</p></div>
+			<div class="step"><span class="label">Velocidad respecto al suelo</span><p class="body">$v = 60 - 15 = 45\ \text{km/h}$.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>$15\ \text{km/h}$</span></li>
+			<li><span class="letter">B</span><span>$75\ \text{km/h}$</span></li>
+			<li><span class="letter">C</span><span>$30\ \text{km/h}$</span></li>
+			<li class="ok"><span class="letter">D</span><span>$45\ \text{km/h}$</span></li>
+		</ol>
+		<div class="result">$v_{\text{real}} = 45\ \text{km/h}$.</div>
+	</article>
+
+	<!-- ============ P2.9 ============ -->
+	<article class="ex">
+		<header><span class="badge">9</span><h3>Reproducibilidad del experimento del colorante</h3><span class="tag">a</span></header>
+		<p class="prompt">Para validar los datos del efecto de la temperatura sobre la disolución.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Método científico</span><p class="body">La fiabilidad se confirma <b>reproduciendo</b> el experimento en las mismas condiciones y comparando resultados (repetibilidad).</p></div>
+			<div class="step"><span class="label">Descartes</span><p class="body">Cambiar variables (presión, concentración) ya no contesta la pregunta original; subir a $100\,°\text{C}$ altera el control.</p></div>
+		</div>
+		<ol class="opts">
+			<li class="ok"><span class="letter">A</span><span>Reproducir el experimento en las mismas condiciones.</span></li>
+			<li><span class="letter">B</span><span>Estudiar el efecto de la presión.</span></li>
+			<li><span class="letter">C</span><span>Subir todas las muestras a $100\,°\text{C}$.</span></li>
+			<li><span class="letter">D</span><span>Cambiar de colorante para analizar concentración.</span></li>
+		</ol>
+		<div class="result">Validar los datos $\Rightarrow$ repetir bajo las mismas condiciones.</div>
+	</article>
+
+	<!-- ============ P2.10 ============ -->
+	<article class="ex">
+		<header><span class="badge">10</span><h3>Cuerda elástica: fuerza vs longitud</h3><span class="tag">a</span></header>
+		<p class="prompt">Tabla: $(2\ \text{N},10\ \text{cm}),(4,11),(6,12)$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Análisis</span><p class="body">A medida que crece $F$, crece $L$ (relación monótona creciente). Es una ley tipo Hooke: $L = L_0 + k F$.</p></div>
+			<div class="step"><span class="label">Ajuste</span><p class="body">$L = 9 + 0{,}5\,F$ (en cm y N). Cada $2\ \text{N}$ adicionales suman $1\ \text{cm}$.</p></div>
+		</div>
+		<ol class="opts">
+			<li class="ok"><span class="letter">A</span><span>A medida que la fuerza aumenta, la longitud aumenta.</span></li>
+			<li><span class="letter">B</span><span>La fuerza aumenta, la longitud disminuye.</span></li>
+			<li><span class="letter">C</span><span>La fuerza no modifica la longitud.</span></li>
+			<li><span class="letter">D</span><span>La fuerza es constante mientras la longitud aumenta.</span></li>
+		</ol>
+		<div class="result">Relación creciente: $L$ aumenta cuando $F$ aumenta.</div>
+	</article>
+
+	<!-- ============ P2.11 ============ -->
+	<article class="ex">
+		<header><span class="badge">11</span><h3>Taco eléctrico de $3500\ \text{W}$</h3><span class="tag">a</span></header>
+		<p class="prompt">Potencias: licuadora $400\ \text{W}$, microondas $1000\ \text{W}$, ventilador $200\ \text{W}$, aire acondicionado $3000\ \text{W}$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Sumas</span><p class="body">Microondas + AA = $1000+3000 = 4000\ \text{W} > 3500\ \text{W}$ ⇒ <b>corta</b>.<br>
+				Microondas + ventilador = $1200\ \text{W}$ ✕<br>
+				Ventilador + AA = $3200\ \text{W}$ ✕<br>
+				Licuadora + ventilador = $600\ \text{W}$ ✕</p></div>
+		</div>
+		<ol class="opts">
+			<li class="ok"><span class="letter">A</span><span>Microondas y aire acondicionado.</span></li>
+			<li><span class="letter">B</span><span>Microondas y ventilador.</span></li>
+			<li><span class="letter">C</span><span>Ventilador y aire acondicionado.</span></li>
+			<li><span class="letter">D</span><span>Licuadora y ventilador.</span></li>
+		</ol>
+		<div class="result">Microondas + AA superan los $3500\ \text{W}$.</div>
+	</article>
+
+	<!-- ============ P2.12 ============ -->
+	<article class="ex">
+		<header><span class="badge">12</span><h3>Gas ideal a presión constante</h3><span class="tag">c</span></header>
+		<p class="prompt">Recipiente flexible, $P_{\text{ext}}=1\ \text{atm}$ constante. ¿Qué sucede al aumentar $T$?</p>
+		<div class="steps">
+			<div class="step"><span class="label">Ley de Charles</span><p class="body">A $P$ constante, $V/T$ = const ⇒ si $T$ sube, $V$ sube.</p></div>
+			<div class="step"><span class="label">Mecanismo</span><p class="body">Más temperatura ⇒ más choques y de mayor energía con las paredes; al ser flexibles, el gas se expande hasta restablecer la presión externa.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>Aumenta la presión del gas.</span></li>
+			<li><span class="letter">B</span><span>Disminuye la presión del gas.</span></li>
+			<li class="ok"><span class="letter">C</span><span>Aumenta el volumen del gas.</span></li>
+			<li><span class="letter">D</span><span>Disminuye el volumen del gas.</span></li>
+		</ol>
+		<div class="result">El volumen aumenta (ley de Charles).</div>
+	</article>
+
+	<!-- ============ P2.13 ============ -->
+	<article class="ex">
+		<header><span class="badge">13</span><h3>Selección de sustancia</h3><span class="tag">d</span></header>
+		<p class="prompt">Buscar: $T_{\text{eb}} < 130\,°\text{C}$, soluble en agua, no conductora.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Filtro</span><p class="body">
+				S1: $-196$, sí, <b>sí conduce</b> ✕<br>
+				S2: $59$, sí, <b>sí conduce</b> ✕<br>
+				S3: $-188$, <b>no soluble</b> ✕<br>
+				S4: $-34$, sí, no conduce ✓
+			</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>Sustancia 1.</span></li>
+			<li><span class="letter">B</span><span>Sustancia 2.</span></li>
+			<li><span class="letter">C</span><span>Sustancia 3.</span></li>
+			<li class="ok"><span class="letter">D</span><span>Sustancia 4.</span></li>
+		</ol>
+		<div class="result">Sustancia 4 cumple los tres criterios.</div>
+	</article>
+
+	<!-- ============ P2.14 ============ -->
+	<article class="ex">
+		<header><span class="badge">14</span><h3>Almacenar gas en tanque de $15\ \text{L}$</h3><span class="tag">c</span></header>
+		<p class="prompt">Tabla 1 (T cte): al subir $P$, baja $V$. Tabla 2 (P cte): al bajar $T$, baja $V$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Ley de Boyle</span><p class="body">$PV=$ const a $T$ cte ⇒ aumentar $P$ reduce $V$.</p></div>
+			<div class="step"><span class="label">Ley de Charles</span><p class="body">$V/T=$ const a $P$ cte ⇒ disminuir $T$ reduce $V$.</p></div>
+			<div class="step"><span class="label">Conclusión</span><p class="body">Combinar las dos acciones para llevar $V$ por debajo de $15\ \text{L}$.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>Disminuir $P$ y aumentar $T$.</span></li>
+			<li><span class="letter">B</span><span>Aumentar $P$ y agrandar el tanque.</span></li>
+			<li class="ok"><span class="letter">C</span><span>Aumentar $P$ y disminuir $T$ para reducir $V$.</span></li>
+			<li><span class="letter">D</span><span>Disminuir $P$ y $T$.</span></li>
+		</ol>
+		<div class="result">Subir $P$ y bajar $T$ ⇒ $V$ disminuye.</div>
+	</article>
+
+	<!-- ============ P2.15 ============ -->
+	<article class="ex">
+		<header><span class="badge">15</span><h3>Fuerza vs posición</h3><span class="tag">b</span></header>
+		<p class="prompt">Primero la fuerza crece hasta $4\ \text{m}$; luego es constante hasta $6\ \text{m}$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Gráfica</span><p class="body">Tramo 1 ($0\to 4\ \text{m}$): pendiente positiva (rampa). Tramo 2 ($4\to 6\ \text{m}$): pendiente cero (recta horizontal).</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>Creciente durante todo el recorrido.</span></li>
+			<li class="ok"><span class="letter">B</span><span>Creciente hasta $4\ \text{m}$ y luego constante hasta $6\ \text{m}$.</span></li>
+			<li><span class="letter">C</span><span>Decreciente durante todo el recorrido.</span></li>
+			<li><span class="letter">D</span><span>Constante durante todo el recorrido.</span></li>
+		</ol>
+		<div class="result">Rampa creciente + meseta horizontal.</div>
+	</article>
+
+	<!-- ============ P2.16 ============ -->
+	<article class="ex">
+		<header><span class="badge">16</span><h3>Tensión superficial del agua</h3><span class="tag">b</span></header>
+		<p class="prompt">$T_s$ del agua a $0,25,50,100\ °\text{C}$.</p>
+		<div class="steps">
+			<div class="step"><span class="label">Tendencia</span><p class="body">$T_s$ disminuye al aumentar $T$: $75{,}64 > 71{,}97 > 67{,}91 > 58{,}85\ (\times 10^{-3}\ \text{N/m})$.</p></div>
+			<div class="step"><span class="label">Mínimo</span><p class="body">$T_s$ mínima a $100\,°\text{C}$.</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>$0\,°\text{C}$</span></li>
+			<li class="ok"><span class="letter">B</span><span>$100\,°\text{C}$</span></li>
+			<li><span class="letter">C</span><span>$50\,°\text{C}$</span></li>
+			<li><span class="letter">D</span><span>$25\,°\text{C}$</span></li>
+		</ol>
+		<div class="result">Mínima tensión superficial: $100\,°\text{C}$.</div>
+	</article>
+
+	<!-- ============ P2.17 ============ -->
+	<article class="ex">
+		<header><span class="badge">17</span><h3>Campo eléctrico vs distancia</h3><span class="tag">d</span></header>
+		<p class="prompt">¿Qué pasa con $E$ al acercarse a la carga?</p>
+		<div class="steps">
+			<div class="step"><span class="label">Ley de Coulomb</span><p class="body">$$E(r) = \dfrac{kQ}{r^{2}}$$</p></div>
+			<div class="step"><span class="label">Tendencia</span><p class="body">Cuando $r$ disminuye, $r^{2}$ disminuye y $E$ crece rápidamente (proporcional inverso al cuadrado).</p></div>
+		</div>
+		<ol class="opts">
+			<li><span class="letter">A</span><span>Disminuye.</span></li>
+			<li><span class="letter">B</span><span>Es uniforme.</span></li>
+			<li><span class="letter">C</span><span>Es constante.</span></li>
+			<li class="ok"><span class="letter">D</span><span>Aumenta.</span></li>
+		</ol>
+		<div class="result">$E\propto 1/r^{2}$ ⇒ $E$ aumenta al disminuir $r$.</div>
 	</article>
 
 	<p class="foot">Solucionario personal — María José Hoyos Rodríguez · 1° periodo 2026 · I. E. CASD</p>
