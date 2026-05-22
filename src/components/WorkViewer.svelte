@@ -152,15 +152,28 @@
 
 	$: markdownHtml = renderMarkdown(markdownContent);
 
-	const PDF_SERVER_BASE = "http://127.0.0.1:4501";
-	const PDF_SERVER_URL = `${PDF_SERVER_BASE}/api/generate-pdf`;
+	// Base de Astro (p. ej. "/estudio/"). Las rutas de PDF viven en el mismo servidor
+	// de Astro durante `astro dev` vía integración; en `astro build` (gh-pages) no
+	// existen y el cliente cae a un toast informativo en vez de un error rojo.
+	const SITE_BASE = import.meta.env.BASE_URL || "/";
+	const PDF_API_URL = `${SITE_BASE}api/generate-pdf`;
+	const PDF_FILE_BASE = `${SITE_BASE}pdf`;
 	// Cache-bust por carga: evita que el navegador sirva versiones viejas del iframe
 	// o del PDF cuando se regeneró el documento por fuera de esta pestaña.
 	const CACHE_BUST = Date.now();
 
-	// El sidecar Node de generación sólo existe en local. En producción (GitHub Pages,
-	// dominio público) ocultamos la barra de generación y dejamos los PDFs ya commiteados.
+	// La generación dinámica de PDF sólo existe en `astro dev`. En producción (GitHub
+	// Pages) ocultamos la barra de generación; los PDFs ya commiteados se sirven como
+	// estáticos desde public/works/<slug>/.
 	let isLocal: boolean = false;
+
+	let toastMsg: string = "";
+	let toastTimer: ReturnType<typeof setTimeout> | null = null;
+	function showToast(msg: string, ms = 4500): void {
+		toastMsg = msg;
+		if (toastTimer) clearTimeout(toastTimer);
+		toastTimer = setTimeout(() => { toastMsg = ""; }, ms);
+	}
 
 	function withCacheBust(url: string): string {
 		if (!url) return url;
@@ -197,9 +210,9 @@
 	onMount(async () => {
 		const host = typeof window !== "undefined" ? window.location.hostname : "";
 		isLocal = host === "localhost" || host === "127.0.0.1" || host === "";
-		const docSidecar = isLocal && slug ? `${PDF_SERVER_BASE}/pdf/${slug}` : "";
+		const docSidecar = isLocal && slug ? `${PDF_FILE_BASE}/${slug}` : "";
 		const solLocal = pdfPath ? deriveSolucionarioLocalPath(pdfPath) : "";
-		const solSidecar = isLocal && slug ? `${PDF_SERVER_BASE}/pdf/${slug}/solucionario` : "";
+		const solSidecar = isLocal && slug ? `${PDF_FILE_BASE}/${slug}/solucionario` : "";
 		const solHtmlLocal = htmlPath ? deriveSolucionarioHtmlPath(htmlPath) : "";
 
 		const [docResolved, solResolved, solHtmlOk] = await Promise.all([
@@ -238,8 +251,6 @@
 	function openExternal(path: string): void {
 		window.open(path, "_blank", "noopener");
 	}
-
-	let genError: string = "";
 
 	let shareOpen: boolean = false;
 	let copied: boolean = false;
@@ -292,28 +303,32 @@
 	async function generatePdf(): Promise<void> {
 		if (!slug) return;
 		generating = true;
-		genError = "";
 		try {
-			const res = await fetch(PDF_SERVER_URL, {
+			const res = await fetch(PDF_API_URL, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ slug }),
 			});
+			if (res.status === 404) {
+				showToast("Generador de PDF no disponible (modo estático). Mostrando PDFs precompilados.");
+				return;
+			}
 			const data = await res.json();
 			if (!res.ok || !data.ok) {
 				throw new Error(data.error || data.stderr || `HTTP ${res.status}`);
 			}
-			// Mostrar PDFs dentro del visor (no abrir nueva pestaña). Cache-bust por timestamp.
 			const ts = Date.now();
-			documentoPath = data.pdfUrl ? `${data.pdfUrl}?t=${ts}` : documentoPath;
-			solucionarioPath = data.solucionarioUrl ? `${data.solucionarioUrl}?t=${ts}` : solucionarioPath;
+			const toAbs = (u: string): string => (u.startsWith("http") || u.startsWith("/")) ? u : `${SITE_BASE}${u}`;
+			documentoPath = data.pdfUrl ? `${toAbs(data.pdfUrl)}?t=${ts}` : documentoPath;
+			solucionarioPath = data.solucionarioUrl ? `${toAbs(data.solucionarioUrl)}?t=${ts}` : solucionarioPath;
 			view = "split";
+			showToast("PDF generado correctamente.");
 		} catch (e) {
 			const msg = e instanceof Error ? e.message : String(e);
 			if (msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
-				genError = "No se pudo contactar el servidor de PDF. Ejecuta 'npm run pdf:server' en otra terminal.";
+				showToast("No hay servidor de PDF disponible. Ejecuta el sitio con `npm run dev` para regenerar.");
 			} else {
-				genError = msg;
+				showToast(`Error generando PDF: ${msg}`);
 			}
 		} finally {
 			generating = false;
@@ -353,15 +368,11 @@
 			class="btn primary"
 			on:click={generatePdf}
 			disabled={!confirmed || generating || !ready}
-			title="Genera el PDF en el servidor (requiere 'npm run pdf:server' corriendo)"
+			title="Genera el PDF en el servidor de desarrollo"
 		>
 			{generating ? "Generando PDF…" : "🖨 Generar PDF"}
 		</button>
-		{#if genError}
-			<span class="hint err">⚠ {genError}</span>
-		{:else}
-			<span class="hint">{ready ? "Marca el check y genera el PDF en el servidor." : "Cargando HTML…"}</span>
-		{/if}
+		<span class="hint">{ready ? "Marca el check y genera el PDF." : "Cargando HTML…"}</span>
 	</div>
 
 	<div class="viewer-panes" class:split={view === "split"}>
@@ -469,6 +480,10 @@
 		{/if}
 	</div>
 </div>
+
+{#if toastMsg}
+	<div class="toast" role="status" aria-live="polite">{toastMsg}</div>
+{/if}
 
 {#if originalLightbox}
 	<div class="lightbox" on:click={() => (originalLightbox = "")} role="presentation">
@@ -744,6 +759,23 @@
 		padding: 0;
 	}
 	.md-body :global(a) { color: var(--is-primary); }
+
+	.toast {
+		position: fixed;
+		left: 50%;
+		bottom: 1.5rem;
+		transform: translateX(-50%);
+		background: var(--is-bg-elevated);
+		color: var(--is-color);
+		border: 1px solid var(--is-b-color-strong);
+		padding: 0.6rem 1rem;
+		border-radius: var(--is-radius);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+		font-size: 0.85rem;
+		z-index: 1200;
+		max-width: min(90vw, 480px);
+		text-align: center;
+	}
 
 	.lightbox {
 		position: fixed;

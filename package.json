@@ -11,7 +11,6 @@
 		"typecheck": "tsc --noEmit",
 		"sync:assets": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-assets.ps1 && node ./scripts/render-latex.mjs",
 		"pdf:gen": "python ./scripts/python/generar_pdfs.py",
-		"pdf:server": "node ./scripts/pdf-server.mjs",
 		"dibujos:firma": "python ./scripts/python/dibujos/watermark.py"
 	},
 	"dependencies": {
