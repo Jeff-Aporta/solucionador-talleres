@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount, tick } from "svelte";
+	import { marked } from "marked";
+	import renderMathInElement from "katex/contrib/auto-render";
 	import PdfViewer from "./PdfViewer.svelte";
 
 	export let slug: string = "";
@@ -71,68 +73,30 @@
 		return documentoHtmlPath;
 	})();
 
+	marked.setOptions({ gfm: true, breaks: false });
+
 	function renderMarkdown(src: string): string {
 		if (!src) return "";
-		const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-		const lines = src.replace(/\r\n/g, "\n").split("\n");
-		const out: string[] = [];
-		let inCode = false;
-		let inList: "ul" | "ol" | null = null;
-		let para: string[] = [];
+		return marked.parse(src) as string;
+	}
 
-		const flushPara = () => {
-			if (para.length === 0) return;
-			const joined = para.join(" ");
-			out.push(`<p>${inlineMd(joined)}</p>`);
-			para = [];
-		};
-		const closeList = () => {
-			if (inList) { out.push(`</${inList}>`); inList = null; }
-		};
-		function inlineMd(s: string): string {
-			let r = esc(s);
-			r = r.replace(/`([^`]+)`/g, "<code>$1</code>");
-			r = r.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-			r = r.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>");
-			r = r.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-			return r;
+	let mdBodyEl: HTMLDivElement | undefined;
+	async function renderMathIn(el: HTMLElement | undefined): Promise<void> {
+		if (!el) return;
+		await tick();
+		try {
+			renderMathInElement(el, {
+				delimiters: [
+					{ left: "$$", right: "$$", display: true },
+					{ left: "$", right: "$", display: false },
+					{ left: "\\(", right: "\\)", display: false },
+					{ left: "\\[", right: "\\]", display: true },
+				],
+				throwOnError: false,
+			});
+		} catch {
+			/* katex error: ignorar */
 		}
-
-		for (const raw of lines) {
-			if (/^```/.test(raw)) {
-				flushPara(); closeList();
-				if (inCode) { out.push("</code></pre>"); inCode = false; }
-				else { out.push('<pre class="md-code"><code>'); inCode = true; }
-				continue;
-			}
-			if (inCode) { out.push(esc(raw)); continue; }
-			const h = raw.match(/^(#{1,6})\s+(.*)$/);
-			if (h) {
-				flushPara(); closeList();
-				const level = h[1].length;
-				out.push(`<h${level}>${inlineMd(h[2])}</h${level}>`);
-				continue;
-			}
-			const li = raw.match(/^\s*[-*]\s+(.*)$/);
-			if (li) {
-				flushPara();
-				if (inList !== "ul") { closeList(); out.push("<ul>"); inList = "ul"; }
-				out.push(`<li>${inlineMd(li[1])}</li>`);
-				continue;
-			}
-			const oli = raw.match(/^\s*\d+\.\s+(.*)$/);
-			if (oli) {
-				flushPara();
-				if (inList !== "ol") { closeList(); out.push("<ol>"); inList = "ol"; }
-				out.push(`<li>${inlineMd(oli[1])}</li>`);
-				continue;
-			}
-			if (/^\s*$/.test(raw)) { flushPara(); closeList(); continue; }
-			para.push(raw.trim());
-		}
-		flushPara(); closeList();
-		if (inCode) out.push("</code></pre>");
-		return out.join("\n");
 	}
 
 	async function loadMarkdown(name: string): Promise<void> {
@@ -151,6 +115,7 @@
 	}
 
 	$: markdownHtml = renderMarkdown(markdownContent);
+	$: if (markdownHtml) renderMathIn(mdBodyEl);
 
 	// Base de Astro (p. ej. "/estudio/"). Las rutas de PDF viven en el mismo servidor
 	// de Astro durante `astro dev` vía integración; en `astro build` (gh-pages) no
@@ -264,12 +229,21 @@
 		return new URL(clean, window.location.origin).href;
 	}
 
+	$: imgsEndpoint = `${SITE_BASE}originales/${slug}`;
+	$: mdEndpoint = (() => {
+		const file = markdownActive || markdownFiles[0] || "";
+		const q = file ? `?file=${encodeURIComponent(file)}` : "";
+		return `${SITE_BASE}markdown/${slug}${q}`;
+	})();
+
 	$: shareLines = (() => {
 		const lines: string[] = [];
 		const pageUrl = typeof window !== "undefined" ? window.location.href.split("#")[0] : "";
 		if (pageUrl) lines.push(`${title} — Página: ${pageUrl}`);
 		if (pdfAvailable) lines.push(`${title} — Documento: ${toAbsolute(documentoPath)}`);
 		if (solucionarioAvailable) lines.push(`${title} — Solucionario: ${toAbsolute(solucionarioPath)}`);
+		if (originalsAvailable) lines.push(`${title} — Imgs: ${toAbsolute(imgsEndpoint)}`);
+		if (markdownAvailable) lines.push(`${title} — Markdown: ${toAbsolute(mdEndpoint)}`);
 		return lines;
 	})();
 	$: shareText = shareLines.join("\n");
@@ -336,6 +310,10 @@
 	}
 </script>
 
+<svelte:head>
+	<link rel="stylesheet" href={`${SITE_BASE}katex/katex.min.css`} />
+</svelte:head>
+
 <div class="viewer">
 	<div class="viewer-toolbar">
 		<div class="viewer-title">
@@ -386,7 +364,7 @@
 							<button class="btn ghost" class:active={htmlKind === "solucionario"} on:click={() => (htmlKind = "solucionario")}>Solucionario</button>
 						{/if}
 						{#if originalsAvailable}
-							<button class="btn ghost" class:active={htmlKind === "originales"} on:click={() => (htmlKind = "originales")}>Originales ({originals.length})</button>
+							<button class="btn ghost" class:active={htmlKind === "originales"} on:click={() => (htmlKind = "originales")}>Imgs ({originals.length})</button>
 						{/if}
 						{#if markdownAvailable}
 							<button
@@ -441,7 +419,7 @@
 									{/each}
 								</div>
 							{/if}
-							<div class="md-body">
+							<div class="md-body" bind:this={mdBodyEl}>
 								{#if markdownLoading}
 									<p class="hint">Cargando…</p>
 								{:else}

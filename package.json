@@ -17,6 +17,7 @@
 		"@astrojs/svelte": "^7.x",
 		"astro": "^5.x",
 		"katex": "^0.16.47",
+		"marked": "^18.0.4",
 		"node-html-parser": "^7.1.0",
 		"pdfjs-dist": "^4.10.38",
 		"svelte": "^5.x"
