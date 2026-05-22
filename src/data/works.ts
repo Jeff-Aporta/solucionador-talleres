@@ -1,4 +1,4 @@
-export type Course = "ELECTRONICA" | "LENGUAJE-PROGRAMACION" | "INSOFT" | "FISICA";
+export type Course = "ELECTRONICA" | "LENGUAJE-PROGRAMACION" | "INSOFT" | "FISICA" | "MATEMATICAS";
 export type WorkType = "FORO" | "TAREA" | "EVALUACION" | "SEGUIMIENTO" | "PROYECTO" | "TALLER";
 
 export interface Work {
@@ -24,6 +24,7 @@ export const COURSES: CourseInfo[] = [
 	{ key: "LENGUAJE-PROGRAMACION", label: "Lenguaje de Programación", short: "LP",   accent: "#7c5cff" },
 	{ key: "INSOFT",               label: "Ingeniería de Software",  short: "INSOFT", accent: "#22c55e" },
 	{ key: "FISICA",               label: "Física",                  short: "FIS",    accent: "#f59e0b" },
+	{ key: "MATEMATICAS",          label: "Matemáticas",             short: "MAT",    accent: "#ec4899" },
 ];
 
 export const TYPE_LABELS: Record<WorkType, string> = {
@@ -46,6 +47,7 @@ export const WORKS: Work[] = [
 	{ slug: "lp-seguimiento-1",     course: "LENGUAJE-PROGRAMACION", type: "SEGUIMIENTO", title: "Seguimiento 1", order: 3 },
 	{ slug: "insoft-chat-app",      course: "INSOFT",                type: "PROYECTO",    title: "Chat App",      order: 1 },
 	{ slug: "fisica-taller-maria",  course: "FISICA",                type: "TALLER",      title: "Taller de Recuperación 1° Periodo 2026", order: 1, hasPdf: false, student: "María José Hoyos Rodríguez", institution: "Institución Educativa CASD — Armenia, Quindío" },
+	{ slug: "matematicas-taller-evelyn", course: "MATEMATICAS",       type: "TALLER",      title: "Taller de Matemáticas — Prueba Saber", order: 1, hasPdf: true, student: "Evelyn Hincapié" },
 ];
 
 export function worksByCourse(course: Course): Work[] {
