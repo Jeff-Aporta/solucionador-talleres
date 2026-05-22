@@ -24,7 +24,7 @@ export const COURSES: CourseInfo[] = [
 	{ key: "LENGUAJE-PROGRAMACION", label: "Lenguaje de Programación", short: "LP",   accent: "#7c5cff" },
 	{ key: "INSOFT",               label: "Ingeniería de Software",  short: "INSOFT", accent: "#22c55e" },
 	{ key: "FISICA",               label: "Física",                  short: "FIS",    accent: "#f59e0b" },
-	{ key: "MATEMATICAS",          label: "Matemáticas",             short: "MAT",    accent: "#ec4899" },
+	{ key: "MATEMATICAS",          label: "Matemáticas",             short: "CASD",   accent: "#ec4899" },
 ];
 
 export const TYPE_LABELS: Record<WorkType, string> = {

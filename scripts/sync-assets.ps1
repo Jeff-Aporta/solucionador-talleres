@@ -66,6 +66,41 @@ foreach ($s in $slugs) {
 		Copy-Item -LiteralPath $solPdfSrc -Destination (Join-Path $dst "solucionario.pdf") -Force
 		$copied++
 	}
+
+	# Originales (imágenes/fotos base)
+	$origSrc = Join-Path $src "originals"
+	$origs = @()
+	if (Test-Path -LiteralPath $origSrc) {
+		$origDst = Join-Path $dst "originals"
+		if (-not (Test-Path $origDst)) { New-Item -ItemType Directory -Path $origDst | Out-Null }
+		$origFiles = Get-ChildItem -Path $origSrc -File | Sort-Object Name
+		foreach ($f in $origFiles) {
+			Copy-Item -LiteralPath $f.FullName -Destination (Join-Path $origDst $f.Name) -Force
+			$origs += $f.Name
+			$copied++
+		}
+	}
+
+	# Markdown (transcripción / notas)
+	$mdFiles = @()
+	foreach ($mdName in @("taller.md", "solucionario.md", "notas.md")) {
+		$mdSrc = Join-Path $src $mdName
+		if (Test-Path -LiteralPath $mdSrc) {
+			Copy-Item -LiteralPath $mdSrc -Destination (Join-Path $dst $mdName) -Force
+			$mdFiles += $mdName
+			$copied++
+		}
+	}
+
+	# Manifest (consumido por WorkViewer para pestañas dinámicas)
+	$manifest = [ordered]@{
+		slug      = $slug
+		originals = $origs
+		markdown  = $mdFiles
+	}
+	$manifestJson = ($manifest | ConvertTo-Json -Depth 5)
+	$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+	[System.IO.File]::WriteAllBytes((Join-Path $dst "manifest.json"), $utf8NoBom.GetBytes($manifestJson))
 }
 
 Write-Host "HTML reescritos:   $rewritten"

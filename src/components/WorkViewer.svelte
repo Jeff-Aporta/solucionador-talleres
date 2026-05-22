@@ -11,7 +11,16 @@
 
 	type View = "html" | "pdf" | "split";
 	type DocKind = "documento" | "solucionario";
+	type HtmlKind = "documento" | "solucionario" | "originales" | "markdown";
 	let view: View = hasPdf ? "split" : "html";
+
+	type Manifest = { slug: string; originals: string[]; markdown: string[] };
+	let originals: string[] = [];
+	let markdownFiles: string[] = [];
+	let markdownActive: string = "";
+	let markdownContent: string = "";
+	let markdownLoading: boolean = false;
+	let originalLightbox: string = "";
 
 	let iframeDocEl: HTMLIFrameElement;
 	let iframeSolEl: HTMLIFrameElement;
@@ -25,15 +34,123 @@
 	let documentoHtmlPath: string = htmlPath;
 	let solucionarioHtmlPath: string = "";
 	let pdfKind: DocKind = "documento";
-	let htmlKind: DocKind = "documento";
+	let htmlKind: HtmlKind = "documento";
 	$: displayedPdfPath = pdfKind === "solucionario" ? solucionarioPath : documentoPath;
 	$: pdfAvailable = !!documentoPath;
 	$: solucionarioAvailable = !!solucionarioPath;
 	$: anyPdf = pdfAvailable || solucionarioAvailable;
 	$: solucionarioHtmlAvailable = !!solucionarioHtmlPath;
+	$: originalsAvailable = originals.length > 0;
+	$: markdownAvailable = markdownFiles.length > 0;
 	$: displayedHtmlPath = htmlKind === "solucionario" && solucionarioHtmlAvailable
 		? solucionarioHtmlPath
 		: documentoHtmlPath;
+
+	function worksBaseFromHtml(p: string): string {
+		// /estudio/works/<slug>/index.html?... -> /estudio/works/<slug>/
+		const clean = p.split("?")[0];
+		return clean.replace(/index\.html$/, "");
+	}
+
+	function siteBaseFromHtml(p: string): string {
+		// /estudio/works/<slug>/index.html -> /estudio
+		const clean = p.split("?")[0];
+		const idx = clean.indexOf("/works/");
+		return idx >= 0 ? clean.slice(0, idx) : "";
+	}
+
+	$: htmlEndpoint = (() => {
+		const sb = siteBaseFromHtml(htmlPath);
+		if (htmlKind === "solucionario") return solucionarioHtmlPath;
+		if (htmlKind === "originales") return `${sb}/originales/${slug}`;
+		if (htmlKind === "markdown") {
+			const file = markdownActive || markdownFiles[0] || "";
+			const q = file ? `?file=${encodeURIComponent(file)}` : "";
+			return `${sb}/markdown/${slug}${q}`;
+		}
+		return documentoHtmlPath;
+	})();
+
+	function renderMarkdown(src: string): string {
+		if (!src) return "";
+		const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+		const lines = src.replace(/\r\n/g, "\n").split("\n");
+		const out: string[] = [];
+		let inCode = false;
+		let inList: "ul" | "ol" | null = null;
+		let para: string[] = [];
+
+		const flushPara = () => {
+			if (para.length === 0) return;
+			const joined = para.join(" ");
+			out.push(`<p>${inlineMd(joined)}</p>`);
+			para = [];
+		};
+		const closeList = () => {
+			if (inList) { out.push(`</${inList}>`); inList = null; }
+		};
+		function inlineMd(s: string): string {
+			let r = esc(s);
+			r = r.replace(/`([^`]+)`/g, "<code>$1</code>");
+			r = r.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+			r = r.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>");
+			r = r.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+			return r;
+		}
+
+		for (const raw of lines) {
+			if (/^```/.test(raw)) {
+				flushPara(); closeList();
+				if (inCode) { out.push("</code></pre>"); inCode = false; }
+				else { out.push('<pre class="md-code"><code>'); inCode = true; }
+				continue;
+			}
+			if (inCode) { out.push(esc(raw)); continue; }
+			const h = raw.match(/^(#{1,6})\s+(.*)$/);
+			if (h) {
+				flushPara(); closeList();
+				const level = h[1].length;
+				out.push(`<h${level}>${inlineMd(h[2])}</h${level}>`);
+				continue;
+			}
+			const li = raw.match(/^\s*[-*]\s+(.*)$/);
+			if (li) {
+				flushPara();
+				if (inList !== "ul") { closeList(); out.push("<ul>"); inList = "ul"; }
+				out.push(`<li>${inlineMd(li[1])}</li>`);
+				continue;
+			}
+			const oli = raw.match(/^\s*\d+\.\s+(.*)$/);
+			if (oli) {
+				flushPara();
+				if (inList !== "ol") { closeList(); out.push("<ol>"); inList = "ol"; }
+				out.push(`<li>${inlineMd(oli[1])}</li>`);
+				continue;
+			}
+			if (/^\s*$/.test(raw)) { flushPara(); closeList(); continue; }
+			para.push(raw.trim());
+		}
+		flushPara(); closeList();
+		if (inCode) out.push("</code></pre>");
+		return out.join("\n");
+	}
+
+	async function loadMarkdown(name: string): Promise<void> {
+		if (!name) return;
+		markdownActive = name;
+		markdownLoading = true;
+		try {
+			const base = worksBaseFromHtml(htmlPath);
+			const r = await fetch(`${base}${name}?v=${CACHE_BUST}`);
+			markdownContent = r.ok ? await r.text() : `# Error\nNo se pudo cargar ${name}.`;
+		} catch (e) {
+			markdownContent = `# Error\n${e instanceof Error ? e.message : String(e)}`;
+		} finally {
+			markdownLoading = false;
+		}
+	}
+
+	$: markdownHtml = renderMarkdown(markdownContent);
 
 	const PDF_SERVER_BASE = "http://127.0.0.1:4501";
 	const PDF_SERVER_URL = `${PDF_SERVER_BASE}/api/generate-pdf`;
@@ -97,6 +214,21 @@
 		documentoHtmlPath = withCacheBust(htmlPath);
 		if (documentoPath || solucionarioPath) view = "split";
 		if (!documentoPath && solucionarioPath) pdfKind = "solucionario";
+
+		// Carga del manifest (originales + markdown)
+		if (htmlPath) {
+			try {
+				const base = worksBaseFromHtml(htmlPath);
+				const r = await fetch(`${base}manifest.json?v=${CACHE_BUST}`);
+				if (r.ok) {
+					const m: Manifest = await r.json();
+					originals = Array.isArray(m.originals) ? m.originals : [];
+					markdownFiles = Array.isArray(m.markdown) ? m.markdown : [];
+				}
+			} catch {
+				/* manifest ausente: ignorar */
+			}
+		}
 	});
 
 	function setView(v: View): void {
@@ -123,6 +255,8 @@
 
 	$: shareLines = (() => {
 		const lines: string[] = [];
+		const pageUrl = typeof window !== "undefined" ? window.location.href.split("#")[0] : "";
+		if (pageUrl) lines.push(`${title} — Página: ${pageUrl}`);
 		if (pdfAvailable) lines.push(`${title} — Documento: ${toAbsolute(documentoPath)}`);
 		if (solucionarioAvailable) lines.push(`${title} — Solucionario: ${toAbsolute(solucionarioPath)}`);
 		return lines;
@@ -204,10 +338,6 @@
 					<button class="btn ghost" class:active={view === "pdf"} on:click={() => setView("pdf")}>PDF</button>
 				{/if}
 			</div>
-			<button class="btn" on:click={() => openExternal(displayedHtmlPath)} title="Abrir HTML en pestaña nueva">⤴ HTML</button>
-			{#if displayedPdfPath}
-				<button class="btn" on:click={() => openExternal(displayedPdfPath)} title="Abrir PDF en pestaña nueva">⤴ PDF</button>
-			{/if}
 			{#if shareLines.length > 0}
 				<button class="btn" on:click={openShare} title="Ver y copiar enlaces de PDF" aria-label="Ver enlaces">👁</button>
 			{/if}
@@ -239,14 +369,29 @@
 			<div class="pane">
 				<div class="pane-header">
 					<span class="tag">HTML</span>
-					{#if solucionarioHtmlAvailable}
-						<div class="seg sm">
-							<button class="btn ghost" class:active={htmlKind === "documento"} on:click={() => (htmlKind = "documento")}>Documento</button>
+					<div class="seg sm">
+						<button class="btn ghost" class:active={htmlKind === "documento"} on:click={() => (htmlKind = "documento")}>Documento</button>
+						{#if solucionarioHtmlAvailable}
 							<button class="btn ghost" class:active={htmlKind === "solucionario"} on:click={() => (htmlKind = "solucionario")}>Solucionario</button>
-						</div>
-					{:else}
-						<code>{documentoHtmlPath.split("/").pop()}</code>
-					{/if}
+						{/if}
+						{#if originalsAvailable}
+							<button class="btn ghost" class:active={htmlKind === "originales"} on:click={() => (htmlKind = "originales")}>Originales ({originals.length})</button>
+						{/if}
+						{#if markdownAvailable}
+							<button
+								class="btn ghost"
+								class:active={htmlKind === "markdown"}
+								on:click={() => { htmlKind = "markdown"; if (!markdownActive) loadMarkdown(markdownFiles[0]); }}
+							>Markdown</button>
+						{/if}
+					</div>
+					<button
+						class="btn ghost sm pane-open"
+						title="Abrir en una pestaña nueva"
+						aria-label="Abrir en pestaña nueva"
+						on:click={() => openExternal(htmlEndpoint)}
+						disabled={!htmlEndpoint}
+					><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13 3v2h4.59l-7.3 7.29 1.42 1.42 7.29-7.3V11h2V3zM19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg></button>
 				</div>
 				<div class="html-stack">
 					<iframe
@@ -264,6 +409,36 @@
 							class:hidden={htmlKind !== "solucionario"}
 						></iframe>
 					{/if}
+					{#if originalsAvailable}
+						<div class="originals" class:hidden={htmlKind !== "originales"}>
+							{#each originals as fname}
+								<figure class="orig-item">
+									<button class="orig-btn" on:click={() => (originalLightbox = `${worksBaseFromHtml(htmlPath)}originals/${fname}`)} title={fname}>
+										<img src={`${worksBaseFromHtml(htmlPath)}originals/${fname}`} alt={fname} loading="lazy" />
+									</button>
+									<figcaption>{fname}</figcaption>
+								</figure>
+							{/each}
+						</div>
+					{/if}
+					{#if markdownAvailable}
+						<div class="markdown-pane" class:hidden={htmlKind !== "markdown"}>
+							{#if markdownFiles.length > 1}
+								<div class="md-tabs">
+									{#each markdownFiles as mf}
+										<button class="btn ghost sm" class:active={markdownActive === mf} on:click={() => loadMarkdown(mf)}>{mf}</button>
+									{/each}
+								</div>
+							{/if}
+							<div class="md-body">
+								{#if markdownLoading}
+									<p class="hint">Cargando…</p>
+								{:else}
+									{@html markdownHtml}
+								{/if}
+							</div>
+						</div>
+					{/if}
 				</div>
 			</div>
 		{/if}
@@ -279,6 +454,13 @@
 					{:else}
 						<code>{displayedPdfPath.split("/").pop()?.split("?")[0]}</code>
 					{/if}
+					<button
+						class="btn ghost sm pane-open"
+						title="Abrir PDF en una pestaña nueva"
+						aria-label="Abrir PDF en pestaña nueva"
+						on:click={() => openExternal(displayedPdfPath)}
+						disabled={!displayedPdfPath}
+					><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13 3v2h4.59l-7.3 7.29 1.42 1.42 7.29-7.3V11h2V3zM19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg></button>
 				</div>
 				{#key displayedPdfPath}
 					<PdfViewer src={displayedPdfPath} title={`${title} — ${pdfKind === "solucionario" ? "Solucionario" : "Documento"}`} />
@@ -287,6 +469,13 @@
 		{/if}
 	</div>
 </div>
+
+{#if originalLightbox}
+	<div class="lightbox" on:click={() => (originalLightbox = "")} role="presentation">
+		<img src={originalLightbox} alt="Original" />
+		<button class="btn ghost lb-close" on:click|stopPropagation={() => (originalLightbox = "")} aria-label="Cerrar">✕</button>
+	</div>
+{/if}
 
 {#if shareOpen}
 	<div class="share-overlay" on:click={closeShare} role="presentation">
@@ -434,6 +623,11 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+	.pane-header .pane-open {
+		margin-left: auto;
+		font-size: 0.85rem;
+		padding: 0.18rem 0.55rem;
+	}
 	iframe {
 		flex: 1 1 auto;
 		width: 100%;
@@ -454,6 +648,128 @@
 	.html-stack iframe.hidden {
 		visibility: hidden;
 		pointer-events: none;
+	}
+
+	.originals,
+	.markdown-pane {
+		position: absolute;
+		inset: 0;
+		overflow: auto;
+		background: var(--is-bg-primary);
+		padding: 0.9rem;
+	}
+	.originals.hidden,
+	.markdown-pane.hidden {
+		visibility: hidden;
+		pointer-events: none;
+	}
+	.originals {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+		gap: 0.75rem;
+		align-content: start;
+	}
+	.orig-item {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		background: var(--is-bg-elevated);
+		border: 1px solid var(--is-b-color);
+		border-radius: 8px;
+		padding: 0.4rem;
+	}
+	.orig-btn {
+		background: transparent;
+		border: 0;
+		padding: 0;
+		cursor: zoom-in;
+		display: block;
+	}
+	.orig-btn img {
+		width: 100%;
+		height: 140px;
+		object-fit: cover;
+		border-radius: 6px;
+		display: block;
+	}
+	.orig-item figcaption {
+		font-size: 0.7rem;
+		color: var(--is-color-muted);
+		text-align: center;
+		word-break: break-all;
+	}
+
+	.markdown-pane .md-tabs {
+		display: flex;
+		gap: 0.35rem;
+		flex-wrap: wrap;
+		margin-bottom: 0.6rem;
+	}
+	.markdown-pane .md-tabs .btn.active {
+		background: var(--is-primary);
+		color: white;
+		border-color: var(--is-primary);
+	}
+	.md-body {
+		color: var(--is-color);
+		font-size: 0.92rem;
+		line-height: 1.55;
+		max-width: 80ch;
+	}
+	.md-body :global(h1) { font-size: 1.4rem; margin: 0.4rem 0 0.6rem; }
+	.md-body :global(h2) { font-size: 1.15rem; margin: 1rem 0 0.4rem; color: var(--is-primary); }
+	.md-body :global(h3) { font-size: 1rem; margin: 0.8rem 0 0.3rem; }
+	.md-body :global(p)  { margin: 0.4rem 0; }
+	.md-body :global(ul),
+	.md-body :global(ol) { padding-left: 1.4rem; margin: 0.3rem 0; }
+	.md-body :global(li) { margin: 0.15rem 0; }
+	.md-body :global(code) {
+		background: var(--is-bg-elevated);
+		border: 1px solid var(--is-b-color);
+		border-radius: 4px;
+		padding: 0.05rem 0.3rem;
+		font-size: 0.85em;
+	}
+	.md-body :global(pre.md-code) {
+		background: var(--is-bg-elevated);
+		border: 1px solid var(--is-b-color);
+		border-radius: 6px;
+		padding: 0.6rem 0.8rem;
+		overflow: auto;
+	}
+	.md-body :global(pre.md-code code) {
+		background: transparent;
+		border: 0;
+		padding: 0;
+	}
+	.md-body :global(a) { color: var(--is-primary); }
+
+	.lightbox {
+		position: fixed;
+		inset: 0;
+		background: rgba(5, 11, 24, 0.88);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1100;
+		padding: 1.5rem;
+		cursor: zoom-out;
+	}
+	.lightbox img {
+		max-width: 95vw;
+		max-height: 95vh;
+		object-fit: contain;
+		border-radius: 8px;
+		box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+	}
+	.lb-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: rgba(0, 0, 0, 0.4);
+		color: white;
+		border: 1px solid rgba(255, 255, 255, 0.2);
 	}
 
 	@media (max-width: 900px) {
