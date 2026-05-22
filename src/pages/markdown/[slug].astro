@@ -8,7 +8,7 @@ import katex from "katex";
 const MD_NAMES = ["taller.md", "solucionario.md", "notas.md"];
 
 export function getStaticPaths() {
-	return WORKS.map((w) => ({ params: { slug: w.slug } }));
+   return WORKS.map((w) => ({ params: { slug: w.slug } }));
 }
 
 const { slug } = Astro.params as { slug: string };
@@ -21,7 +21,7 @@ const base = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
 const srcDir = path.resolve("sources", slug);
 const available: string[] = [];
 for (const name of MD_NAMES) {
-	if (fs.existsSync(path.join(srcDir, name))) available.push(name);
+   if (fs.existsSync(path.join(srcDir, name))) available.push(name);
 }
 
 const requested = (Astro.url.searchParams.get("file") || "").trim();
@@ -31,27 +31,27 @@ const rawContent = fileName ? fs.readFileSync(path.join(srcDir, fileName), "utf8
 marked.setOptions({ gfm: true, breaks: false });
 
 function renderKatex(expr: string, displayMode: boolean): string {
-	try {
-		return katex.renderToString(expr, { displayMode, throwOnError: false });
-	} catch {
-		return `<span class="katex-error">${expr}</span>`;
-	}
+   try {
+      return katex.renderToString(expr, { displayMode, throwOnError: false });
+   } catch {
+      return `<span class="katex-error">${expr}</span>`;
+   }
 }
 
 function renderMarkdown(src: string): string {
-	if (!src) return "";
-	const stash: string[] = [];
-	const push = (html: string): string => {
-		const i = stash.length;
-		stash.push(html);
-		return `@@MDX${i}@@`;
-	};
-	let prepared = src.replace(/\$\$([\s\S]+?)\$\$/g, (_, c: string) => push(renderKatex(c.trim(), true)));
-	prepared = prepared.replace(/(^|[^\\])\$([^\n$]+?)\$/g, (_, pre: string, c: string) => `${pre}${push(renderKatex(c, false))}`);
-	prepared = prepared.replace(/\\\$/g, () => push("&#36;"));
-	let html = marked.parse(prepared) as string;
-	html = html.replace(/@@MDX(\d+)@@/g, (_, i: string) => stash[Number(i)] ?? "");
-	return html;
+   if (!src) return "";
+   const stash: string[] = [];
+   const push = (html: string): string => {
+      const i = stash.length;
+      stash.push(html);
+      return `@@MDX${i}@@`;
+   };
+   let prepared = src.replace(/\$\$([\s\S]+?)\$\$/g, (_, c: string) => push(renderKatex(c.trim(), true)));
+   prepared = prepared.replace(/(^|[^\\])\$([^\n$]+?)\$/g, (_, pre: string, c: string) => `${pre}${push(renderKatex(c, false))}`);
+   prepared = prepared.replace(/\\\$/g, () => push("&#36;"));
+   let html = marked.parse(prepared) as string;
+   html = html.replace(/@@MDX(\d+)@@/g, (_, i: string) => stash[Number(i)] ?? "");
+   return html;
 }
 
 const html = renderMarkdown(rawContent);
@@ -59,78 +59,233 @@ const mdAssetUrl = fileName ? `${base}${assetBase(work.slug)}/${fileName}` : "";
 ---
 
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{fileName || "Markdown"} — {work.title}</title>
-		<link rel="stylesheet" href={`${base}/katex/katex.min.css`} />
-		<style>
-			html, body { margin: 0; padding: 0; background: #0c1222; color: #dfe9f7; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; }
-			.wrap { max-width: 80ch; margin: 0 auto; padding: 1rem 1.25rem 3rem; }
-			.toolbar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: flex-end; gap: 0.4rem; padding: 0.5rem 0; background: linear-gradient(to bottom, #0c1222 70%, transparent); }
-			.tabs { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-right: auto; }
-			.tab { padding: 0.25rem 0.55rem; border: 1px solid #1f3357; border-radius: 6px; background: #0f1a30; color: #9aa9c2; font-size: 0.75rem; text-decoration: none; }
-			.tab.active { background: #2f4a78; border-color: #2f4a78; color: #fff; }
-			button.btn, a.btn { font-family: inherit; cursor: pointer; padding: 0.35rem 0.7rem; border-radius: 6px; background: #0f1a30; color: #dfe9f7; border: 1px solid #1f3357; font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; }
-			button.btn:hover, a.btn:hover { background: #001327; border-color: #2f4a78; }
-			.empty { color: #9aa9c2; font-style: italic; padding: 2rem; text-align: center; }
-			.md h1 { font-size: 1.5rem; margin: 0.6rem 0 0.7rem; }
-			.md h2 { font-size: 1.2rem; margin: 1.4rem 0 0.5rem; color: #6aa1ff; border-bottom: 1px solid #1f3357; padding-bottom: 0.25rem; }
-			.md h3 { font-size: 1.05rem; margin: 1rem 0 0.35rem; color: #cfd8e8; }
-			.md p { margin: 0.5rem 0; }
-			.md ul, .md ol { padding-left: 1.6rem; margin: 0.4rem 0; }
-			.md li { margin: 0.18rem 0; }
-			.md blockquote { border-left: 3px solid #2f4a78; margin: 0.6rem 0; padding: 0.2rem 0.9rem; color: #b8c4d8; background: rgba(47,74,120,0.12); border-radius: 0 6px 6px 0; }
-			.md code { background: #0f1a30; border: 1px solid #1f3357; border-radius: 4px; padding: 0.05rem 0.35rem; font-size: 0.88em; }
-			.md pre { background: #0f1a30; border: 1px solid #1f3357; border-radius: 6px; padding: 0.7rem 0.9rem; overflow: auto; }
-			.md pre code { background: transparent; border: 0; padding: 0; }
-			.md a { color: #6aa1ff; }
-			.md hr { border: 0; border-top: 1px solid #1f3357; margin: 1.2rem 0; }
-			.md table { width: 100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.88rem; }
-			.md th, .md td { border: 1px solid #1f3357; padding: 0.35rem 0.55rem; text-align: left; }
-			.md th { background: #0f1a30; }
-			.md .katex { font-size: 1.05em; }
-			.md .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.3rem 0; }
-			.copy-ok { color: #4ade80; }
-		</style>
-	</head>
-	<body>
-		<div class="wrap">
-			<div class="toolbar">
-				{available.length > 1 && (
-					<nav class="tabs">
-						{available.map((f) => (
-							<a class:list={["tab", { active: f === fileName }]} href={`?file=${encodeURIComponent(f)}`}>{f}</a>
-						))}
-					</nav>
-				)}
-				{mdAssetUrl && (
-					<a class="btn" href={mdAssetUrl} target="_blank" rel="noopener" title="Ver el .md crudo">⤴ Crudo</a>
-				)}
-				<button id="copyBtn" class="btn" type="button" title="Copiar todo el markdown al portapapeles">📋 Copiar md</button>
-			</div>
-			{available.length === 0 ? (
-				<p class="empty">No hay archivos markdown.</p>
-			) : (
-				<article class="md" set:html={html} />
-			)}
-		</div>
-		<textarea id="rawMd" style="position:absolute;left:-9999px;top:-9999px" readonly>{rawContent}</textarea>
-		<script is:inline>
-			document.getElementById("copyBtn")?.addEventListener("click", async () => {
-				const ta = document.getElementById("rawMd");
-				if (!ta) return;
-				const text = ta.value;
-				const btn = document.getElementById("copyBtn");
-				try {
-					await navigator.clipboard.writeText(text);
-					if (btn) { const old = btn.textContent; btn.textContent = "✓ Copiado"; btn.classList.add("copy-ok"); setTimeout(() => { btn.textContent = old; btn.classList.remove("copy-ok"); }, 1800); }
-				} catch {
-					ta.style.left = "0"; ta.style.top = "0"; ta.focus(); ta.select();
-					try { document.execCommand("copy"); } catch {}
-					ta.style.left = "-9999px"; ta.style.top = "-9999px";
-				}
-			});
-		</script>
-	</body>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{fileName || "Markdown"} — {work.title}</title>
+      <link rel="stylesheet" href={`${base}/katex/katex.min.css`} />
+      <style>
+         html,
+         body {
+            margin: 0;
+            padding: 0;
+            background: #0c1222;
+            color: #dfe9f7;
+            font-family:
+               ui-sans-serif,
+               system-ui,
+               -apple-system,
+               "Segoe UI",
+               Roboto,
+               sans-serif;
+            line-height: 1.6;
+         }
+         .wrap {
+            max-width: 80ch;
+            margin: 0 auto;
+            padding: 1rem 1.25rem 3rem;
+         }
+         .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.4rem;
+            padding: 0.5rem 0;
+            background: linear-gradient(to bottom, #0c1222 70%, transparent);
+         }
+         .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-right: auto;
+         }
+         .tab {
+            padding: 0.25rem 0.55rem;
+            border: 1px solid #1f3357;
+            border-radius: 6px;
+            background: #0f1a30;
+            color: #9aa9c2;
+            font-size: 0.75rem;
+            text-decoration: none;
+         }
+         .tab.active {
+            background: #2f4a78;
+            border-color: #2f4a78;
+            color: #fff;
+         }
+         button.btn,
+         a.btn {
+            font-family: inherit;
+            cursor: pointer;
+            padding: 0.35rem 0.7rem;
+            border-radius: 6px;
+            background: #0f1a30;
+            color: #dfe9f7;
+            border: 1px solid #1f3357;
+            font-size: 0.8rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+         }
+         button.btn:hover,
+         a.btn:hover {
+            background: #001327;
+            border-color: #2f4a78;
+         }
+         .empty {
+            color: #9aa9c2;
+            font-style: italic;
+            padding: 2rem;
+            text-align: center;
+         }
+         .md h1 {
+            font-size: 1.5rem;
+            margin: 0.6rem 0 0.7rem;
+         }
+         .md h2 {
+            font-size: 1.2rem;
+            margin: 1.4rem 0 0.5rem;
+            color: #6aa1ff;
+            border-bottom: 1px solid #1f3357;
+            padding-bottom: 0.25rem;
+         }
+         .md h3 {
+            font-size: 1.05rem;
+            margin: 1rem 0 0.35rem;
+            color: #cfd8e8;
+         }
+         .md p {
+            margin: 0.5rem 0;
+         }
+         .md ul,
+         .md ol {
+            padding-left: 1.6rem;
+            margin: 0.4rem 0;
+         }
+         .md li {
+            margin: 0.18rem 0;
+         }
+         .md blockquote {
+            border-left: 3px solid #2f4a78;
+            margin: 0.6rem 0;
+            padding: 0.2rem 0.9rem;
+            color: #b8c4d8;
+            background: rgba(47, 74, 120, 0.12);
+            border-radius: 0 6px 6px 0;
+         }
+         .md code {
+            background: #0f1a30;
+            border: 1px solid #1f3357;
+            border-radius: 4px;
+            padding: 0.05rem 0.35rem;
+            font-size: 0.88em;
+         }
+         .md pre {
+            background: #0f1a30;
+            border: 1px solid #1f3357;
+            border-radius: 6px;
+            padding: 0.7rem 0.9rem;
+            overflow: auto;
+         }
+         .md pre code {
+            background: transparent;
+            border: 0;
+            padding: 0;
+         }
+         .md a {
+            color: #6aa1ff;
+         }
+         .md hr {
+            border: 0;
+            border-top: 1px solid #1f3357;
+            margin: 1.2rem 0;
+         }
+         .md table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.6rem 0;
+            font-size: 0.88rem;
+         }
+         .md th,
+         .md td {
+            border: 1px solid #1f3357;
+            padding: 0.35rem 0.55rem;
+            text-align: left;
+         }
+         .md th {
+            background: #0f1a30;
+         }
+         .md .katex {
+            font-size: 1.05em;
+         }
+         .md .katex-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.3rem 0;
+         }
+         .copy-ok {
+            color: #4ade80;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="wrap">
+         <div class="toolbar">
+            {
+               available.length > 1 && (
+                  <nav class="tabs">
+                     {available.map((f) => (
+                        <a class:list={["tab", { active: f === fileName }]} href={`?file=${encodeURIComponent(f)}`}>
+                           {f}
+                        </a>
+                     ))}
+                  </nav>
+               )
+            }
+            {
+               mdAssetUrl && (
+                  <a class="btn" href={mdAssetUrl} target="_blank" rel="noopener" title="Ver el .md crudo">
+                     ⤴ Crudo
+                  </a>
+               )
+            }
+            <button id="copyBtn" class="btn" type="button" title="Copiar todo el markdown al portapapeles">📋 Copiar md</button>
+         </div>
+         {available.length === 0 ? <p class="empty">No hay archivos markdown.</p> : <article class="md" set:html={html} />}
+      </div>
+      <textarea id="rawMd" style="position:absolute;left:-9999px;top:-9999px" readonly>{rawContent}</textarea>
+      <script is:inline>
+         document.getElementById("copyBtn")?.addEventListener("click", async () => {
+            const ta = document.getElementById("rawMd");
+            if (!ta) return;
+            const text = ta.value;
+            const btn = document.getElementById("copyBtn");
+            try {
+               await navigator.clipboard.writeText(text);
+               if (btn) {
+                  const old = btn.textContent;
+                  btn.textContent = "✓ Copiado";
+                  btn.classList.add("copy-ok");
+                  setTimeout(() => {
+                     btn.textContent = old;
+                     btn.classList.remove("copy-ok");
+                  }, 1800);
+               }
+            } catch {
+               ta.style.left = "0";
+               ta.style.top = "0";
+               ta.focus();
+               ta.select();
+               try {
+                  document.execCommand("copy");
+               } catch {}
+               ta.style.left = "-9999px";
+               ta.style.top = "-9999px";
+            }
+         });
+      </script>
+   </body>
 </html>

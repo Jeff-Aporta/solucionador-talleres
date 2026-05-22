@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 export function getStaticPaths() {
-	return WORKS.map((w) => ({ params: { slug: w.slug } }));
+   return WORKS.map((w) => ({ params: { slug: w.slug } }));
 }
 
 const { slug } = Astro.params as { slug: string };
@@ -17,53 +17,104 @@ const base = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
 const origDir = path.resolve("public", `works/${slug}/originals`);
 let originals: string[] = [];
 if (fs.existsSync(origDir)) {
-	originals = fs
-		.readdirSync(origDir)
-		.filter((f) => /\.(jpe?g|png|gif|webp|bmp|tiff?)$/i.test(f))
-		.sort();
+   originals = fs
+      .readdirSync(origDir)
+      .filter((f) => /\.(jpe?g|png|gif|webp|bmp|tiff?)$/i.test(f))
+      .sort();
 }
 
 const assetPrefix = `${base}${assetBase(work.slug)}/originals`;
 ---
 
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Originales — {work.title}</title>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-		<style>
-			html, body { margin: 0; padding: 0; background: #0c1222; color: #dfe9f7; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-			.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; padding: 1rem; }
-			.card { background: #0f1a30; border: 1px solid #1f3357; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; margin: 0; }
-			.card a { display: block; background: #000; text-decoration: none; cursor: zoom-in; }
-			.card img { display: block; width: 100%; height: 220px; object-fit: contain; background: #0a0f1f; }
-			.card figcaption { padding: 0.5rem 0.6rem; font-size: 0.75rem; color: #9aa9c2; word-break: break-all; border-top: 1px solid #1f3357; text-align: center; }
-			.empty { color: #9aa9c2; font-style: italic; padding: 2rem; text-align: center; }
-		</style>
-	</head>
-	<body>
-		{originals.length === 0 ? (
-			<p class="empty">No hay archivos originales.</p>
-		) : (
-			<div class="grid">
-				{originals.map((f) => (
-					<figure class="card">
-						<a class="glb-item" href={`${assetPrefix}/${f}`} data-gallery={`orig-${slug}`}>
-							<img src={`${assetPrefix}/${f}`} alt={f} loading="lazy" />
-						</a>
-						<figcaption>{f}</figcaption>
-					</figure>
-				))}
-			</div>
-		)}
-		<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" is:inline></script>
-		<script is:inline define:vars={{ slug }}>
-			window.addEventListener("DOMContentLoaded", () => {
-				if (typeof GLightbox === "function") {
-					GLightbox({ selector: '.glb-item[data-gallery="orig-' + slug + '"]', loop: true, touchNavigation: true, zoomable: true });
-				}
-			});
-		</script>
-	</body>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Originales — {work.title}</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+      <style>
+         html,
+         body {
+            margin: 0;
+            padding: 0;
+            background: #0c1222;
+            color: #dfe9f7;
+            font-family:
+               ui-sans-serif,
+               system-ui,
+               -apple-system,
+               "Segoe UI",
+               Roboto,
+               sans-serif;
+         }
+         .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+         }
+         .card {
+            background: #0f1a30;
+            border: 1px solid #1f3357;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+         }
+         .card a {
+            display: block;
+            background: #000;
+            text-decoration: none;
+            cursor: zoom-in;
+         }
+         .card img {
+            display: block;
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            background: #0a0f1f;
+         }
+         .card figcaption {
+            padding: 0.5rem 0.6rem;
+            font-size: 0.75rem;
+            color: #9aa9c2;
+            word-break: break-all;
+            border-top: 1px solid #1f3357;
+            text-align: center;
+         }
+         .empty {
+            color: #9aa9c2;
+            font-style: italic;
+            padding: 2rem;
+            text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      {
+         originals.length === 0 ? (
+            <p class="empty">No hay archivos originales.</p>
+         ) : (
+            <div class="grid">
+               {originals.map((f) => (
+                  <figure class="card">
+                     <a class="glb-item" href={`${assetPrefix}/${f}`} data-gallery={`orig-${slug}`}>
+                        <img src={`${assetPrefix}/${f}`} alt={f} loading="lazy" />
+                     </a>
+                     <figcaption>{f}</figcaption>
+                  </figure>
+               ))}
+            </div>
+         )
+      }
+      <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" is:inline></script>
+      <script is:inline define:vars={{ slug }}>
+         window.addEventListener("DOMContentLoaded", () => {
+            if (typeof GLightbox === "function") {
+               GLightbox({ selector: '.glb-item[data-gallery="orig-' + slug + '"]', loop: true, touchNavigation: true, zoomable: true });
+            }
+         });
+      </script>
+   </body>
 </html>
