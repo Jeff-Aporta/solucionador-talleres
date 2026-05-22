@@ -19,6 +19,7 @@
 		"astro": "^5.x",
 		"katex": "^0.16.47",
 		"node-html-parser": "^7.1.0",
+		"pdfjs-dist": "^4.10.38",
 		"svelte": "^5.x"
 	},
 	"devDependencies": {

@@ -109,6 +109,48 @@
 
 	let genError: string = "";
 
+	let shareOpen: boolean = false;
+	let copied: boolean = false;
+	let copyError: string = "";
+
+	function toAbsolute(path: string): string {
+		if (!path) return "";
+		const clean = path.split("?")[0];
+		if (/^https?:\/\//i.test(clean)) return clean;
+		if (typeof window === "undefined") return clean;
+		return new URL(clean, window.location.origin).href;
+	}
+
+	$: shareLines = (() => {
+		const lines: string[] = [];
+		if (pdfAvailable) lines.push(`${title} — Documento: ${toAbsolute(documentoPath)}`);
+		if (solucionarioAvailable) lines.push(`${title} — Solucionario: ${toAbsolute(solucionarioPath)}`);
+		return lines;
+	})();
+	$: shareText = shareLines.join("\n");
+
+	async function copyShare(): Promise<void> {
+		copyError = "";
+		try {
+			await navigator.clipboard.writeText(shareText);
+			copied = true;
+			setTimeout(() => (copied = false), 2000);
+		} catch (e) {
+			copyError = e instanceof Error ? e.message : String(e);
+		}
+	}
+
+	async function openShare(): Promise<void> {
+		shareOpen = true;
+		copied = false;
+		copyError = "";
+		await copyShare();
+	}
+
+	function closeShare(): void {
+		shareOpen = false;
+	}
+
 	function handleIframeLoad(): void {
 		ready = true;
 	}
@@ -165,6 +207,9 @@
 			<button class="btn" on:click={() => openExternal(displayedHtmlPath)} title="Abrir HTML en pestaña nueva">⤴ HTML</button>
 			{#if displayedPdfPath}
 				<button class="btn" on:click={() => openExternal(displayedPdfPath)} title="Abrir PDF en pestaña nueva">⤴ PDF</button>
+			{/if}
+			{#if shareLines.length > 0}
+				<button class="btn" on:click={openShare} title="Ver y copiar enlaces de PDF" aria-label="Ver enlaces">👁</button>
 			{/if}
 		</div>
 	</div>
@@ -242,6 +287,32 @@
 		{/if}
 	</div>
 </div>
+
+{#if shareOpen}
+	<div class="share-overlay" on:click={closeShare} role="presentation">
+		<div class="share-modal" on:click|stopPropagation role="dialog" aria-modal="true" aria-label="Enlaces de PDF">
+			<div class="share-head">
+				<h3>Enlaces de PDF</h3>
+				<button class="btn ghost share-close" on:click={closeShare} aria-label="Cerrar">✕</button>
+			</div>
+			<ul class="share-list">
+				{#each shareLines as line}
+					<li><code>{line}</code></li>
+				{/each}
+			</ul>
+			<div class="share-foot">
+				{#if copyError}
+					<span class="hint err">⚠ {copyError}</span>
+				{:else if copied}
+					<span class="hint ok">✓ Copiado al portapapeles</span>
+				{:else}
+					<span class="hint">Listo para copiar.</span>
+				{/if}
+				<button class="btn primary" on:click={copyShare}>{copied ? "✓ Copiado" : "📋 Copiar"}</button>
+			</div>
+		</div>
+	</div>
+{/if}
 
 <style>
 	.viewer {
@@ -389,5 +460,83 @@
 		.viewer-panes.split {
 			flex-direction: column;
 		}
+	}
+
+	.share-overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(5, 11, 24, 0.72);
+		backdrop-filter: blur(2px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		padding: 1rem;
+	}
+
+	.share-modal {
+		background: var(--is-bg-elevated);
+		border: 1px solid var(--is-b-color);
+		border-radius: 10px;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+		width: min(640px, 100%);
+		max-height: 80vh;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	.share-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.65rem 0.9rem;
+		border-bottom: 1px solid var(--is-b-color);
+	}
+
+	.share-head h3 {
+		margin: 0;
+		font-size: 0.95rem;
+		color: var(--is-color);
+	}
+
+	.share-close {
+		font-size: 0.9rem;
+		padding: 0.15rem 0.5rem;
+	}
+
+	.share-list {
+		list-style: none;
+		margin: 0;
+		padding: 0.75rem 0.9rem;
+		overflow: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+	}
+
+	.share-list li code {
+		display: block;
+		font-size: 0.78rem;
+		color: var(--is-color);
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid var(--is-b-color);
+		border-radius: 6px;
+		padding: 0.5rem 0.6rem;
+		word-break: break-all;
+		white-space: pre-wrap;
+	}
+
+	.share-foot {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: 0.65rem 0.9rem;
+		border-top: 1px solid var(--is-b-color);
+	}
+
+	.share-foot .hint.ok {
+		color: #5fd38a;
 	}
 </style>
