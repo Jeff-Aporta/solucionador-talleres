@@ -1,6 +1,8 @@
-# REMINGTON — Sitio de trabajos universitarios
+# solucionador-talleres · REMINGTON
 
-Sitio estático en **Astro + Svelte 4** que cataloga las entregas (foros, tareas, evaluaciones, proyectos) y permite visualizar el HTML y el PDF de cada trabajo en un visor unificado (tabs HTML / HTML+PDF / PDF), siguiendo el mismo patrón de `ISA-DOC` (proyecto Patyia).
+Catálogo de trabajos universitarios en **Astro + Svelte 4**. Visualiza entregas (foros, tareas, evaluaciones, proyectos) con visor unificado HTML / PDF.
+
+> Repo **público** · [Jeff-Aporta/solucionador-talleres](https://github.com/Jeff-Aporta/solucionador-talleres)
 
 ## Estructura
 
