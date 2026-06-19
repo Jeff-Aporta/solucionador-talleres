@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Técnica - TConversacion (ISW)</title>
+
+    <!-- Importaciones de CodeMirror para resaltado de sintaxis -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/shell/shell.min.js"></script>
+    <!-- Dependencias añadidas para htmlmixed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/meta.min.js"></script>
+
+    <style>
+        /* Estilos de impresión y página */
+        @page {
+            size: letter;
+            margin: 15px;
+            /* Margen de impresión */
+        }
+
+        /* Estilos base del cuerpo */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            padding: 15px;
+            /* Margen de visualización */
+            background-color: #f4f7f6;
+        }
+
+        main {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Encabezado principal del documento (Sección 1) */
+        header {
+            text-align: left;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #004a99;
+            padding-bottom: 20px;
+        }
+
+        /* Títulos */
+        h1 {
+            color: #004a99;
+            /* Azul oscuro Insoft */
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            border-left: 5px solid #1E90FF;
+            /* DodgerBlue */
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #004a99;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        /* Párrafos y listas */
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul,
+        ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: #eef;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        /* Estilos de Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            font-size: 0.9em;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #004a99;
+            /* Azul oscuro Insoft */
+            color: white;
+            font-size: 1.1em;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Estilos de CodeMirror */
+        .code-editor {
+            display: none;
+            /* Oculta el textarea original */
+        }
+
+        .CodeMirror {
+            background-color: #1e1e1e;
+            /* Fondo oscuro VSCode */
+            color: #d4d4d4;
+            border: 1px solid #3c3c3c;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            height: auto;
+            margin: 15px 0;
+        }
+
+        .CodeMirror-gutters {
+            background-color: #1e1e1e;
+            border-right: 1px solid #3c3c3c;
+        }
+
+        .CodeMirror-linenumber {
+            color: #858585;
+        }
+
+        .CodeMirror-cursor {
+            border-left: 1px solid #aeafad;
+        }
+
+        .cm-s-vscode-dark .cm-keyword {
+            color: #569cd6;
+        }
+
+        .cm-s-vscode-dark .cm-atom,
+        .cm-s-vscode-dark .cm-number {
+            color: #b5cea8;
+        }
+
+        .cm-s-vscode-dark .cm-def {
+            color: #dcdcaa;
+        }
+
+        .cm-s-vscode-dark .cm-variable {
+            color: #9cdcfe;
+        }
+
+        .cm-s-vscode-dark .cm-variable-2 {
+            color: #4fc1ff;
+        }
+
+        .cm-s-vscode-dark .cm-property {
+            color: #9cdcfe;
+        }
+
+        .cm-s-vscode-dark .cm-operator {
+            color: #d4d4d4;
+        }
+
+        .cm-s-vscode-dark .cm-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        .cm-s-vscode-dark .cm-string,
+        .cm-s-vscode-dark .cm-string-2 {
+            color: #ce9178;
+        }
+
+        .cm-s-vscode-dark .cm-tag {
+            color: #569cd6;
+        }
+
+        .cm-s-vscode-dark .cm-attribute {
+            color: #9cdcfe;
+        }
+
+        /* Temas específicos de TypeScript (manejados por JS) */
+        .cm-s-vscode-dark .cm-qualifier,
+        .cm-s-vscode-dark .cm-builtin,
+        .cm-s-vscode-dark .cm-type {
+            color: #4ec9b0;
+        }
+
+        /* Marcador de Imagen Pendiente */
+        .image-placeholder {
+            display: block;
+            width: 90%;
+            min-height: 200px;
+            margin: 20px auto;
+            border: 3px dashed #1E90FF;
+            /* DodgerBlue */
+            background-color: #f0f8ff;
+            /* Azul muy claro */
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .image-placeholder-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #004a99;
+            /* Azul oscuro Insoft */
+            margin-bottom: 10px;
+        }
+
+        .image-placeholder-details {
+            font-style: italic;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        /* Portada */
+        .cover-page {
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 95vh;
+            /* Altura de la ventana */
+            text-align: center;
+            padding: 2in 1in;
+            box-sizing: border-box;
+        }
+
+        .cover-page .logo {
+            font-size: 3em;
+            font-weight: bold;
+            color: #1E90FF;
+            /* DodgerBlue */
+            letter-spacing: 2px;
+            border-bottom: 4px solid #004a99;
+            padding-bottom: 10px;
+        }
+
+        .cover-page .project-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #004a99;
+            margin: 20px 0;
+            line-height: 1.3;
+        }
+
+        .cover-page .subtitle {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .cover-page .team {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .cover-page .date {
+            font-size: 1em;
+            color: #777;
+        }
+
+        /* Salto de página */
+        .page-break {
+            page-break-before: always;
+        }
+
+        /* Pie de página */
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Portada -->
+    <div class="cover-page">
+        <div>
+            <div class="logo">INSOFT S.A.S</div>
+            <p class="subtitle">ENTREGA DE PROYECTO</p>
+        </div>
+
+        <div>
+            <h1 class="project-title">Documentación Técnica: Componente TConversacion (ISW)</h1>
+            <p class="team">Equipo de Desarrollo ISW</p>
+        </div>
+
+        <div>
+            <p class="date">Noviembre, 2025</p>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <main>
+        <!-- Sección 1: Introducción (se usa <header> para la primera sección) -->
+        <header>
+            <h1>1. Introducción</h1>
+
+            <h3>1.1. Propósito</h3>
+            <p>
+                <code>TConversacion</code> es un componente Svelte de alto nivel, disponible en el paquete
+                <code>@jeff-aporta/svelteprueba</code>, diseñado para encapsular y abstraer la totalidad de la lógica
+                de una interfaz de conversación en tiempo real.
+            </p>
+            <p>
+                Su objetivo principal es proporcionar una solución "plug-and-play" que minimice drásticamente el tiempo
+                de desarrollo. Al consumir este componente, el desarrollador se abstrae de la gestión manual de:
+            </p>
+            <ul>
+                <li>Conexiones WebSocket y reconexiones (vía Azure Web PubSub).</li>
+                <li>Gestión de estado de mensajes (enviando, enviado, editado, leído).</li>
+                <li>Paginación y carga de historial (scroll infinito).</li>
+                <li>Renderizado condicional de tipos de mensajes (citas, reacciones, eliminados).</li>
+                <li>Lógica de UI para citar, editar y reaccionar a mensajes.</li>
+            </ul>
+
+            <h3>1.2. Arquitectura de Consumo</h3>
+            <p>
+                Para integrar <code>TConversacion</code>, es fundamental comprender la interacción de las tres
+                entidades del ecosistema:
+            </p>
+            <ol>
+                <li>
+                    <strong>ISW-Chat (Frontend - El Consumidor):</strong>
+                    <ul>
+                        <li>Es el proyecto (Astro/Svelte) que importa y renderiza <code>TConversacion</code>.</li>
+                        <li>Es responsable de instanciar y configurar el <code>TMensajeClient</code> con las
+                            credenciales y la URL del backend.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>ISS (Backend API - El Servidor):</strong>
+                    <ul>
+                        <li>Una API de Azure Functions que expone la lógica de negocio.</li>
+                        <li><strong>API de Persistencia (REST):</strong> Provee endpoints CRUD (Crear, Leer, Actualizar,
+                            Borrar) para la entidad <code>Mensaje</code>.</li>
+                        <li><strong>Broker de Conexión (WebSocket):</strong> Expone un endpoint (ej.
+                            <code>/api/pubsub</code>) que genera una URL de conexión temporal a Azure Web PubSub.
+                            <code>TConversacion</code> utiliza esta URL para establecer la conexión en tiempo real.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>ISP-Chat (Lógica/Tipos - El Paquete):</strong>
+                    <ul>
+                        <li>Un paquete NPM (<code>@jeff-aporta/ispchat</code>) que actúa como librería compartida para
+                            mantener la consistencia contractual entre frontend y backend.</li>
+                        <li><strong>Contratos de Datos (Tipos):</strong> Define las interfaces TypeScript (ej.
+                            <code>TMensaje</code>, <code>TConversacion</code>, <code>TReaccion</code>) que ambos, ISW e
+                            ISS, utilizan.
+                        </li>
+                        <li><strong>Cliente API:</strong> Exporta la clase <code>TMensajeClient</code>, un *wrapper*
+                            que encapsula la lógica <code>fetch</code> para interactuar con la API de ISS.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="image-placeholder">
+                <div class="image-placeholder-title">IMAGEN PENDIENTE (Código MMD)</div>
+                <div class="image-placeholder-details">
+                    <strong>Descripción:</strong> Diagrama de arquitectura de componentes.
+                </div>
+                <textarea class="code-editor" data-mode="text/x-markdown">
+```mermaid
+graph TD
+    subgraph "<span style=\'white-space: nowrap;\'>ISP (Paquete Compartido)</span>"
+        Types(Tipos: TMensaje, etc.)
+        Client(TMensajeClientInterface)
+    end
+
+    subgraph "<span style=\'white-space: nowrap;\'>ISW (Frontend)</span>"
+        App(Consumidor App) -- Renderiza --> TCon(TConversacion)
+        App -- Implementa --> Client
+    end
+
+    subgraph "<span style=\'white-space: nowrap;\'>ISS (Backend API)</span>"
+        API[API REST (Endpoint /mensaje)]
+        PubSubURL(Endpoint /pubsub)
+        PubSubService[Azure Web PubSub]
+    end
+
+    TCon -- Llama a 'obtenerMensajes()' --> Client
+    Client -- 1. HTTP Request (REST) --> API
+    
+    TCon -- Llama a 'obtenerUrlPubSub()' --> Client
+    Client -- 2. HTTP Request --> PubSubURL
+    PubSubURL -- 3. Genera URL --> Client
+    Client -- 4. Devuelve URL --> TCon
+    TCon -- 5. Conexión WebSocket --> PubSubService
+
+    ISW -- Importa Tipos --> Types
+    ISS -- Importa Tipos --> Types
+```
+                </textarea>
+            </div>
+
+            <h3>1.3. El Patrón de Diseño: Inversión de Dependencias</h3>
+            <p>
+                El diseño de <code>TConversacion</code> se basa fundamentalmente en el principio de Inversión de
+                Dependencias (la "D" de SOLID) para lograr un <b>Acoplamiento Débil</b>.
+            </p>
+            <p>
+                <strong>La Solución (Acoplamiento Débil):</strong> La arquitectura invierte esta dependencia. En lugar
+                de
+                que la Vista dependa de la Lógica, ambos dependen de una abstracción (la Interfaz).
+            </p>
+            <ol>
+                <li><strong>La Vista (<code>TConversacion</code>):</strong> Solo conoce el "Contrato" (la interfaz). Su
+                    única responsabilidad es renderizar la UI y llamar a los métodos de ese contrato (ej.
+                    <code>props.controlador.fnEnviarMensaje()</code>).
+                </li>
+                <li><strong>El Contrato (<code>TMensajeClientInterface</code>):</strong> Define el <b>"QUÉ"</b> (qué
+                    métodos
+                    deben existir), pero no el <b>"CÓMO"</b> (cómo se implementan).</li>
+                <li><strong>El Controlador (Su implementación):</strong> Es la lógica concreta que el consumidor crea e
+                    inyecta en el componente. Aquí es donde vive el <code>fetch</code>, la lógica de autenticación y el
+                    manejo de URLs.</li>
+            </ol>
+            <p>
+                Este patrón (conocido como <b>Inyección de Dependencias</b>) es la base de esta arquitectura,
+                permitiendo
+                que el componente sea testeable, mantenible y agnóstico a la fuente de datos.
+            </p>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="https://mermaid.ink/svg/pako:eNp1Uktu2zAQvQoxqxaQXEuWZYVIDdhyUhiogQLNqlUXLDWS2FCkQFFNXcOnyhFysZJSksJAy9W8-bx5nJkTcF0iUAjDsFBcq0rUtFCESHbUg6UE5b2HtsEWKSmxYoO0hRrTK6kfeMOMJXdbl9QP32vDusYbH7wx_1rAdd8xF7JHie8fGmExdA6OdL1RVoSfmDVPj4qSDdedZK1AZTW5HdBYvH7nS9cFfPMCprd9U8DHp8dacEZyrbhBy5wocouWNwW8_Zu5cZl3LuUnmp5xodVzFFX5L6mRk_pZy4GLUc5-rPO2Z99h58pQccH6Czk73-SAqmc_MJde_F5ZNJX74IWY_D9ipnfjovu2k27CyjL-3FWSiREvhPufkTBck-0E8hHsJnDzAiCA2ogSaMVkjwG0aFrmMZx8ZgHjOgugznxZKQRTqGTm_uBuwkfH8kKdHZ9bxRetW6DWDI7R6KFuXvmHrmQWd4K5obavXuOHZnI9KAs0jrKRBOgJfgENs3iWLdJ5tlotk8XV4ioN4Ag0WmUz50h6SKK54mLnwP4PfaNZvNlki2TZRTHUZKmc1eBpbDaHKYLHg_5_AeqhOVc"
+                    alt="Diagrama de Inversión de Dependencias"
+                    style="max-width: 90%; height: auto; border-radius: 8px; background-color: white; padding: 10px; border: 1px solid #ddd;">
+
+                <div class="image-placeholder-details" style="text-align: left; margin-top: 15px;">
+                    <strong>Código Mermaid (Diagrama de Dependencias):</strong>
+                </div>
+                <textarea class="code-editor" data-mode="text/x-markdown">
+---
+config:
+  theme: default
+---
+flowchart TB
+
+ subgraph subGraph1["<span style='white-space: nowrap;'>Dependencias</span>"]
+   D("TMensajeClientInterface")
+   C("TConversacion")
+   E("Implementación del Cliente")
+ end
+   C --> D
+   E --> D
+                </textarea>
+            </div>
+        </header>
+
+        <!-- Sección 2: Configuración del Cliente -->
+        <section class="page-break">
+            <h2>2. Paso 1: El Contrato del Cliente (<code>TMensajeClientInterface</code>)</h2>
+            <p>
+                Como se describe en el patrón de Inversión de Dependencias, al componente
+                <code>TConversacion</code> no le debe importar <b>cómo</b> se implementa la lógica de backend (es decir,
+                <b>cómo</b>
+                se hacen las llamadas API, <b>cómo</b> se gestiona la autenticación, o qué librería se usa).
+            </p>
+            <p>
+                Al componente solo le debe interesar que el objeto <code>mensajeClient</code> que se le inyecta (como
+                prop) cumpla con un "Contrato" formal. Este contrato es la interfaz
+                <code>TMensajeClientInterface</code>, la cual se alinea con una metodología de "Diseño Basado en
+                Interfaz" (Interface-First Design).
+            </p>
+            <p>
+                Cualquier clase que implemente la siguiente interfaz (exportada desde
+                <code>@jeff-aporta/ispchat/client</code>) será un cliente válido:
+            </p>
+
+            <h3>2.1. El Contrato: <code>TMensajeClientInterface</code></h3>
+            <textarea class="code-editor" data-mode="javascript">
+// Interfaz para gestionar recursos de mensajes
+export interface TMensajeClientInterface {
+  // elimina un mensaje del servidor
+  fnEliminarMensaje(mensaje: TMensaje): Promise<boolean>; 
+  
+  // envia un mensaje, cita o reaccion al servidor
+  fnEnviarMensaje(mensaje: TMensaje): Promise<boolean>; 
+  
+  // edita el contenido de un mensaje existente
+  fnEditarMensaje(mensaje: TMensaje): Promise<boolean>; 
+  
+  // obtiene mensajes del servidor
+  obtenerMensajes(args: { 
+    sentido: TSentidoTiempo; 
+    mensaje?: TMensaje; 
+    limite?: number 
+  }): Promise<TMensaje[]>; 
+  
+  // obtiene informacion de usuario para mostrar en mensaje
+  obtenerInformacionUsuario(args: { 
+    mensaje: TMensaje; 
+    mensajes: TMensaje[] 
+  }): TInformacionUsuario; 
+  
+  // obtiene la URL de conexión para Web PubSub
+  obtenerUrlPubSub(args: { 
+    iusuario: string; 
+    hub: string 
+  }): Promise<string>;
+}
+</textarea>
+            <p>El consumidor del componente es responsable de crear (o importar) una clase que implemente esta interfaz
+                y
+                de gestionar la lógica de conexión (REST, GraphQL, etc.) y autenticación (Tokens) dentro de dicha clase.
+            </p>
+        </section>
+
+        <!-- Sección 3: Implementación Mínima -->
+        <section class="page-break">
+            <h2>3. Paso 2: Implementación Mínima</h2>
+            <p>El siguiente código es la implementación mínima funcional del componente.</p>
+            <textarea class="code-editor" data-mode="htmlmixed">
+&lt;script lang="ts"&gt;
+  import { TConversacion, TTDTipoConversacion } from "@jeff-aporta/svelteprueba";
+  import { TMensajeClient } from "@jeff-aporta/ispchat/client";
+
+  // --- 1. Configuración del Cliente (Paso 1) ---
+  // El consumidor debe proveer su propia implementación de TMensajeClientInterface.
+  // A modo de ejemplo, asumimos que 'miCliente' es una instancia válida.
+  const miCliente: TMensajeClientInterface = new MiImplementacionDeCliente();
+  
+  // --- 2. Parámetros Requeridos ---
+  // ID del usuario que está utilizando la instancia del chat
+  export const iusuarioActual: string = "USUARIO_LOGUEADO"; // Ej: "PRENDON"
+  // ID de la sala o grupo de chat
+  export const idConversacion: string = "SALA_DE_PRUEBA";   // Ej: "TEST"
+&lt;/script&gt;
+
+&lt;!-- 3. Renderizado del Componente --&gt;
+&lt;!-- Es CRÍTICO definir una altura en el componente o en su contenedor padre --&gt;
+&lt;div style="height: 500px; border: 1px solid #ccc;"&gt;
+  &lt;TConversacion
+    mensajeClient={miCliente}
+    {iusuarioActual}
+    {idConversacion}
+    ttdconversacion={TTDTipoConversacion.chat}
+  /&gt;
+&lt;/div&gt;
+</textarea>
+            <p><strong>Consideración Crítica: Definición de Altura</strong></p>
+            <p>
+                Observe el <code>&lt;div&gt;</code> que envuelve a <code>TConversacion</code> con
+                <code>style="height: 500px;"</code>. Esto es <strong>fundamental</strong>. El componente de chat está
+                diseñado para llenar el 100% de la altura de su contenedor padre (<code>height: 100%</code> por
+                defecto). El área de historial de mensajes necesita una altura <b>definida</b> para saber cuándo debe
+                volverse "scrollable".
+            </p>
+            <p>
+                Si no defines una altura en el contenedor padre, el chat intentará crecer verticalmente de forma
+                infinita a medida que se cargan mensajes, en lugar de crear una barra de scroll interna.
+            </p>
+
+            <div class="image-placeholder">
+                <div class="image-placeholder-title">IMAGEN PENDIENTE</div>
+                <div class="image-placeholder-details">
+                    <strong>Descripción:</strong> Captura de pantalla del componente <code>TConversacion</code>
+                    funcionando con la implementación básica.
+                    <br>
+                    <strong>Formato:</strong> PNG.
+                    <br>
+                    <strong>Contenido:</strong> Mostrar el chat sin estilos personalizados, con la cabecera y la entrada
+                    de mensajes que vienen por defecto.
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 4: API de Propiedades -->
+        <section class="page-break">
+            <h2>4. Paso 3: API de Propiedades (Props)</h2>
+            <p>A continuación, se detallan todas las propiedades (props) expuestas al consumidor, analizadas desde
+                <code>Conversacion.svelte</code> y <code>Historial.svelte</code>.
+            </p>
+
+            <h3>4.1. Props Requeridas (Core)</h3>
+            <p>Estas propiedades son mandatorias para la inicialización y funcionalidad del componente.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prop</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>mensajeClient</code></td>
+                        <td><code>TMensajeClientInterface</code></td>
+                        <td><strong>(Mandatoria)</strong> La instancia configurada del cliente. Es el motor para toda la
+                            persistencia y la obtención de la URL de PubSub.</td>
+                    </tr>
+                    <tr>
+                        <td><code>iusuarioActual</code></td>
+                        <td><code>string</code></td>
+                        <td><strong>(Mandatoria)</strong> El identificador único del usuario actual. Se utiliza
+                            internamente para: <br> 1. Determinar la alineación de los mensajes (enviados vs.
+                            recibidos). <br> 2. Registrar lecturas (no se auto-registra la lectura). <br> 3. Habilitar
+                            permisos de edición y eliminación (solo en mensajes propios). <br> 4. Identificar la autoría
+                            de reacciones.</td>
+                    </tr>
+                    <tr>
+                        <td><code>idConversacion</code></td>
+                        <td><code>string</code></td>
+                        <td><strong>(Mandatoria)</strong> El identificador único de la sala de chat. Se utiliza
+                            internamente para: <br> 1. Solicitar el historial de mensajes correcto a la API. <br> 2.
+                            Unirse al grupo de Web PubSub correspondiente para recibir eventos en tiempo real.</td>
+                    </tr>
+                    <tr>
+                        <td><code>ttdconversacion</code></td>
+                        <td><code>TTDTipoConversacion</code></td>
+                        <td><strong>(Mandatoria)</strong> Un <em>enum</em> que define el modo de renderizado. <br>
+                            <strong>Valor:</strong> <code>TTDTipoConversacion.chat</code>. <br> Actúa como un selector
+                            de modo. Aunque actualmente solo <code>chat</code> está implementado, esta prop permite la
+                            extensibilidad futura (ej. <code>TTDTipoConversacion.foro</code>).
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>4.2. Props Opcionales (Control de UX)</h3>
+            <p>Estas propiedades ajustan el comportamiento y la experiencia de usuario. Se definen en
+                <code>TConversacion</code> y se propagan internamente a <code>TChat</code> y <code>THistorial</code>.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prop</th>
+                        <th>Tipo</th>
+                        <th>Default</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>enviarConEnter</code></td>
+                        <td><code>boolean</code></td>
+                        <td><code>true</code></td>
+                        <td>Define el comportamiento de la tecla "Enter" en el campo de entrada. <br>
+                            <strong><code>true</code>:</strong>
+                            "Enter" envía el mensaje. "Shift+Enter" crea una nueva línea. (Comportamiento de
+                            WhatsApp/Telegram). <br> <strong><code>false</code>:</strong> "Enter" crea una nueva línea.
+                            "Ctrl+Enter" (o "Cmd+Enter") envía el mensaje. (Comportamiento de Slack/Discord).</td>
+                    </tr>
+                    <tr>
+                        <td><code>mostrarAvatarUsuario</code></td>
+                        <td><code>boolean</code></td>
+                        <td><code>true</code></td>
+                        <td>Controla la visibilidad del componente <code>TAvatar</code> junto a los mensajes. <br>
+                            <strong><code>true</code>:</strong> Renderiza el <code>TAvatar</code>. <br>
+                            <strong><code>false</code>:</strong> Oculta el <code>TAvatar</code> para una interfaz más
+                            minimalista.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>avatarAncho</code></td>
+                        <td><code>string | number</code></td>
+                        <td><code>18</code></td>
+                        <td>Define el ancho (y alto) del <code>TAvatar</code>. Acepta un número (ej. <code>32</code>)
+                            que
+                            se interpreta como <code>px</code>, o un string (ej. <code>"2.5rem"</code>).</td>
+                    </tr>
+                    <tr>
+                        <td><code>mostrarNombreSobrePrimerMensaje</code></td>
+                        <td><code>boolean</code></td>
+                        <td><code>true</code></td>
+                        <td>Controla la agrupación visual de mensajes. <br> <strong><code>true</code>:</strong> Agrupa
+                            mensajes consecutivos del mismo usuario, mostrando el nombre del autor solo sobre el primer
+                            mensaje del bloque. <br> <strong><code>false</code>:</strong> Muestra el nombre del autor en
+                            <em>cada</em> mensaje.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>mostrarCabecera</code></td>
+                        <td><code>boolean</code></td>
+                        <td><code>true</code></td>
+                        <td>Controla la visibilidad de la <code>TTarjeta</code> superior que envuelve el
+                            <code>slot="cabecera"</code>. <br> <strong><code>true</code>:</strong> Renderiza el espacio
+                            de la cabecera. <br> <strong><code>false</code>:</strong> Oculta la cabecera, y el historial
+                            de mensajes ocupa el espacio superior (layout de 2 filas en lugar de 3).
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>4.3. Props Opcionales (Control de Estilo)</h3>
+            <p>Estas propiedades permiten la personalización visual del componente.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prop</th>
+                        <th>Tipo</th>
+                        <th>Default</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>style</code></td>
+                        <td><code>string | Record&lt;...&gt;</code></td>
+                        <td><code>""</code></td>
+                        <td>Aplica estilos CSS en línea al componente raíz <code>TTarjeta</code> (el contenedor
+                            principal). Es el método recomendado para <strong>definir la altura</strong> (ej.
+                            <code>style={{ height: "80vh" }}</code>).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>styleHistorial</code></td>
+                        <td><code>string | Record&lt;...&gt;</code></td>
+                        <td><code>""</code></td>
+                        <td>Aplica estilos CSS en línea directamente al contenedor del historial
+                            (<code>THistorial</code>). Es ideal para <code>backgroundImage</code> (ej.
+                            <code>styleHistorial={{ backgroundImage: 'url(...)' }}</code>).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>historialThemeName</code></td>
+                        <td><code>string | undefined</code></td>
+                        <td><code>undefined</code></td>
+                        <td>Asigna el atributo <code>data-theme-name</code> al componente <code>THistorial</code>. Útil
+                            para aplicar temas CSS personalizados (ej. "dark", "light") si están definidos en el
+                            proyecto consumidor.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Sección 5: API de Slots -->
+        <section class="page-break">
+            <h2>5. Paso 4: API de Slots (Personalización)</h2>
+            <p>
+                <code>TConversacion</code> expone dos slots principales (<code>cabecera</code> y
+                <code>entradaMensaje</code>) que permiten al consumidor inyectar su propio contenido Svelte/HTML,
+                reemplazando las secciones por defecto.
+            </p>
+
+            <h3>5.1. Slot: <code>cabecera</code></h3>
+            <p>
+                Reemplaza el contenido de la barra superior del chat. Es ideal para mostrar el nombre de la sala, los
+                participantes, o contenido multimedia relevante.
+            </p>
+            <p><strong>Ejemplo (Basado en <code>_index.svelte</code>):</strong></p>
+            <textarea class="code-editor" data-mode="htmlmixed">
+&lt;script lang="ts"&gt;
+  import { TDiv } from "@jeff-aporta/svelteprueba";
+  // ... resto del script
+&lt;/script&gt;
+
+&lt;TConversacion
+  {...propsRequeridas}
+  style={{ height: "500px" }}
+&gt;
+  &lt;!-- 
+    Contenido personalizado para la cabecera: un video de YouTube.
+    (Basado en el archivo _index.svelte proporcionado)
+  --&gt;
+  &lt;TDiv slot="cabecera" class="flex align-center gap-10px"&gt;
+    &lt;iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/s7C3m_NHaGg?si=HWXVU6TomFInnkCl"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    &gt;&lt;/iframe&gt;
+  &lt;/TDiv&gt;
+&lt;/TConversacion&gt;
+</textarea>
+
+            <div class="image-placeholder">
+                <div class="image-placeholder-title">IMAGEN PENDIENTE</div>
+                <div class="image-placeholder-details">
+                    <strong>Descripción:</strong> Captura de pantalla del chat con un <em>slot de cabecera</em>
+                    personalizado.
+                    <br>
+                    <strong>Formato:</strong> PNG.
+                    <br>
+                    <strong>Contenido:</strong> Mostrar el chat con el ejemplo de cabecera (el video de YouTube
+                    incrustado).
+                </div>
+            </div>
+
+            <h3>5.2. Slot: <code>entradaMensaje</code></h3>
+            <p>Reemplaza el área de entrada de texto inferior.</p>
+
+            <h4>Caso 1: Ejemplo Simple (Reemplazo de Input)</h4>
+            <p>
+                Si el objetivo es solo reemplazar el <code>input</code> por defecto (ej. por un
+                <code>TCampoTexto</code> o un <code>input</code> HTML estándar) pero <strong>conservar el formulario,
+                    la lógica de envío, y el botón de enviar por defecto</strong> del componente
+                <code>TConversacion</code>, simplemente pase el componente de input al slot.
+                <code>TConversacion</code> (<code>THistorial</code>) está diseñado para buscar un <code>input</code> o
+                <code>textarea</code> dentro de este slot.
+            </p>
+            <textarea class="code-editor" data-mode="htmlmixed">
+&lt;script lang="ts"&gt;
+  import { TCampoTexto } from "@jeff-aporta/svelteprueba";
+  // ... resto del script
+&lt;/script&gt;
+
+&lt;TConversacion {...propsRequeridas} style={{ height: "500px" }}&gt;
+  &lt;!-- 
+    Opción 1: Un &lt;input&gt; HTML estándar. (Como en _index.svelte)
+    TConversacion lo encontrará y lo usará.
+  --&gt;
+  &lt;input slot="entradaMensaje" placeholder="Escribe un mensaje (HTML)" /&gt;
+
+  &lt;!-- 
+    Opción 2: Usar un componente TCampoTexto.
+    (Basado en el código comentado en _index.svelte)
+  --&gt;
+  &lt;!--
+  &lt;TCampoTexto 
+    slot="entradaMensaje" 
+    variante="texto" 
+    placeholder="Escribe un mensaje (TCampoTexto)" 
+    borderWidth={1} 
+    borderColor="rgba(128,128,128,0.3)" 
+  /&gt;
+  --&gt;
+&lt;/TConversacion&gt;
+</textarea>
+
+            <h4>Caso 2: Ejemplo Avanzado (Reemplazo Total del Formulario)</h4>
+            <p>
+                <strong>Advertencia:</strong> Si se inyecta contenido que <em>no</em> es un simple <code>input</code>
+                (ej. botones propios, <code>divs</code> envoltorios), <code>TConversacion</code> asume que el
+                consumidor tomará control total del formulario.
+            </p>
+            <p>
+                Esto significa que el consumidor es ahora responsable de:
+            </p>
+            <ol>
+                <li>Renderizar sus propios botones (<code>Adjuntar</code>, <code>Enviar</code>).</li>
+                <li>Capturar el evento de envío (clic en botón o "Enter").</li>
+                <li>Instanciar el objeto <code>TMensaje</code> (o <code>TCita</code>).</li>
+                <li>Llamar a <code>mensajeClient.fnEnviarMensaje(nuevoMensaje)</code> manualmente.</li>
+                <li>Limpiar el input y el estado de la cita/edición.</li>
+            </ol>
+            <textarea class="code-editor" data-mode="htmlmixed">
+&lt;script lang="ts"&gt;
+  import { TMensaje } from "@jeff-aporta/ispchat/client"; // Importar el tipo
+  // ... resto del script
+  
+  let miMensaje = "";
+
+  async function enviarMensaje() {
+    if (miMensaje.trim() === "") return;
+
+    // 1. Crear el objeto TMensaje (de ispchat)
+    const nuevoMensaje = new TMensaje({
+      idconversacion: idConversacion,
+      iusuario: iusuarioActual,
+      contenido: miMensaje,
+      // ... otros campos como 'icita' si estuvieras citando
+    });
+
+    try {
+      // 2. Usar el cliente para enviar el mensaje a la API (ISS)
+      await mensajeClient.fnEnviarMensaje(nuevoMensaje);
+      
+      // 3. Limpiar el input
+      miMensaje = "";
+    } catch (error) {
+      console.error("Error al enviar mensaje:", error);
+      // Implementar manejo de errores (ej. Toast)
+    }
+  }
+&lt;/script&gt;
+
+&lt;TConversacion {...propsRequeridas} style={{ height: "500px" }}&gt;
+  &lt;!-- Contenido personalizado que REEMPLAZA el &lt;form&gt; --&gt;
+  &lt;div slot="entradaMensaje" class="custom-input-area"&gt;
+    &lt;button class="attach-button"&gt;➕&lt;/button&gt;
+    &lt;input
+      type="text"
+      placeholder="Escribe tu mensaje..."
+      class="custom-input"
+      bind:value={miMensaje}
+      on:keydown={(e) => e.key === 'Enter' && enviarMensaje()}
+    /&gt;
+    &lt;button class="send-button" on:click={enviarMensaje}&gt;
+      📤 Enviar
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/TConversacion&gt;
+
+&lt;style&gt;
+  .custom-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    gap: 8px;
+  }
+  .custom-input {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+  }
+  .attach-button, .send-button {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0 12px;
+  }
+&lt;/style&gt;
+</textarea>
+
+            <div class="image-placeholder">
+                <div class="image-placeholder-title">IMAGEN PENDIENTE</div>
+                <div class="image-placeholder-details">
+                    <strong>Descripción:</strong> Captura de pantalla del chat con un <em>slot de entrada</em>
+                    avanzado.
+                    <br>
+                    <strong>Formato:</strong> PNG.
+                    <br>
+                    <strong>Contenido:</strong> Mostrar el chat con los botones personalizados <code>➕</code> y
+                    <code>📤</code>, reemplazando la entrada por defecto.
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 6: Ejemplo Completo -->
+        <section class="page-break">
+            <h2>6. Paso 5: Ejemplo Completo (Referencia del Consumidor)</h2>
+            <p>
+                Este código es una versión limpia del archivo <code>_index.svelte</code> proporcionado, integrada en la
+                estructura de esta documentación técnica.
+            </p>
+
+            <h3>6.1. Componente <code>ChatPage.svelte</code> (Ejemplo Completo)</h3>
+            <textarea class="code-editor" data-mode="htmlmixed">
+&lt;script lang="ts"&gt;
+  // Importar estilos locales del consumidor
+  import "./_index.scss"; 
+
+  import { TConversacion, TTDTipoConversacion, TDiv } from "@jeff-aporta/svelteprueba";
+  import { TMensajeClient } from "@jeff-aporta/ispchat/client";
+
+  // --- Configuración (Paso 1) ---
+  // Asumimos que 'miCliente' es una instancia válida que implementa TMensajeClientInterface
+  const miCliente: TMensajeClientInterface = new MiImplementacionDeCliente();
+  // (Aquí iría la lógica real para instanciar y configurar el cliente)
+
+
+  // --- Parámetros desde URL (Basado en _index.svelte) ---
+  // (Esta función 'obtenerParametro' es un ejemplo de cómo el consumidor
+  // puede obtener los datos. No es parte del componente TConversacion.)
+  function obtenerParametro(nombre: string, valorPorDefecto: string): string {
+    if (typeof window === "undefined") return valorPorDefecto;
+    const urlActual = new URL(window.location.href);
+    let valor = (urlActual.searchParams.get(nombre) ?? "").trim();
+    if (!valor) {
+      valor = valorPorDefecto;
+      urlActual.searchParams.set(nombre, valor);
+      window.history.replaceState(null, "", urlActual.toString());
+    }
+    return valor;
+  }
+  export const iusuarioActual: string = obtenerParametro("iusuario", "VISITANTE");
+  export const idConversacion: string = obtenerParametro("grupo", "GENERAL"); // Nota: el nombre del parámetro "grupo" es flexible.
+&lt;/script&gt;
+
+&lt;!-- 
+  Este 'main' actúa como el contenedor de la página,
+  dando un fondo y centrando el componente de chat.
+--&gt;
+&lt;main class="chat-container"&gt;
+  &lt;TConversacion
+    mensajeClient={miCliente}
+    {iusuarioActual}
+    {idConversacion}
+    ttdconversacion={TTDTipoConversacion.chat}
+    
+    &lt;!-- Props de Estilo (Mandatorio definir altura) --&gt;
+    style={{
+      height: "80vh",
+      maxWidth: "800px",
+      margin: "0 auto",
+      border: "1px solid #e0e0e0",
+      borderRadius: "8px",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+      overflow: "hidden" // Asegura que las esquinas redondeadas corten el contenido
+    }}
+    styleHistorial={{
+      // Fondo sutil para el área de mensajes (como en tu ejemplo)
+      backgroundImage: `url("https://www.transparenttextures.com/patterns/inspiration-geometry.png")`,
+    }}
+
+    &lt;!-- Props de UX --&gt;
+    enviarConEnter={true}
+    mostrarAvatarUsuario={true}
+    avatarAncho={32}
+  &gt;
+    &lt;!-- Slot de Cabecera Personalizado (de _index.svelte) --&gt;
+    &lt;TDiv slot="cabecera" class="flex align-center gap-10px"&gt;
+      &lt;iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/s7C3m_NHaGg?si=HWXVU6TomFInnkCl"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      &gt;&lt;/iframe&gt;
+    &lt;/TDiv&gt;
+
+    &lt;!-- Slot de Entrada Personalizado (Caso 1 - Simple) --&gt;
+    &lt;input slot="entradaMensaje" placeholder="Escribe un mensaje" /&gt;
+    
+  &lt;/TConversacion&gt;
+&lt;/main&gt;
+
+&lt;style&gt;
+  /* Estilos globales para la página contenedora */
+  .chat-container {
+    padding: 20px;
+    min-height: 100vh;
+    /* Fondo degradado para la página completa */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  /* Puedes añadir más estilos globales o específicos aquí, 
+     o importarlos desde tu archivo .scss */
+&lt;/style&gt;
+</textarea>
+
+            <div class="image-placeholder">
+                <div class="image-placeholder-title">IMAGEN PENDIENTE</div>
+                <div class="image-placeholder-details">
+                    <strong>Descripción:</strong> Captura de pantalla del resultado final del "Ejemplo Completo".
+                    <br>
+                    <strong>Formato:</strong> PNG.
+                    <br>
+                    <strong>Contenido:</strong> Mostrar la aplicación de chat completamente estilizada, con el fondo
+                    degradado de la página, la <code>TConversacion</code> centrada, y los slots de cabecera (video) y
+                    entrada (input simple) aplicados.
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 7: Solución de Problemas -->
+        <section class="page-break">
+            <h2>7. Paso 6: Solución de Problemas (Troubleshooting)</h2>
+
+            <h3>7.1. Error: "Cannot read properties of undefined (reading 'fnEnviarMensaje')"</h3>
+            <ul>
+                <li><strong>Causa:</strong> La prop <code>mensajeClient</code> es <code>undefined</code>,
+                    <code>null</code>, o no es un objeto que implemente la interfaz
+                    <code>TMensajeClientInterface</code>.</li>
+                <li><strong>Solución:</strong> Asegurarse de que el objeto pasado a <code>mensajeClient</code> esté
+                    correctamente instanciado y contenga todas las funciones requeridas por la interfaz antes de
+                    renderizar <code>TConversacion</code>.</li>
+            </ul>
+
+            <h3>7.2. Error de CORS (Cross-Origin Resource Sharing)</h3>
+            <ul>
+                <li><strong>Causa:</strong> El servidor ISS (Azure Functions) no ha sido configurado para aceptar
+                    peticiones desde el origen del frontend (ej. <code>http://localhost:4321</code> o
+                    <code>https://mi-app.com</code>).
+                </li>
+                <li><strong>Solución:</strong> En la configuración de la Azure Function App (servidor ISS), navegar a la
+                    sección "CORS" y añadir el origen del frontend (ej. <code>http://localhost:4321</code>) a la lista
+                    de orígenes permitidos.</li>
+            </ul>
+
+            <h3>7.3. El chat se conecta, pero los mensajes en tiempo real de <em>otros</em> usuarios no llegan</h3>
+            <ul>
+                <li><strong>Causa:</strong> La conexión WebSocket está activa, pero el cliente no se ha unido al grupo
+                    (sala) correcto. Esto casi siempre es debido a un <code>idConversacion</code> incorrecto o diferente
+                    entre los usuarios.</li>
+                <li><strong>Solución:</strong> Asegurarse de que ambos usuarios (en diferentes navegadores) estén usando
+                    <em>exactamente</em> el mismo <code>idConversacion</code> (sensible a mayúsculas/minúsculas).
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- Sección 8: Checklist -->
+        <section class="page-break">
+            <h2>8. Paso 7: Checklist de Implementación</h2>
+            <ul>
+                <li>[ ] Importar <code>TConversacion</code>, <code>TTDTipoConversacion</code> y la interfaz
+                    <code>TMensajeClientInterface</code>.
+                </li>
+                <li>[ ] Crear o inyectar una instancia de un cliente que implemente
+                    <code>TMensajeClientInterface</code>.
+                </li>
+                <li>[ ] Definir <code>iusuarioActual</code> e <code>idConversacion</code>. El consumidor define
+                    <b>cómo</b> se
+                    establecen estos valores.</li>
+                <li>[ ] Implementar el componente <code>TConversacion</code> en el HTML pasando todas las props
+                    requeridas: <b><code>mensajeClient</code></b>, <b><code>iusuarioActual</code></b>,
+                    <b><code>idConversacion</code></b>, y <b><code>ttdconversacion</code></b>.
+                </li>
+                <li>[ ] (Opcional) Personalizar con <code>styleHistorial</code> o <code>slot="cabecera"</code> para
+                    alinear con la identidad de tu app.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>© 2025 Insoft S.A.S. - Documento Confidencial</p>
+    </footer>
+
+    <!-- Script de inicialización de CodeMirror -->
+    <script>
+        // Initialize CodeMirror editors immediately since script is at end of body
+        const codeEditors = document.querySelectorAll('.code-editor');
+
+        codeEditors.forEach((textarea) => {
+            // Directamente usa el data-mode. 'htmlmixed' es el modo correcto.
+            const mode = textarea.getAttribute('data-mode') || 'javascript';
+
+            const editor = CodeMirror.fromTextArea(textarea, {
+                mode: mode,
+                theme: 'vscode-dark', // Usamos un tema oscuro
+                lineNumbers: true,
+                readOnly: true,
+                lineWrapping: true,
+                viewportMargin: Infinity,
+            });
+
+            editor.setSize(null, 'auto'); // Ajusta la altura automáticamente
+
+            // Refrescar el editor para asegurar el renderizado
+            setTimeout(() => {
+                editor.refresh();
+            }, 1);
+        });
+    </script>
+</body>
+
+</html>

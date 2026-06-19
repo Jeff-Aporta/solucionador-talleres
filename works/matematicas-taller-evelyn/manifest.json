@@ -1,0 +1,13 @@
+{
+    "slug":  "matematicas-taller-evelyn",
+    "originals":  [
+                      "taller-pagina-1.jpeg",
+                      "taller-pagina-2.jpeg",
+                      "taller-pagina-3.jpeg",
+                      "taller-pagina-4.jpeg",
+                      "taller-pagina-5.jpeg"
+                  ],
+    "markdown":  [
+                     "taller.md"
+                 ]
+}
